@@ -81,7 +81,7 @@ export default class Table extends React.Component {
   
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.saveToLocalStorage &&
         window &&
         window.localStorage) {

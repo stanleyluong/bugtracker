@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_204216) do
+ActiveRecord::Schema.define(version: 2019_11_04_214500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,18 +18,23 @@ ActiveRecord::Schema.define(version: 2019_11_01_204216) do
   create_table "bugs", force: :cascade do |t|
     t.string "name"
     t.string "priority"
+    t.string "submitted_by"
     t.string "attachment"
     t.string "status"
     t.string "description"
+    t.string "location"
     t.time "opened"
     t.time "closed"
     t.time "age"
-    t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "submitted_by"
-    t.string "location"
-    t.string "assigned_to"
+  end
+
+  create_table "project_bugs", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "bug_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -57,7 +62,6 @@ ActiveRecord::Schema.define(version: 2019_11_01_204216) do
     t.string "password"
     t.string "role"
     t.string "image"
-    t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

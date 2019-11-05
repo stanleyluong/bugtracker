@@ -12,7 +12,7 @@ class UserProjectsController < ApplicationController
     end
   
     def create
-      @userproject = UserProject.find_or_create_by(user_params)
+      @userproject = UserProject.find_or_create_by(userproject_params)
   
       if @userproject.save
         render json: @userproject
@@ -22,7 +22,7 @@ class UserProjectsController < ApplicationController
     end
   
     def update
-      if @userproject.update(user_params)
+      if @userproject.update(userproject_params)
         render json: @userproject
       else
         render json: @userproject.errors, status: :unprocessable_entity

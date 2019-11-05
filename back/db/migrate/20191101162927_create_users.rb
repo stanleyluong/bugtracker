@@ -5,7 +5,6 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :password
       t.string :role
       t.string :image
-      t.integer :project_id
       t.timestamps
     end
   end

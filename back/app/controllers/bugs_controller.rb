@@ -1,5 +1,5 @@
 class BugsController < ApplicationController
-    before_action :set_item, only: [:show, :update, :destroy]
+    before_action :set_bug, only: [:show, :update, :destroy]
 
   # GET /bugs
   def index
@@ -15,7 +15,7 @@ class BugsController < ApplicationController
 
   # POST /bugs
   def create
-    @bug = Bug.new(item_params)
+    @bug = Bug.new(bug_params)
 
     if @bug.save
       render json: @bug, status: :created, location: @bug
@@ -26,7 +26,7 @@ class BugsController < ApplicationController
 
   # PATCH/PUT /bugs/1
   def update
-    if @bug.update(item_params)
+    if @bug.update(bug_params)
       render json: @bug
     else
       render json: @bug.errors, status: :unprocessable_entity
@@ -46,6 +46,6 @@ class BugsController < ApplicationController
 
     # Only allow a trusted parameter    white list" through.
     def bug_params
-      params.require(:item).permit(:name, :priority, :attachment, :status, :description , :opened, :closed, :age, :submitted_by, :location, :assigned_to)
+      params.require(:bug).permit(:name, :priority, :attachment, :status, :description , :opened, :closed, :age, :submitted_by, :location)
     end
 end

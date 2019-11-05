@@ -12,7 +12,7 @@ class UserBugsController < ApplicationController
     end
   
     def create
-      @userbug = UserBug.find_or_create_by(user_params)
+      @userbug = UserBug.find_or_create_by(userbug_params)
   
       if @userbug.save
         render json: @userbug
@@ -22,7 +22,7 @@ class UserBugsController < ApplicationController
     end
   
     def update
-      if @userbug.update(user_params)
+      if @userbug.update(userbug_params)
         render json: @userbug
       else
         render json: @userbug.errors, status: :unprocessable_entity
@@ -34,7 +34,7 @@ class UserBugsController < ApplicationController
     end
   
     private
-      def set_user
+      def set_userbug
         @userbug = UserBug.find(params[:id])
       end
   
