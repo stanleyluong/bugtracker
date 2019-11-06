@@ -50,12 +50,12 @@ const ProjectList = (props) => {
             </th>
             <th>
               <h3 className="ui center aligned header">
-                Closed
+                Age
               </h3>
             </th>
             <th>
               <h3 className="ui center aligned header">
-                Age
+                Closed
               </h3>
             </th>
             <th>
@@ -86,6 +86,15 @@ const ProjectList = (props) => {
               user_bugs={user_bugs}
               users={users}
               project_bugs={project_bugs}
+              projects={props.projects}
+              handleChangeStatus={props.handleChangeStatus}
+              handleChangePriority={props.handleChangePriority}
+              handleChangeOpened={props.handleChangeOpened}
+              handleChangeClosed={props.handleChangeClosed}
+              handleChangeProjectId={props.handleChangeProjectId}
+              handleChangeDescription={props.handleChangeDescription}
+              handleChangeName={props.handleChangeName}
+              handleChangeSubmittedBy={props.handleChangeSubmittedBy}
               />
           })}
   

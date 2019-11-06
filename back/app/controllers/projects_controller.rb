@@ -24,8 +24,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1
   def update
+    
     if @project.update(project_params)
       render json: @project
     else
@@ -33,7 +33,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
   def destroy
     @project.destroy
   end

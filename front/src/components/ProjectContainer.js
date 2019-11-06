@@ -37,18 +37,127 @@ class ProjectContainer extends React.Component{
         })
  
     }
+    handleChangeStatus=(e, data, id)=>{
+        let option = e.target.innerText
+        let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
+        // console.log(currentbug)
+        currentbug.status = data.value
+        // console.log(id)
+        // console.log(data.value)
+        let url = `http://localhost:3000/bugs/${id}`
+        fetch(url, {
+            method: 'PATCH', 
+            body: JSON.stringify({
+            status: option
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        });
+    }
+    
+    handleChangePriority=(e, data, id)=>{
+        let option = e.target.innerText
+        let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
+        currentbug.status = data.value
+        let url = `http://localhost:3000/bugs/${id}`
+        fetch(url, {
+            method: 'PATCH', 
+            body: JSON.stringify({
+            priority: option
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        });
+    }
 
-    // showProjects=()=>{
-    //     return this.props.projects.map((project,index)=>{
-    //      return   <button onClick={()=>this.handleClick(project)}>{project.title}</button>
-    //     })
-    // }
+    handleChangeOpened=(date, bug)=>{
+        console.log(date, bug)
+        // return <Calendar />
+        bug.opened = date
+        fetch(`http://localhost:3000/bugs/${bug.id}`,{
+            method: 'PATCH',
+            body: JSON.stringify({
+                opened: date
+            }),
+            headers: {
+                'Content-Type':'application/json'
+            }
+        })
+    }
 
-    // showProject=()=>{
-    //     return this.state.showOneProjectInfo.map((project,index)=>{
-    //         return <Project project={project} key={index}/>        
-    //     })
-    // }   
+    handleChangeClosed=(date, bug)=>{
+        bug.closed = date
+        fetch(`http://localhost:3000/bugs/${bug.id}`,{
+            method: 'PATCH',
+            body: JSON.stringify({
+                closed: date
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+
+    handleChangeProjectId=(val, bug)=>{
+        let projectBug
+        this.state.project_bugs.forEach(project_bug=>{
+            if (project_bug.bug_id === bug.id){
+                projectBug = project_bug
+                project_bug.project_id = val
+            }
+        })
+        val = parseInt(val)
+        fetch(`http://localhost:3000/project_bugs/${projectBug.id}`,{
+            method: 'PATCH',
+            body: JSON.stringify({
+                project_id: val
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        } )
+    }
+
+    handleChangeDescription=(val, bug)=>{
+        bug.description=val
+        fetch(`http://localhost:3000/bugs/${bug.id}`,{
+            method: 'PATCH',
+            body: JSON.stringify({
+                description: val
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })  
+    }
+
+    handleChangeName=(val, bug)=>{
+        bug.name=val
+        fetch(`http://localhost:3000/bugs/${bug.id}`,{
+            method: 'PATCH',
+            body: JSON.stringify({
+                name: val
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+
+    handleChangeSubmitteBy=(val, bug)=>{
+        bug.name=val
+        fetch(`http://localhost:3000/bugs/${bug.id}`,{
+            method: 'PATCH',
+            body: JSON.stringify({
+                submitted_by: val
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
 
     render(){
         const re = new RegExp(this.state.searchText, "i");
@@ -77,7 +186,16 @@ class ProjectContainer extends React.Component{
                 bugs={bugs} 
                 user_bugs={this.state.user_bugs}
                 users={users}
+                projects={this.state.projects}
                 project_bugs={this.state.project_bugs}
+                handleChangeStatus={this.handleChangeStatus}
+                handleChangePriority={this.handleChangePriority}
+                handleChangeOpened={this.handleChangeOpened}
+                handleChangeClosed={this.handleChangeClosed}
+                handleChangeProjectId={this.handleChangeProjectId}
+                handleChangeDescription={this.handleChangeDescription}
+                handleChangeName={this.handleChangeName}
+                handleChangeSubmitteBy={this.handleChangeSubmitteBy}
                 />
             </div>
         )

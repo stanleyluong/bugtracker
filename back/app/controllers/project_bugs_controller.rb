@@ -39,6 +39,6 @@ class ProjectBugsController < ApplicationController
       end
   
       def projectbug_params
-        params.require(:projectbug).permit(:project_id, :bug_id)
+        params.require(:project_bug).permit(:project_id, :bug_id)
       end
 end

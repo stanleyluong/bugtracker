@@ -8,9 +8,9 @@ class CreateBugs < ActiveRecord::Migration[5.2]
       t.string :status
       t.string :description
       t.string :location
-      t.time :opened
-      t.time :closed
-      t.time :age
+      t.string :opened
+      t.string :closed
+      t.string :age
       t.timestamps
     end
   end

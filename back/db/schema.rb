@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 2019_11_04_214500) do
     t.string "status"
     t.string "description"
     t.string "location"
-    t.time "opened"
-    t.time "closed"
-    t.time "age"
+    t.string "opened"
+    t.string "closed"
+    t.string "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
