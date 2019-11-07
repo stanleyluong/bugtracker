@@ -11,12 +11,11 @@ class ProjectContainer extends React.Component{
         users: [],
         user_bugs: [],
         user_projects: [],
-        project_bugs: [],
         searchText: ""
       }
     
     componentDidMount(){
-        let dataArray = ['projects', 'bugs', 'users', 'user_bugs','user_projects', 'project_bugs']
+        let dataArray = ['projects', 'bugs', 'users', 'user_bugs','user_projects']
         dataArray.forEach(data=>{
             let URL = "http://localhost:3000/"+data
             fetch(URL)
@@ -26,18 +25,18 @@ class ProjectContainer extends React.Component{
             }))
         })
     }
-
+    
     handleChange = (searchText) => {
         this.setState({
-          searchText
+            searchText
         })
-      }
-
+    }
+    
     handleClick=(project)=>{
         this.setState({
             showOneProjectInfo: [...this.state.showOneProjectInfo, project]
         })
- 
+        
     }
     handleChangeStatus=(e, data, id)=>{
         let option = e.target.innerText
@@ -50,10 +49,10 @@ class ProjectContainer extends React.Component{
         fetch(url, {
             method: 'PATCH', 
             body: JSON.stringify({
-            status: option
+                status: option
             }),
             headers: {
-            'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
         });
     }
@@ -66,14 +65,15 @@ class ProjectContainer extends React.Component{
         fetch(url, {
             method: 'PATCH', 
             body: JSON.stringify({
-            priority: option
+                priority: option
             }),
             headers: {
-            'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
         });
+        // console.log(this.state.bugs)
     }
-
+    
     handleChangeOpened=(date, bug)=>{
         console.log(date, bug)
         // return <Calendar />
@@ -102,19 +102,20 @@ class ProjectContainer extends React.Component{
         })
     }
 
-    handleChangeProjectId=(val, bug)=>{
-        let projectBug
-        this.state.project_bugs.forEach(project_bug=>{
-            if (project_bug.bug_id === bug.id){
-                projectBug = project_bug
-                project_bug.project_id = val
-            }
-        })
-        val = parseInt(val)
-        fetch(`http://localhost:3000/project_bugs/${projectBug.id}`,{
+    handleChangeProject=(val, bug)=>{
+        // let projectBug
+        // this.state.project_bugs.forEach(project_bug=>{
+        //     if (project_bug.bug_id === bug.id){
+        //         projectBug = project_bug
+        //         project_bug.project_id = val
+        //     }
+        // })
+        // val = parseInt(val)
+        bug.project = val
+        fetch(`http://localhost:3000/bugs/${bug.id}`,{
             method: 'PATCH',
             body: JSON.stringify({
-                project_id: val
+                project: val
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -174,18 +175,19 @@ class ProjectContainer extends React.Component{
         })
     }
 
-    handleChangeAssignedTo=(val, bug)=>{
-        console.log('val', val)
-        console.log('bug',bug)
-        let usersassignedtobug=[]
-        this.state.users.forEach(user=>{
-            if(val.includes(user.id)){
+    // handleChangeAssignedTo=(val, bug)=>{
+    //     console.log('val', val)
+    //     console.log('bug',bug)
+    //     let usersassignedtobug=[]
+    //     this.state.users.forEach(user=>{
+    //         if(val.includes(user.id)){
                 
-            }
-        })
+    //         }
+    //     })
 
-    }
+    // }
 
+    // console.log(this.state.bugs)
     render(){
         const re = new RegExp(this.state.searchText, "i");
         const bugs = this.state.bugs.filter((bug) => {
@@ -219,7 +221,7 @@ class ProjectContainer extends React.Component{
                 handleChangePriority={this.handleChangePriority}
                 handleChangeOpened={this.handleChangeOpened}
                 handleChangeClosed={this.handleChangeClosed}
-                handleChangeProjectId={this.handleChangeProjectId}
+                handleChangeProject={this.handleChangeProject}
                 handleChangeDescription={this.handleChangeDescription}
                 handleChangeName={this.handleChangeName}
                 handleChangeSubmittedBy={this.handleChangeSubmittedBy}

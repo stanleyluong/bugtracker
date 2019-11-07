@@ -4,7 +4,7 @@ class BugsController < ApplicationController
   # GET /bugs
   def index
     @bugs = Bug.all
-
+    
     render json: @bugs
   end
 
@@ -16,7 +16,7 @@ class BugsController < ApplicationController
   # POST /bugs
   def create
     @bug = Bug.new(bug_params)
-
+    
     if @bug.save
       render json: @bug, status: :created, location: @bug
     else
@@ -26,6 +26,7 @@ class BugsController < ApplicationController
 
   # PATCH/PUT /bugs/1
   def update
+    
     if @bug.update(bug_params)
       render json: @bug
     else

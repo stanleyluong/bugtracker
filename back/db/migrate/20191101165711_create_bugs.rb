@@ -11,7 +11,7 @@ class CreateBugs < ActiveRecord::Migration[5.2]
       t.string :opened
       t.string :closed
       t.string :age
-      t.string :project
+      t.integer :project_id
       t.timestamps
     end
   end

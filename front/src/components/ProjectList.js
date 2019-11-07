@@ -11,12 +11,12 @@ const ProjectList = (props) => {
           <tr>
           <th>
               <h3 className="ui center aligned header">
-                ID
+                Bug ID
               </h3>
             </th>
             <th>
               <h3 className="ui center aligned header">
-                Project ID
+                Project Name
               </h3>
             </th>
             <th>
@@ -92,7 +92,7 @@ const ProjectList = (props) => {
               handleChangePriority={props.handleChangePriority}
               handleChangeOpened={props.handleChangeOpened}
               handleChangeClosed={props.handleChangeClosed}
-              handleChangeProjectId={props.handleChangeProjectId}
+              handleChangeProject={props.handleChangeProject}
               handleChangeDescription={props.handleChangeDescription}
               handleChangeName={props.handleChangeName}
               handleChangeSubmittedBy={props.handleChangeSubmittedBy}

@@ -5,35 +5,39 @@ Project.destroy_all
 Bug.destroy_all
 UserBug.destroy_all
 UserProject.destroy_all
-ProjectBug.destroy_all
+# ProjectBug.destroy_all
 
 10.times do
     Project.create(
-        title:Faker::Movie.quote
+        title:Faker::Games::LeagueOfLegends.masteries
         )
 end
 
 10.times do
     User.create(
-        username: Faker::Name.name,
+        username: Faker::Games::LeagueOfLegends.champion,
         password: Faker::Alphanumeric.alpha(number: 10),
+        firstname: Faker::Name.first_name,  
+        lastname: Faker::Name.last_name, 
+        email: Faker::Internet.email,
         image: Faker::Avatar.image(size: "75x75"),
-        role: Faker::Job.title
+        job: Faker::Job.title
     )
 end
 
 10.times do
     Bug.create(
-        name:Faker::Hacker.abbreviation,
-        priority:Faker::Job.employment_type,
+        name:Faker::Games::LeagueOfLegends.rank,
+        priority:["Low","Medium","High","Critical"].sample,
         attachment:Faker::Avatar.image(size: "75x75"),
-        status:Faker::Quote.singular_siegler,
-        description:Faker::Quote.famous_last_words,
-        opened:"test",
-        closed:"",
+        status:["Can't reproduce","In progress","Complete","Blocked","Won't fix","Duplicate"].sample,
+        description:Faker::Games::LeagueOfLegends.quote,
+        opened:Faker::Date.backward(days: 100),
+        closed:nil,
         age:Faker::Date.between(from: 2.days.ago, to: Date.today),
         submitted_by:Faker::Games::LeagueOfLegends.champion,
-        location:Faker::Games::LeagueOfLegends.location
+        location:Faker::Games::LeagueOfLegends.location,
+        project: Project.all.sample
     )
 end
 
@@ -51,9 +55,3 @@ end
     )
 end 
 
-Bug.all.each do |bug|
-    ProjectBug.create(
-        project_id: rand(Project.all.count),
-        bug_id: bug.id
-    )
-end

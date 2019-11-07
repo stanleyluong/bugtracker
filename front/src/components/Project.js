@@ -15,7 +15,7 @@ class Project extends React.Component {
         showOpenedCalender: false,
         showClosedCalendar: false,
         showEditName: false,
-        showEditProjectId: false,
+        showEditProject: false,
         showEditDescription: false,
         showEditSubmittedBy: false,
         showEditLocation: false,
@@ -45,22 +45,22 @@ class Project extends React.Component {
     // }
     
  
-    findProjectId=(bug)=>{
-        // console.log(bug)
-        let id
-        this.props.project_bugs.forEach(project_bug=>{
-            // console.log(bug.id, project_bug.bug_id)
-            if (project_bug.bug_id === bug.id){
-                id = project_bug.project_id
-            }
-        }) 
-        // console.log(id)
+    // findProjectId=(bug)=>{
+    //     // console.log(bug)
+    //     let id
+    //     this.props.project_bugs.forEach(project_bug=>{
+    //         // console.log(bug.id, project_bug.bug_id)
+    //         if (project_bug.bug_id === bug.id){
+    //             id = project_bug.project_id
+    //         }
+    //     }) 
+    //     // console.log(id)
 
-        // id = id.toString()
-        // console.log(id)
-        return id
+    //     // id = id.toString()
+    //     // console.log(id)
+    //     return id
         
-    }
+    // }
 
     handleOpenedClick=()=>{this.setState({showOpenedCalender: true})}
     onChangeOpened=(date)=>{
@@ -87,29 +87,29 @@ class Project extends React.Component {
         }
     }
     
-    handleProjectId=(val)=>{
-        this.props.handleChangeProjectId(val, this.props.bug)
-        this.setState({showEditProjectId: false})
+    handleProject=(val)=>{
+        this.props.handleChangeProject(val, this.props.bug)
+        this.setState({showEditProject: false})
     }
-    handleShowProjectId=()=>{
-        if (this.state.showEditProjectId===false){
-            return this.findProjectId(this.props.bug)
+    handleShowProject=()=>{
+        if (this.state.showEditProject===false){
+            return this.props.bug.project_id
         } else {
             return <EdiText 
-            value={`${this.findProjectId(this.props.bug)}`}
-            type="text"
+            value={this.props.bug.project_id}
+            type="textarea"
             hint="Assign bug to project"
             editOnViewClick={true}
             submitOnEnter
             // validationMessage="Please enter a valid Project ID"
             // validation={value => this.props.projects.some(project=> project.id === value)}
-            onSave={this.handleProjectId}
-            onCancel={this.cancelShowProjectId}
+            onSave={this.handleProject}
+            onCancel={this.cancelShowProject}
             />
         }      
     }
-    cancelShowProjectId=()=>{this.setState({showEditProjectId: false})}
-    handleProjectIdClick=()=>{this.setState({showEditProjectId: true})}
+    cancelShowProject=()=>{this.setState({showEditProject: false})}
+    handleProjectClick=()=>{this.setState({showEditProject: true})}
     
     
     
@@ -225,7 +225,7 @@ class Project extends React.Component {
         return(
             <tr>
                 <td style={{width: ".1em"}}>{this.props.bug.id}</td>
-                <td onClick={()=>this.handleProjectIdClick()}>{this.handleShowProjectId()}</td>
+                <td onClick={()=>this.handleProjectClick()}>{this.handleShowProject()}</td>
                 <td onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
                 <td style={{width: "7em"}}><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
                 <td><img src={this.props.bug.attachment} alt="oops"/></td>
