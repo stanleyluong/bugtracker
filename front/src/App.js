@@ -7,17 +7,13 @@ import 'semantic-ui-css/semantic.min.css'
 
 class App extends React.Component{
 
-  
-
   render(){
     return(
       <div className="ui raised segment">
-        <div className="ui segment green inverted">
-          <h2>Bug Manager</h2>
+        <div className="ui segment black inverted">
+          <h2>Bug Tracker 9000</h2>
         </div>
-        
         <ProjectContainer />
-
       </div>
       
         /* <Table x={10} y={10} id={'1'}/> */

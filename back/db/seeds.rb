@@ -17,7 +17,7 @@ end
     User.create(
         username: Faker::Name.name,
         password: Faker::Alphanumeric.alpha(number: 10),
-        image: Faker::LoremFlickr.image,
+        image: Faker::Avatar.image(size: "75x75"),
         role: Faker::Job.title
     )
 end

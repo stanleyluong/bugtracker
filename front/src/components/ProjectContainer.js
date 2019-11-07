@@ -1,6 +1,8 @@
 import React from 'react'
 import ProjectList from './ProjectList'
 import Search from './Search'
+import 'semantic-ui-css/semantic.min.css'
+
 class ProjectContainer extends React.Component{
 
     state = {
@@ -146,8 +148,8 @@ class ProjectContainer extends React.Component{
         })
     }
 
-    handleChangeSubmitteBy=(val, bug)=>{
-        bug.name=val
+    handleChangeSubmittedBy=(val, bug)=>{
+        bug.submitted_by=val
         fetch(`http://localhost:3000/bugs/${bug.id}`,{
             method: 'PATCH',
             body: JSON.stringify({
@@ -157,6 +159,31 @@ class ProjectContainer extends React.Component{
                 'Content-Type': 'application/json'
             }
         })
+    }
+
+    handleChangeLocation=(val, bug)=>{
+        bug.location=val
+        fetch(`http://localhost:3000/bugs/${bug.id}`,{
+            method: 'PATCH',
+            body: JSON.stringify({
+                location: val
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+
+    handleChangeAssignedTo=(val, bug)=>{
+        console.log('val', val)
+        console.log('bug',bug)
+        let usersassignedtobug=[]
+        this.state.users.forEach(user=>{
+            if(val.includes(user.id)){
+                
+            }
+        })
+
     }
 
     render(){
@@ -195,7 +222,9 @@ class ProjectContainer extends React.Component{
                 handleChangeProjectId={this.handleChangeProjectId}
                 handleChangeDescription={this.handleChangeDescription}
                 handleChangeName={this.handleChangeName}
-                handleChangeSubmitteBy={this.handleChangeSubmitteBy}
+                handleChangeSubmittedBy={this.handleChangeSubmittedBy}
+                handleChangeLocation={this.handleChangeLocation}
+                handleChangeAssignedTo={this.handleChangeAssignedTo}
                 />
             </div>
         )

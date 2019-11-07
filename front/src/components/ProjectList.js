@@ -1,5 +1,6 @@
 import React from 'react'
 import Project from './Project'
+import 'semantic-ui-css/semantic.min.css'
 
 const ProjectList = (props) => {
     const { bugs, user_bugs, users, project_bugs } = props
@@ -20,7 +21,7 @@ const ProjectList = (props) => {
             </th>
             <th>
               <h3 className="ui center aligned header">
-                Name
+                Bug Name
               </h3>
             </th>
             <th>
@@ -95,6 +96,8 @@ const ProjectList = (props) => {
               handleChangeDescription={props.handleChangeDescription}
               handleChangeName={props.handleChangeName}
               handleChangeSubmittedBy={props.handleChangeSubmittedBy}
+              handleChangeLocation={props.handleChangeLocation}
+              handleChangeAssignedTo={props.handleChangeAssignedTo}
               />
           })}
   
