@@ -12,8 +12,8 @@ class UserBugsController < ApplicationController
     end
   
     def create
-      @userbug = UserBug.find_or_create_by(userbug_params)
-  
+      # byebug
+      @userbug = UserBug.new(userbug_params)
       if @userbug.save
         render json: @userbug
       else
@@ -39,6 +39,6 @@ class UserBugsController < ApplicationController
       end
   
       def userbug_params
-        params.require(:userbug).permit(:user_id, :bug_id)
+        params.require(:user_bug).permit(:user_id, :bug_id)
       end
 end

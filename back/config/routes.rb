@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :user_projects
   resources :user_bugs
-  resources :project_bugs
   resources :bugs
   resources :projects
   resources :users

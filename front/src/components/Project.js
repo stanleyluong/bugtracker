@@ -6,6 +6,7 @@ import Moment from 'react-moment'
 import EdiText from 'react-editext'
 import AssignedToDropdown from './AssignedToDropdown'
 import 'semantic-ui-css/semantic.min.css'
+// import { element } from 'prop-types'
 
 
 class Project extends React.Component {
@@ -19,7 +20,8 @@ class Project extends React.Component {
         showEditDescription: false,
         showEditSubmittedBy: false,
         showEditLocation: false,
-        showEditAssignedTo: false
+        assignedUsers: []
+        // showEditAssignedTo: false
     }
    
     // findUserName=(bug)=>{
@@ -87,29 +89,35 @@ class Project extends React.Component {
         }
     }
     
-    handleProject=(val)=>{
-        this.props.handleChangeProject(val, this.props.bug)
-        this.setState({showEditProject: false})
-    }
+    // handleProject=(val)=>{
+    //     this.props.handleChangeProject(val, this.props.bug)
+    //     this.setState({showEditProject: false})
+    // }
     handleShowProject=()=>{
-        if (this.state.showEditProject===false){
-            return this.props.bug.project_id
-        } else {
-            return <EdiText 
-            value={this.props.bug.project_id}
-            type="textarea"
-            hint="Assign bug to project"
-            editOnViewClick={true}
-            submitOnEnter
-            // validationMessage="Please enter a valid Project ID"
-            // validation={value => this.props.projects.some(project=> project.id === value)}
-            onSave={this.handleProject}
-            onCancel={this.cancelShowProject}
-            />
-        }      
+        let projectTitle
+            this.props.projects.forEach(project=>{
+                if (project.id === this.props.bug.project_id){
+                    projectTitle = project.title
+                }
+            })
+        // if (this.state.showEditProject===false){
+            return projectTitle     
+        // } else {
+        //     return <EdiText 
+        //     value={this.props.bug.project_id}
+        //     type="textarea"
+        //     hint="Assign bug to project"
+        //     editOnViewClick={true}
+        //     submitOnEnter
+        //     // validationMessage="Please enter a valid Project ID"
+        //     // validation={value => this.props.projects.some(project=> project.id === value)}
+        //     onSave={this.handleProject}
+        //     onCancel={this.cancelShowProject}
+        //     />
+        // }      
     }
-    cancelShowProject=()=>{this.setState({showEditProject: false})}
-    handleProjectClick=()=>{this.setState({showEditProject: true})}
+    // cancelShowProject=()=>{this.setState({showEditProject: false})}
+    // handleProjectClick=()=>{this.setState({showEditProject: true})}
     
     
     
@@ -125,13 +133,15 @@ class Project extends React.Component {
             return <EdiText
                 value={this.props.bug.description}
                 type="textarea"
-                inputProps={{placeholder: "Type your content here"}}
-                hint="Write a bug description"
+                // inputProps={{placeholder: "Type your content here"}}
+                hint="Enter description"
                 editOnViewClick={true}
                 submitOnEnter
                 onSave={this.handleDescription}
-                viewProps={{style:{width:"200px"}}}
+                // viewProps={{style:{"text-align:center;"}}}
+                // inputProps={{styles:{textalign:"center"}}}
                 onCancel={this.handleCancelShowDescription}
+                // mainContainerClassName={true}
                 />
         }
     }
@@ -144,8 +154,8 @@ class Project extends React.Component {
         } else { 
             return <EdiText 
                 value={this.props.bug.name}
-                type="text"
-                hint="Enter bug name"
+                type="textarea"
+                hint="Enter name"
                 editOnViewClick={true}
                 submitOnEnter
                 onSave={this.handleName}
@@ -174,8 +184,8 @@ class Project extends React.Component {
         } else {
             return <EdiText 
             value={this.props.bug.submitted_by}
-            type="text"
-            hint="Enter bug submitter"
+            type="textarea"
+            hint="Enter submitter"
             editOnViewClick={true}
             submitOnEnter
             onSave={this.handleSubmittedBy}
@@ -184,8 +194,6 @@ class Project extends React.Component {
         }
     }
     handleCancelSubmittedBy=()=>{this.setState({showEditSubmittedBy:false})}
-    
-    
     
     handleLocation=(val)=>{
         this.props.handleChangeLocation(val, this.props.bug)
@@ -200,8 +208,8 @@ class Project extends React.Component {
         } else {
             return <EdiText 
             value={this.props.bug.location}
-            type="text"
-            hint="Enter bug submitter"
+            type="textarea"
+            hint="Enter location"
             editOnViewClick={true}
             submitOnEnter
             onSave={this.handleLocation}
@@ -212,20 +220,35 @@ class Project extends React.Component {
     handleCancelLocation=()=>{this.setState({showEditLocation:false})}
     
 
-    handleAssignedToClick=()=>{this.setState({showEditAssignedTo:true})}
-    handleShowAssignedTo=()=>{
-        if (this.state.showEditAssignedTo===false){
-            return this.findUserName(this.props.bug)
-        } else {
-            // console.log(this.props.users)
-            return <AssignedToDropdown findUserName={this.findUserName} users={this.props.users} bug={this.props.bug}/>
-        }
+    // handleAssignedToClick=()=>{this.setState({showEditAssignedTo:true})}
+    // handleShowAssignedTo=()=>{
+    //     if (this.state.showEditAssignedTo===false){
+    //         return this.findUserName(this.props.bug)
+    //     } else {
+    //         // console.log(this.props.users)
+    //         return <AssignedToDropdown findUserName={this.findUserName} users={this.props.users} bug={this.props.bug}/>
+    //     }
+    // }
+    findUsers=()=>{
+        let assignedUsers = []
+        this.props.user_bugs.forEach(user_bug=>{
+            if (user_bug.bug_id === this.props.bug.id){
+                this.props.users.forEach(user=>{
+                    if (user.id === user_bug.user_id){
+                        assignedUsers.push(user.id)
+                    }
+                })
+            }
+        })
+        // console.log(assignedUsers)
+        // this.props.setAssignedUsers(assignedUsers)
+        return assignedUsers
     }
     render(){
         return(
             <tr>
                 <td style={{width: ".1em"}}>{this.props.bug.id}</td>
-                <td onClick={()=>this.handleProjectClick()}>{this.handleShowProject()}</td>
+                <td /*onClick={()=>this.handleProjectClick()}*/>{this.handleShowProject()}</td>
                 <td onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
                 <td style={{width: "7em"}}><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
                 <td><img src={this.props.bug.attachment} alt="oops"/></td>
@@ -236,10 +259,9 @@ class Project extends React.Component {
                 <td onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
                 <td onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
-                <td width="300px"><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug}/></td>
+                <td width="300px"><AssignedToDropdown /*findUsers={this.findUsers}*/ handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/>{this.findUsers()}</td>
             </tr>
-            )
-
+        )
     }
 }
 

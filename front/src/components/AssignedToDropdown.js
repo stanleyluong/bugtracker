@@ -7,28 +7,67 @@ import 'semantic-ui-css/semantic.min.css'
 class AssignedToDropdown extends React.Component{
     state = {
         searchQuery: "",
-        value: []
+        value: [],
+        addUser: [],
+        removeUser: []
     }
-    // componentDidMount(){
-    //     this.setState({
-    //         value: this.props.findUserName()
-    //     })
-    // }
+
+    componentDidMount(){
+        let assignedUsers = []
+        // console.log(this.props.user_bugs)
+        // console.log(this.props)
+        this.props.user_bugs.forEach(user_bug=>{
+            if (user_bug.bug_id === this.props.bug.id){
+                this.props.users.forEach(user=>{
+                    if (user.id === user_bug.user_id){
+                        assignedUsers.push(user.id)
+                    }
+                })
+            }
+        })
+
+        // console.log(assignedUsers)
+        this.setState({value: assignedUsers})
+    }
     handleChange = (e, { searchQuery, value }) => {
-        this.setState({ searchQuery, value })
-        console.log(this.state.searchQuery)
         // console.log(e)
-        console.log(this.state.value)
-        this.props.handleChangeAssignedTo(this.state.value,this.props.bug)
+        console.log(value)
+        // console.log(searchQuery)
+        // console.log("state", this.state.value)
+        // console.log(this.props.bug)
+        this.setState({ searchQuery, value },()=>{this.props.handleChangeAssignedTo(this.state.value,this.props.bug)})
+        
+        // console.log(this.state.searchQuery)
+        // console.log(e)
+        // console.log(this.state.value)
     }
 
     handleSearchChange = (e, { searchQuery }) => {
         this.setState({ searchQuery })
-        console.log(searchQuery)
-        console.log(e)
+        // console.log(searchQuery)
+        // console.log(e)
     }
-    
+    // placeholder=()=>{
+    //     // console.log(this.props.users)
+    //     return "hello"
+    // }
+
+    // findusers=()=>{
+    //     let assignedUsers = []
+    //     this.props.user_bugs.forEach(user_bug=>{
+    //         if (user_bug.bug_id === this.props.bug.id){
+    //             this.props.users.forEach(user=>{
+    //                 if (user.id === user_bug.user_id){
+    //                     assignedUsers.push(user.id)
+    //                 }
+    //             })
+    //         }
+    //     })
+    //     // console.log(assignedUsers)
+    //     this.setState({value: assignedUsers})
+    // }
     render(){
+        // this.findusers()
         const { searchQuery, value } = this.state
         // console.log('searchQuery', searchQuery);
         // console.log('value', value)
@@ -40,27 +79,27 @@ class AssignedToDropdown extends React.Component{
         // console.log(this.props.users)
         // console.log(developerOptions)
         
-        return(
+        return(<div>
+                {console.log(value,"value")}
             <Dropdown
             fluid
             multiple
             onChange={this.handleChange}
             onSearchChange={this.handleSearchChange}
             options={developerOptions}
-            placeholder="     selectdevs"
+            placeholder=".....searchdevs"
             search
             searchQuery={searchQuery}
             selection
             value={value}
             closeOnChange
             closeOnBlur
+            // loading
             />
+        </div>
         )
     }
 
 }
-    
-
-
 
 export default AssignedToDropdown

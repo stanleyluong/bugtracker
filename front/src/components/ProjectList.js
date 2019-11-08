@@ -3,7 +3,6 @@ import Project from './Project'
 import 'semantic-ui-css/semantic.min.css'
 
 const ProjectList = (props) => {
-    const { bugs, user_bugs, users, project_bugs } = props
 
     return (
         <table className="ui celled striped padded table">
@@ -80,13 +79,15 @@ const ProjectList = (props) => {
             return <Project data={data} />
           })} */}
           
-          {bugs.map((bug,key) => {
+          {props.bugs.map((bug,key) => {
               return <Project 
               bug={bug} 
-              key={key} 
-              user_bugs={user_bugs}
-              users={users}
-              project_bugs={project_bugs}
+              key={key}
+              bugs={props.bugs}
+              // setAssignedUsers={props.setAssignedUsers}
+              // assignedUsersToBugs={props.assignedUsersToBugs}
+              user_bugs={props.user_bugs}
+              users={props.users}
               projects={props.projects}
               handleChangeStatus={props.handleChangeStatus}
               handleChangePriority={props.handleChangePriority}
