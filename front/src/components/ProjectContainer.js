@@ -12,8 +12,7 @@ class ProjectContainer extends React.Component{
         users: [],
         user_bugs: [],
         user_projects: [],
-        searchText: "",
-        assignedUsersToBug: []
+        searchText: ""
       }
     
     // componentDidMount(){

@@ -7,7 +7,8 @@ import EdiText from 'react-editext'
 import AssignedToDropdown from './AssignedToDropdown'
 import 'semantic-ui-css/semantic.min.css'
 // import { element } from 'prop-types'
-
+import ImageUploader from 'react-images-upload';
+import '../css/Project.css'
 
 class Project extends React.Component {
 
@@ -20,8 +21,11 @@ class Project extends React.Component {
         showEditDescription: false,
         showEditSubmittedBy: false,
         showEditLocation: false,
-        assignedUsers: []
-        // showEditAssignedTo: false
+        pictures: []
+    }
+
+    componentDidMount(){
+        this.setState({pictures:this.props.bug.attachment},()=>console.log(this.state.pictures))
     }
    
     // findUserName=(bug)=>{
@@ -244,6 +248,12 @@ class Project extends React.Component {
         // this.props.setAssignedUsers(assignedUsers)
         return assignedUsers
     }
+    onDrop=(picture)=> {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+    }
+    
     render(){
         return(
             <tr>
@@ -251,7 +261,7 @@ class Project extends React.Component {
                 <td /*onClick={()=>this.handleProjectClick()}*/>{this.handleShowProject()}</td>
                 <td onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
                 <td style={{width: "7em"}}><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
-                <td><img src={this.props.bug.attachment} alt="oops"/></td>
+                <td><div className="grandparent"><ImageUploader  withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
                 <td><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
                 <td onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
                 <td onClick={()=>this.handleOpenedClick()}>{this.handleShowOpened()}</td>
@@ -264,5 +274,5 @@ class Project extends React.Component {
         )
     }
 }
-
+{/* <img src={this.props.bug.attachment} alt="oops"/> */}
 export default Project

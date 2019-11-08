@@ -1,0 +1,25 @@
+.grandparent {
+    width: 300px;
+    /* overflow-x: scroll; */
+    /* background: gray */
+}
+
+.fileContainer{
+    display: inline-flex;
+    /* background: green; */
+}
+
+.fileContainer .uploadPictureContainer {
+    padding: 1%;
+    margin: 1%;
+    display: inline-table;
+    /* transition: all .2s ease-in-out; */
+    /* background: red */
+}
+
+.fileContainer .uploadPictureContainer:hover {
+    transform: scale(2.5);
+    /* position: relative; */
+    /* bottom: 100px */
+    z-index: 2
+}
