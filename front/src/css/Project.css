@@ -13,13 +13,21 @@
     padding: 1%;
     margin: 1%;
     display: inline-table;
-    /* transition: all .2s ease-in-out; */
     /* background: red */
 }
 
 .fileContainer .uploadPictureContainer:hover {
     transform: scale(2.5);
-    /* position: relative; */
-    /* bottom: 100px */
-    z-index: 2
+    z-index: 2 ;  
+    transition: all 1s ease-in-out;
+}
+.deleteImage{
+    transform: scale(.5)
+}
+.ui.dropdown:not(.button)>.default.text {
+    color: black
+}
+
+.text{
+    color: black
 }

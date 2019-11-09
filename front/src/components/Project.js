@@ -24,9 +24,9 @@ class Project extends React.Component {
         pictures: []
     }
 
-    componentDidMount(){
-        this.setState({pictures:this.props.bug.attachment},()=>console.log(this.state.pictures))
-    }
+    // componentDidMount(){
+    //     this.setState({pictures:this.props.bug.attachment},()=>console.log(this.state.pictures))
+    // }
    
     // findUserName=(bug)=>{
     //     let usernames = []
@@ -251,7 +251,7 @@ class Project extends React.Component {
     onDrop=(picture)=> {
         this.setState({
             pictures: this.state.pictures.concat(picture),
-        });
+        }, ()=> console.log(this.state.pictures));
     }
     
     render(){
