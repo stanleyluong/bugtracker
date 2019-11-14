@@ -15,7 +15,7 @@ end
 10.times do
     User.create(
         username: Faker::Games::LeagueOfLegends.champion,
-        password: Faker::Alphanumeric.alpha(number: 10),
+        password: 'password',
         firstname: Faker::Name.first_name,  
         lastname: Faker::Name.last_name, 
         email: Faker::Internet.email,
@@ -24,6 +24,9 @@ end
     )
 end
 
+# User.create(username: 'stanzz', password:'luong',firstname: 'stan',lastname:'luong',email:'xstanz@gmail.com',job:'pimp')
+
+# User.create(username: 'jared from subway',password:'jared',firstname:'subway',lastname:'badass',email: 'jared@jared.com',job:'asdasd')
 10.times do
     Bug.create(
         name:Faker::Games::LeagueOfLegends.rank,
@@ -40,12 +43,6 @@ end
     )
 end
 
-# 10.times do
-#     UserBug.create(
-#         user_id:User.all.sample.id,
-#         bug_id:Bug.all.sample.id
-#     )
-# end
 UserBug.create(user_id: 1, bug_id: 1)
 UserBug.create(user_id: 2, bug_id: 2)
 UserBug.create(user_id: 3, bug_id: 3)
@@ -56,10 +53,6 @@ UserBug.create(user_id: 7, bug_id: 7)
 UserBug.create(user_id: 8, bug_id: 8)
 UserBug.create(user_id: 9, bug_id: 9)
 UserBug.create(user_id: 10, bug_id: 10)
-
-
-
-
 
 10.times do
     UserProject.create(

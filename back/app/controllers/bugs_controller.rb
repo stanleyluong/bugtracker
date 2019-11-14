@@ -15,9 +15,9 @@ class BugsController < ApplicationController
 
   # POST /bugs
   def create
+    # byebug
     @bug = Bug.new(bug_params)
-    
-    if @bug.save
+    if @bug.save!
       render json: @bug, status: :created, location: @bug
     else
       render json: @bug.errors, status: :unprocessable_entity
@@ -47,6 +47,6 @@ class BugsController < ApplicationController
 
     # Only allow a trusted parameter    white list" through.
     def bug_params
-      params.require(:bug).permit(:name, :priority, :attachment, :status, :description , :opened, :closed, :age, :submitted_by, :location)
+      params.require(:bug).permit(:name, :project_id, :priority, :attachment, :status, :description , :opened, :closed, :age, :submitted_by, :location)
     end
 end

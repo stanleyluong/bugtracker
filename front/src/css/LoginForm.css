@@ -1,0 +1,9 @@
+/* .ui.form .fields>.field {
+    flex: 0 1 auto;
+    padding-left: 10%;
+    padding-right: 10%;
+} */
+
+.ui.teal.button, .ui.teal.buttons .button {
+    background-color: black;
+}

@@ -1,5 +1,5 @@
 .grandparent {
-    width: 300px;
+    width: 9em;
     /* overflow-x: scroll; */
     /* background: gray */
 }
@@ -31,3 +31,7 @@
 .text{
     color: black
 }
+
+/* .td:hover {
+    transform: scale(2)
+} */

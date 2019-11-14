@@ -10,7 +10,7 @@ const ProjectList = (props) => {
           <tr>
           <th>
               <h3 className="ui center aligned header">
-                Bug ID
+                Project ID
               </h3>
             </th>
             <th>
@@ -18,77 +18,29 @@ const ProjectList = (props) => {
                 Project Name
               </h3>
             </th>
-            <th>
+            {/* <th>
               <h3 className="ui center aligned header">
-                Bug Name
+                Bugs
               </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Priority
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Attachment
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Status
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Description
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Opened
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Age
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Closed
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Submitted By
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Location
-              </h3>
-            </th>
-            <th>
+            </th> */}
+            {/* <th>
               <h3 className="ui center aligned header">
                 Assigned To
               </h3>
-            </th>
+            </th> */}
           </tr>
-  
-          {/* {data.map((data) => {
-            return <Project data={data} />
-          })} */}
           
-          {props.bugs.map((bug,key) => {
+          {props.projects.map((project,key) => {
               return <Project 
-              bug={bug} 
+              project={project}
               key={key}
               bugs={props.bugs}
-              // setAssignedUsers={props.setAssignedUsers}
-              // assignedUsersToBugs={props.assignedUsersToBugs}
               user_bugs={props.user_bugs}
               users={props.users}
+              user_projects={props.user_projects}
               projects={props.projects}
+              jwt={props.jwt}
+              addBug={props.addBug}
               handleChangeStatus={props.handleChangeStatus}
               handleChangePriority={props.handleChangePriority}
               handleChangeOpened={props.handleChangeOpened}
@@ -99,6 +51,7 @@ const ProjectList = (props) => {
               handleChangeSubmittedBy={props.handleChangeSubmittedBy}
               handleChangeLocation={props.handleChangeLocation}
               handleChangeAssignedTo={props.handleChangeAssignedTo}
+              handleProjectTitle={props.handleProjectTitle}
               />
           })}
   

@@ -9,8 +9,7 @@ import 'semantic-ui-css/semantic.min.css'
 // import { element } from 'prop-types'
 import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
-import Bugs from './Bugs'
-import BugContainer from './BugContainer'
+
 class Project extends React.Component {
 
     state = {
@@ -21,7 +20,7 @@ class Project extends React.Component {
         showEditProject: false,
         showEditDescription: false,
         showEditSubmittedBy: false,
-        showProjectTitle: false,
+        showLocation: false,
         pictures: []
     }
 
@@ -131,49 +130,30 @@ class Project extends React.Component {
     }
     handleCancelSubmittedBy=()=>{this.setState({showEditSubmittedBy:false})}
     
-    handleProjectTitle=(val)=>{
-        this.props.handleProjectTitle(val, this.props.project)
-        this.setState({showProjectTitle: false})
+    handleLocation=(val)=>{
+        this.props.handleChangeLocation(val, this.props.bug)
+        this.setState({showLocation: false})
     }
-    handleProjectTitleClick=()=>{
-        this.setState({showProjectTitle:true})
+    handleLocationClick=()=>{
+        this.setState({showLocation:true})
     }
-    handleShowProjectTitle=()=>{
-        if(this.state.showProjectTitle===false){
-            return this.props.project.title
+    handleShowLocation=()=>{
+        if(this.state.showLocation===false){
+            return this.props.bug.location
         } else {
-            // return <EdiText 
-            // value={this.props.project.title}
-            // type="textarea"
-            // hint="Enter title"
-            // editOnViewClick={true}
-            // submitOnEnter
-            // onSave={this.handleProjectTitle}
-            // onCancel={this.handleCanceProjectTitle}
-            // />
-            return <BugContainer
-                        handleChangeStatus={this.props.handleChangeStatus}
-                        handleChangePriority={this.props.handleChangePriority}
-                        handleChangeOpened={this.props.handleChangeOpened}
-                        handleChangeClosed={this.props.handleChangeClosed}
-                        handleChangeProject={this.props.handleChangeProject}
-                        handleChangeDescription={this.props.handleChangeDescription}
-                        handleChangeName={this.props.handleChangeName}
-                        handleChangeSubmittedBy={this.props.handleChangeSubmittedBy}
-                        handleChangeLocation={this.props.handleChangeLocation}
-                        handleChangeAssignedTo={this.props.handleChangeAssignedTo}
-                        addBug={this.props.addBug}
-                        bugs={this.props.bugs.filter(bug=>{if (bug.project_id===this.props.project.id){return bug}})}
-                        user_bugs={this.props.user_bugs}
-                        users={this.props.users}
-                        projects={this.props.projects}
-                        user_projects={this.props.user_projects}
-                        jwt={this.props.jwt}
-                        project={this.props.project}
-                        />
+            return <EdiText 
+            value={this.props.bug.location}
+            type="textarea"
+            hint="Enter title"
+            editOnViewClick={true}
+            submitOnEnter
+            onSave={this.handleLocation}
+            onCancel={this.handleCanceLocation}
+            />
+            
         }
     }
-    handleCancelProjectTitle=()=>{this.setState({showProjectTitle:false})}
+    handleCancelLocation=()=>{this.setState({showLocation:false})}
 
     handleShowProjectBugs=()=>{
         console.log(this.props.bugs)
@@ -213,8 +193,8 @@ class Project extends React.Component {
         // console.log(this.props)
         return(
             <tr>
-                {/* <td className="td" style={{width: ".05em"}}>{this.props.bug.id}</td>
-                <td className="td" style={{width:".1em"}}>{this.handleShowProject()}</td>
+                <td className="td" style={{width: ".05em"}}>{this.props.bug.id}</td>
+                {/* <td className="td" style={{width:".1em"}}>{this.handleShowProject()}</td> */}
                 <td className="td" onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
                 <td className="td" style={{width: "1em"}}><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
                 <td className="td" ><div className="grandparent"><ImageUploader  withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
@@ -225,11 +205,11 @@ class Project extends React.Component {
                 <td className="td" onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
                 <td className="td" onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td className="td" onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
-                <td className="td" width="300px"><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td> */}
-                <td>{this.props.project.id}</td>
+                <td className="td" width="300px"><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td>
+                {/* <td>{this.props.project.id}</td>
                 <td onClick={()=>this.handleProjectTitleClick()}>{this.handleShowProjectTitle()}</td>
-                {/* <td>{this.handleShowProjectBugs()}</td> */}
-                {/* <td>project users</td> */}
+                <td>{this.handleShowProjectBugs()}</td>
+                <td>project users</td> */}
             </tr>
         )
     }

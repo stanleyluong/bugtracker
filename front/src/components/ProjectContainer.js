@@ -1,11 +1,13 @@
-import React from 'react'
 import ProjectList from './ProjectList'
-import Search from './Search'
+import React from 'react'
+import BugList from './BugList'
+import ProjectSearch from './ProjectSearch'
 import 'semantic-ui-css/semantic.min.css'
-import '../css/ProjectContainer.css'
-
-class ProjectContainer extends React.Component{
-
+import '../css/BugContainer.css'
+import NewProject from './NewProject'
+import TabBar from './TabBar'
+import { Tab } from 'semantic-ui-react'
+class BugContainer extends React.Component{
     state = {
         projects: [],
         bugs: [],
@@ -15,32 +17,53 @@ class ProjectContainer extends React.Component{
         searchText: ""
       }
     
-    // componentDidMount(){
-    //     let dataArray = ['projects', 'bugs', 'users', 'user_bugs','user_projects']
-    //     Promise.all([
-    //         dataArray.forEach(data=>{
-    //         let URL = "http://localhost:3000/"+data
-    //         fetch(URL)
-    //         .then(response=>response.json())
-    //         .then(response=>this.setState({
-    //         [data]: response
-    //         }))
-            
-    //     }
-    //     )])
-        
-    // }
-    
     componentDidMount(){
         Promise.all([
-            fetch("http://localhost:3000/projects"),
-            fetch("http://localhost:3000/bugs"),
-            fetch("http://localhost:3000/users"),
-            fetch("http://localhost:3000/user_bugs"),
-            fetch("http://localhost:3000/user_projects")
-        ]).then(([res1,res2,res3,res4,res5])=>
+            fetch("http://localhost:3000/projects",{
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Accept':'application/json',
+                    'Authorization':`Bearer ${this.props.jwt}`
+                }
+            }),
+            fetch("http://localhost:3000/bugs",{
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Accept':'application/json',
+                    'Authorization':`Bearer ${this.props.jwt}`
+                }
+            }),
+            fetch("http://localhost:3000/users",{
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Accept':'application/json',
+                    'Authorization':`Bearer ${this.props.jwt}`
+                }
+            }),
+            fetch("http://localhost:3000/user_bugs",{
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Accept':'application/json',
+                    'Authorization':`Bearer ${this.props.jwt}`
+                }
+            }),
+            fetch("http://localhost:3000/user_projects",{
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Accept':'application/json',
+                    'Authorization':`Bearer ${this.props.jwt}`
+                }
+            })
+        ])
+        .then(([res1,res2,res3,res4,res5])=>
         Promise.all([res1.json(),res2.json(),res3.json(),res4.json(),res5.json()])
         ).then(([res1,res2,res3,res4,res5])=>{
+            console.log(res1)
             this.setState({
                 projects: res1,
                 bugs: res2,
@@ -64,12 +87,10 @@ class ProjectContainer extends React.Component{
         
     }
     handleChangeStatus=(e, data, id)=>{
+        console.log('in project container finally wtf', e, data, id)
         let option = e.target.innerText
         let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
-        // console.log(currentbug)
         currentbug.status = data.value
-        // console.log(id)
-        // console.log(data.value)
         let url = `http://localhost:3000/bugs/${id}`
         fetch(url, {
             method: 'PATCH', 
@@ -77,7 +98,9 @@ class ProjectContainer extends React.Component{
                 status: option
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         });
     }
@@ -93,7 +116,9 @@ class ProjectContainer extends React.Component{
                 priority: option
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         });
         // console.log(this.state.bugs)
@@ -109,7 +134,9 @@ class ProjectContainer extends React.Component{
                 opened: date
             }),
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         })
     }
@@ -122,20 +149,14 @@ class ProjectContainer extends React.Component{
                 closed: date
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         })
     }
 
     handleChangeProject=(val, bug)=>{
-        // let projectBug
-        // this.state.project_bugs.forEach(project_bug=>{
-        //     if (project_bug.bug_id === bug.id){
-        //         projectBug = project_bug
-        //         project_bug.project_id = val
-        //     }
-        // })
-        // val = parseInt(val)
         bug.project = val
         fetch(`http://localhost:3000/bugs/${bug.id}`,{
             method: 'PATCH',
@@ -143,7 +164,9 @@ class ProjectContainer extends React.Component{
                 project: val
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         } )
     }
@@ -156,7 +179,9 @@ class ProjectContainer extends React.Component{
                 description: val
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         })  
     }
@@ -169,7 +194,9 @@ class ProjectContainer extends React.Component{
                 name: val
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         })
     }
@@ -182,12 +209,15 @@ class ProjectContainer extends React.Component{
                 submitted_by: val
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         })
     }
 
     handleChangeLocation=(val, bug)=>{
+        console.log(bug)
         bug.location=val
         fetch(`http://localhost:3000/bugs/${bug.id}`,{
             method: 'PATCH',
@@ -195,21 +225,13 @@ class ProjectContainer extends React.Component{
                 location: val
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
             }
         })
     }
-    //sending back an array of userids as val and associated bug. must assign users to this bug. must find userbugs with same bug id.adding an assignedto will create a userbug. deleting an assignedto will delete a userbug.
-    // handleChangeAssignedTo=(val, bug)=>{
-    //     console.log('val', val)
-    //     console.log('bug',bug)
-    //     this.props.user_bugs.forEach(user_bug=>{
-    //         if(val.includes(user_bug.user_id)===false){
-
-    //         }
     handleChangeAssignedTo=(val, bug)=>{
-        
-        //for all userbugs that have same bug id as bug. gather all their user_ids. if that userid is not in value post a new userbug with bug_id=bug.id and user_id=val
         let userbugbugidsthatarethesameasbugbugid = []
         let usersthatareassociatedwithbug = []
         this.state.user_bugs.forEach(user_bug=>{
@@ -221,9 +243,6 @@ class ProjectContainer extends React.Component{
         console.log(val.length)
         console.log(val[val.length-1])
         console.log(usersthatareassociatedwithbug)
-        // debugger
-        // console.log(val.last())
-        // console.log(val[usersthatar])
         console.log(bug.id)
         if (val.length > usersthatareassociatedwithbug.length){
             console.log("insideif")
@@ -234,7 +253,9 @@ class ProjectContainer extends React.Component{
                     bug_id: bug.id
                 }),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept':'application/json',
+                    'Authorization':`Bearer ${this.props.jwt}`
                 }
             })
         }
@@ -245,7 +266,9 @@ class ProjectContainer extends React.Component{
                      fetch (`http://localhost:3000/user_bugs/${user_bug.id}`,{
                                     method: 'DELETE',
                                     headers: {
-                                        'Content-Type': 'application/json'
+                                        'Content-Type': 'application/json',
+                                        'Accept':'application/json',
+                                        'Authorization':`Bearer ${this.props.jwt}`
                                     }
                                 }).then(res=>console.log(res))
                 }
@@ -253,129 +276,92 @@ class ProjectContainer extends React.Component{
         }
 
     }
-        // if(val.length < usersthatareassociatedwithbug.length){
-            // find missing value from array and delete from backend
-            // this.state.user_bugs.forEach(user_bug=> {
-            //             if(user_bug.bug_id===bug.id){
-            //                 if(!val.includes(user_bug.user_id)){
-                                // fetch (`http://localhost:3000/user_bug/${user_bug.id}`,{
-                                //     method: 'DELETE',
-                                //     headers: {
-                                //         'Content-Type': 'application/json'
-                                //     }
-                                // }).then(res=>console.log(res))
-            //                     }
-        
-            //             }
-            //         })
-        // }
-        
-        // console.log(userbugbugidsthatarethesameasbugbugid)
-        // console.log(usersthatareassociatedwithbug)
-        // // val.forEach(val=>{this.state.user_bugs.forEach(user_bug=>{if(user_bug)})})
-        // if (val.length > usersthatareassociatedwithbug){
-        //     val.forEach(val=>{
-        //         console.log("value within handleChange", val)
-        //         console.log("boolean for the conditional", !userbugbugidsthatarethesameasbugbugid.includes(val))
-        //         if(!userbugbugidsthatarethesameasbugbugid.includes(val)){
-                //     fetch (`http://localhost:3000/user_bugs`,{
-                //         method: 'POST',
-                //         body: JSON.stringify({
-                //             user_id: val,
-                //             bug_id: bug.id
-                //         }),
-                //         headers: {
-                //             'Content-Type': 'application/json'
-                //         }
-                // }
-                // )}
-        //     })
-        // } else if (val.length < this.state.user_bugs) {
-        //     this.state.user_bugs.forEach(user_bug=> {
-        //         if(user_bug.bug_id===bug.id){
-        //             if(!val.includes(user_bug.user_id)){
-        //                 fetch (`http://localhost:3000/user_bug/${user_bug.id}`,{
-        //                     method: 'DELETE',
-        //                     headers: {
-        //                         'Content-Type': 'application/json'
-        //                     }
-        //                 }).then(res=>console.log(res))
-        //             }
-                    
-        //         }
-        //     })
-        // }
-        //if userbug is not included in  new set then deletedestroy it. how does it know if its in new set? how do i get the value of the userbug to be destroyed? this is so fucking hard. fuck my life. fuck my brain hurts. this is fun but so fucking hard. god dammit. i dontk now what to do. i am frustrated. i wish i had help. but i want to solve this by myself. fuck fuck fuck fuck fuck.
-        
-        //DIF... when val comes back with less than before. look through all userbugs that have that bug id. 
-        // userbugsthathavesamebugidasbug.forEach(user_bug=>{
-        //     if(!val.includes(user_bug.id)){
-        //         fetch(`http://localhost:3000/user_bugs/${user_bug.id}`,{
-        //             method: 'DELETE',
-        //             body: JSON.stringify({
-                        
-        //             })
-        //         })
-        //     }
-        // })
-        // this.state.user_bugs.forEach(user_bug=>{
-        //     if(val.includes(user_bug.user_id)){
-        //         console.log(user_bug)
-        //     }
-        // })
-        // val.forEach(val=>{
-        //     this.state.user_bugs.forEach(user_bug=>{
-        //         if (user_bug.user_id === val && bug.i)
-        //     })
-        // })
-    // }
-    // setAssignedUsers=(userIDs)=>{
-    //     this.setState({assignedUsersToBug:userIDs})
-    // }
 
-    //     val.forEach(v=>{fetch(`http://localhost:3000/user_bugs/`, {
-    //         method: 'POST',
-    //         body: JSON.stringify({
-    //             user_id: 
-    //         })
-    //     })
-    // })
+    addBug=(bug)=>{
+       console.log(bug)
+        fetch('http://localhost:3000/bugs',{
+            method:'POST',
+            body: JSON.stringify({
+                bug:
+                {
+
+                name: bug.name,
+                submitted_by: bug.submitted_by,
+                description: bug.description,
+                project_id: bug.project_id,
+                opened: bug.opened
+            }
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
+            }
+        }).then(response=>response.json())
+        .then(response=>this.setState({
+            bugs: [response, ...this.state.bugs]
+        }),()=>{console.log(this.state.bugs)})
+    }
+
+    addProject=(project)=>{
+        console.log(project)
+            fetch('http://localhost:3000/projects',{
+                method:'POST',
+                body: JSON.stringify({
+                    project:{
+                      title: project.title
+                    }
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept':'application/json',
+                    'Authorization':`Bearer ${this.state.jwt}`
+                }
+            }).then(response=>response.json())
+            .then(response=>this.setState({
+                projects: [response, ...this.state.projects]
+            }))
+      }
+
     
 
-    // console.log(this.state.bugs)
     render(){
         const re = new RegExp(this.state.searchText, "i");
-        const bugs = this.state.bugs.filter((bug) => {
-            return re.test(bug.id) 
-            || re.test(bug.name)
-            || re.test(bug.priority)
-            || re.test(bug.project)
-            || re.test(bug.status)
-            || re.test(bug.description)
-            || re.test(bug.opened)
-            || re.test(bug.closed)
-            || re.test(bug.age)
-            || re.test(bug.submitted_by)
-            || re.test(bug.location)
-        })
+        // const bugs = this.state.bugs.filter((bug) => {
+        //     return re.test(bug.id) 
+        //     || re.test(bug.name)
+        //     || re.test(bug.priority)
+        //     || re.test(bug.project)
+        //     || re.test(bug.status)
+        //     || re.test(bug.description)
+        //     || re.test(bug.opened)
+        //     || re.test(bug.closed)
+        //     || re.test(bug.age)
+        //     || re.test(bug.submitted_by)
+        //     || re.test(bug.location)
+        // })
         const projects = this.state.projects.filter((project)=>{
             return re.test(project.title)
         })
 
-        const users = this.state.users.filter((user)=>{
-            return re.test(user.username) 
-        })
+        // const users = this.state.users.filter((user)=>{
+        //     return re.test(user.username) 
+        // })
         
         return(
             <div className="project-container-div">
-                <Search onChange={this.handleChange}/>
-                <ProjectList 
-                // setAssignedUsers={this.setAssignedUsers}
-                // assignedUsersToBug={this.state.assignedUsersToBug}
-                bugs={bugs} 
+                <ProjectSearch onChange={this.handleChange}/>
+                {/* <NewBug addBug={this.addBug} jwt={this.props.jwt}/> */}
+                <NewProject jwt={this.state.jwt} addProject={this.addProject}/> 
+                {/* <TabBar projects={this.state.projects}/> */}
+                <TabBar
+                jwt={this.state.jwt}
+                bugs={this.state.bugs} 
                 user_bugs={this.state.user_bugs}
-                users={users}
+                users={this.state.users}
                 projects={projects}
+                user_projects={this.state.user_projects}
+                addBug={this.addBug}
                 handleChangeStatus={this.handleChangeStatus}
                 handleChangePriority={this.handleChangePriority}
                 handleChangeOpened={this.handleChangeOpened}
@@ -386,10 +372,11 @@ class ProjectContainer extends React.Component{
                 handleChangeSubmittedBy={this.handleChangeSubmittedBy}
                 handleChangeLocation={this.handleChangeLocation}
                 handleChangeAssignedTo={this.handleChangeAssignedTo}
+                handleProjectTitle={this.handleProjectTitle}
                 />
             </div>
         )
     }
 }
 
-export default ProjectContainer
+export default BugContainer

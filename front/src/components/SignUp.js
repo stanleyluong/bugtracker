@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment,Button, Checkbox, Form, Grid,Header, Image , Message} from 'semantic-ui-react'
+import { Segment, Checkbox, Form, Grid, Header, Image , Message, Button} from 'semantic-ui-react'
 
 class SignUp extends React.Component {
 
@@ -26,55 +26,62 @@ class SignUp extends React.Component {
       submittedFirstname: firstname,
       submittedLastname: lastname,
       submittedEmail: email
-    })
+    },()=>this.props.handleSignedUpandLoggedin(this.state))
+    
+    //need to refactor this move code up to app and fetch login automatically to get jwt after signing up/posting new user
+   
   }
 
   render(){
-    const { username, password, firstname, lastname,  email, submittedUsername, submittedPassword, submittedFirstname, submittedLastname, submittedEmail } = this.state
+    const { username, password, firstname, lastname,  email } = this.state
 
     return(
        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-      <Grid.Column style={{ maxWidth: 1000 }}>
-      <Header as='h2' color='teal' textAlign='center'>
-      <Image src='https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg' /> Create an account
-      </Header>
-      <Form size='large'>
-        <Segment stacked>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Input
-              placeholder='Username'
-              name='username'
-              value={username}
-              onChange={this.handleChange}
-            />
-            <Form.Input
-              placeholder='Password'
-              name='password'
-              value={password}
-              onChange={this.handleChange}
-            />
-            <Form.Input
-              placeholder='First Name'
-              name='firstname'
-              value={firstname}
-              onChange={this.handleChange}
-            />
-            <Form.Input
-              placeholder='Last Name'
-              name='lastname'
-              value={lastname}
-              onChange={this.handleChange}
-            />
-            <Form.Input
-              placeholder='E-mail'
-              name='email'
-              value={email}
-              onChange={this.handleChange}
-            />
-            {/* <Form.Button content='Submit' /> */}
+        <Grid.Column style={{ maxWidth: 1000 }}>
+          <Header as='h2' color='teal' textAlign='center'>
+            <Image src='https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg' /> Create an account
+          </Header>
+          
+          <Segment stacked>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group>
+                <Form.Input
+                  placeholder='Username'
+                  name='username'
+                  value={username}
+                  onChange={this.handleChange}
+                  icon='user'
+                />
+                <Form.Input
+                  placeholder='Password'
+                  name='password'
+                  value={password}
+                  onChange={this.handleChange}
+                  icon='lock'
+                />
+                <Form.Input
+                  placeholder='First Name'
+                  name='firstname'
+                  value={firstname}
+                  onChange={this.handleChange}
+                  icon='user outline'
+                />
+                <Form.Input
+                  placeholder='Last Name'
+                  name='lastname'
+                  value={lastname}
+                  onChange={this.handleChange}
+                  icon='user outline'
+                />
+                <Form.Input
+                  placeholder='E-mail'
+                  name='email'
+                  value={email}
+                  onChange={this.handleChange}
+                  icon='envelope'
+                />
           </Form.Group>
-          <Form.Button content='Submit' color='teal' fluid size='large' type='submit'>Submit</Form.Button>
+          <Form.Button color='teal' fluid size='large' type='submit'>Submit</Form.Button>
         </Form>
 
 
@@ -83,13 +90,13 @@ class SignUp extends React.Component {
           </Form.Field>
 
         </Segment>
-      </Form>
+      {/* </Form> */}
       {/* <strong>for testing: onChange:</strong>
         <pre>{JSON.stringify({ username, password, firstname, lastname, email }, null, 2)}</pre>
         <strong>onSubmit:</strong>
         <pre>{JSON.stringify({ submittedUsername, submittedPassword, submittedFirstname, submittedLastname, submittedEmail }, null, 2)}</pre> */}
       <Message>
-        Have an existing account? <a href='#'>Sign In</a>
+        Have an existing account? <Button onClick={()=>this.props.handleRenderLogin()}>Sign In</Button>
       </Message>
 
     </Grid.Column>

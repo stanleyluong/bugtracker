@@ -13,3 +13,7 @@
   padding: 20px;
   color: white;
 }
+
+.ui.center.aligned.header {
+  color: rgb(0, 0, 0)!important;
+}

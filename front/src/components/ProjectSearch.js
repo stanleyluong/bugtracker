@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Search = (props) => {
+const ProjectSearch = (props) => {
   const { onChange } = props;
 
   function handleChange(e) {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     onChange(e.target.value)
   }
 
@@ -12,7 +12,7 @@ const Search = (props) => {
     <div className="ui huge fluid icon input">
       <input
         type="text"
-        placeholder={"Search Bugs"}
+        placeholder={"Search Projects"}
         onChange={(searchText) => handleChange(searchText)}
       />
       <i className="circular search link icon"></i>
@@ -20,4 +20,4 @@ const Search = (props) => {
   )
 }
 
-export default Search
+export default ProjectSearch
