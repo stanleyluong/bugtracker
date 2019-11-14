@@ -327,27 +327,11 @@ class BugContainer extends React.Component{
 
     render(){
         const re = new RegExp(this.state.searchText, "i");
-        // const bugs = this.state.bugs.filter((bug) => {
-        //     return re.test(bug.id) 
-        //     || re.test(bug.name)
-        //     || re.test(bug.priority)
-        //     || re.test(bug.project)
-        //     || re.test(bug.status)
-        //     || re.test(bug.description)
-        //     || re.test(bug.opened)
-        //     || re.test(bug.closed)
-        //     || re.test(bug.age)
-        //     || re.test(bug.submitted_by)
-        //     || re.test(bug.location)
-        // })
+    
         const projects = this.state.projects.filter((project)=>{
             return re.test(project.title)
         })
 
-        // const users = this.state.users.filter((user)=>{
-        //     return re.test(user.username) 
-        // })
-        
         return(
             <div className="project-container-div">
                 <ProjectSearch onChange={this.handleChange}/>

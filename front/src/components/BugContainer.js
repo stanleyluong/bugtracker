@@ -329,7 +329,7 @@ class BugContainer extends React.Component{
 //    }
     
     render(){
-        const re = new RegExp(this.props.searchText, "i");
+        const re = new RegExp(this.state.searchText, "i");
         const bugs = this.props.bugs.filter((bug) => {
             return re.test(bug.id) 
             || re.test(bug.name)
@@ -343,25 +343,19 @@ class BugContainer extends React.Component{
             || re.test(bug.submitted_by)
             || re.test(bug.location)
         })
-        const projects = this.props.projects.filter((project)=>{
-            return re.test(project.title)
-        })
-
-        const users = this.props.users.filter((user)=>{
-            return re.test(user.username) 
-        })
+      
         
         return(
             <div className="project-container-div">
-                <h1>{this.props.project.title}</h1>
+                {/* <h1>{this.props.project.title}</h1> */}
                 <Search onChange={this.handleChange}/>
                 <NewBug addBug={this.props.addBug} jwt={this.props.jwt} project={this.props.project}/>
                 <BugList 
                 // setAssignedUsers={this.setAssignedUsers}
                 // assignedUsersToBug={this.props.assignedUsersToBug}
                 bugs={bugs} 
-                users={users}
-                projects={projects}
+                users={this.props.users}
+                projects={this.props.projects}
                 user_bugs={this.props.user_bugs}
                 handleChangeStatus={this.props.handleChangeStatus}
                 handleChangePriority={this.props.handleChangePriority}
