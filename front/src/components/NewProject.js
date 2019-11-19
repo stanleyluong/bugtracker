@@ -9,11 +9,13 @@ class NewProject extends React.Component{
 
     handleSubmit=(event)=>{
         event.preventDefault()
-        this.props.projects.forEach(project=>{
-            if(project.title === this.state.title){alert("Project name unavailable, please try again.")}
-        })
         if(this.state.title.length===0){alert("Enter project name")}
-        else {this.props.addProject(this.state)}
+        
+        this.props.projects.forEach(project=>{
+            if(project.title === this.state.title){
+                return alert("Project name unavailable, please try again.")
+            } else {this.props.addProject(this.state)}
+        })
         
         console.log(this.state)
     }
@@ -24,7 +26,7 @@ class NewProject extends React.Component{
         const { title } = this.state
         return(
             <Form onSubmit={this.handleSubmit}>
-                <Form.Input style={{marginTop:"10px"}} size="mini" name='title' value={title} onChange={this.handleChange} placeholder='Project Title' />
+                <Form.Input style={{marginTop:"10px"}} size="mini" name='title' value={title} onChange={this.handleChange} placeholder='Enter New Project Name' />
                
                 <Button style={{marginBottom:"10px"}} size="mini" type='submit'>Add Project</Button>
             </Form>

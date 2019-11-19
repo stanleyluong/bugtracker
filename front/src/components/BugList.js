@@ -7,11 +7,11 @@ const BugList = (props) => {
         <table className="ui celled striped padded table">
         <tbody>
           <tr>
-          <th>
+          {/* <th>
               <h3 className="ui center aligned header">
                 Bug ID
               </h3>
-            </th>
+            </th> */}
             <th>
               <h3 className="ui center aligned header">
                 Bug Name

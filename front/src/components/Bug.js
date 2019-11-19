@@ -8,7 +8,7 @@ import AssignedToDropdown from './AssignedToDropdown'
 import 'semantic-ui-css/semantic.min.css'
 import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
-
+import ReadMoreReact from 'read-more-react'
 class Bug extends React.Component {
 
     state = {
@@ -68,7 +68,7 @@ class Bug extends React.Component {
     handleDescriptionClick=()=>{this.setState({showEditDescription: true})}
     handleShowDescription=()=>{
         if (this.state.showEditDescription===false){
-            return this.props.bug.description
+            return <ReadMoreReact text={this.props.bug.description} readMoreText={"see more"}/>
         } else{
             return <EdiText
                 value={this.props.bug.description}
@@ -193,14 +193,31 @@ class Bug extends React.Component {
         this.props.handleDeleteBug(this.props.bug)
     }
     
+    // handlePriorityColor=()=>{
+    //     if (this.props.bug.priority==='Low'){
+    //         return {backgroundColor:"blue"}
+    //     }
+    //     if (this.props.bug.priority==='Normal'){
+    //         return {backgroundColor:"grey"}
+    //     }
+    //     if(this.props.bug.priority==='High'){
+    //         return {backgroundColor:"yellow"}
+    //     }
+    //     if(this.props.bug.priority==='Critical'){
+    //         return {backgroundColor:"red"}
+    //     }
+    // }
+
     render(){
         // console.log(this.props)
         return(
             <tr>
-                <td className="td" >{this.props.bug.id}</td>
+                {/* <td className="td" >{this.props.bug.id}</td> */}
                 {/* <td className="td" style={{width:".1em"}}>{this.handleShowProject()}</td> */}
                 <td className="td" onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
-                <td className="td" ><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
+                <td className="td" 
+                // style={this.handlePriorityColor()}
+                ><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
                 <td className="td" ><div className="grandparent"><ImageUploader  withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
                 <td className="td" ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
                 <td className="td" onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
@@ -209,7 +226,7 @@ class Bug extends React.Component {
                 <td className="td" onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
                 <td className="td" onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td className="td" onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
-                <td className="td" ><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td>
+                <td className="td" width="200px" ><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td>
                 <td><img onClick={()=>this.handleDeleteBug()} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td>
                 {/* <td>{this.props.project.id}</td>
                 <td onClick={()=>this.handleProjectTitleClick()}>{this.handleShowProjectTitle()}</td>

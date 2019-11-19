@@ -87,7 +87,7 @@ class AssignedToDropdown extends React.Component{
             onChange={this.handleChange}
             onSearchChange={this.handleSearchChange}
             options={developerOptions}
-            placeholder=".....searchdevs"
+            placeholder=".....devs"
             search
             searchQuery={searchQuery}
             selection

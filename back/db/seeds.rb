@@ -6,13 +6,13 @@ Bug.destroy_all
 UserBug.destroy_all
 UserProject.destroy_all
 
-10.times do
+20.times do
     Project.create(
         title:Faker::Games::LeagueOfLegends.masteries
         )
 end
 
-10.times do
+20.times do
     User.create(
         username: Faker::Games::LeagueOfLegends.champion,
         password: 'password',
@@ -27,13 +27,13 @@ end
 # User.create(username: 'stanzz', password:'luong',firstname: 'stan',lastname:'luong',email:'xstanz@gmail.com',job:'pimp')
 
 # User.create(username: 'jared from subway',password:'jared',firstname:'subway',lastname:'badass',email: 'jared@jared.com',job:'asdasd')
-10.times do
+20.times do
     Bug.create(
         name:Faker::Games::LeagueOfLegends.rank,
         priority:["Low","Medium","High","Critical"].sample,
         attachment:Faker::Avatar.image(size: "75x75"),
         status:["Can't reproduce","In progress","Complete","Blocked","Won't fix","Duplicate"].sample,
-        description:Faker::Games::LeagueOfLegends.quote,
+        description:Faker::Games::LeagueOfLegends.quote + Faker::Games::LeagueOfLegends.quote + Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote,
         opened:Faker::Date.backward(days: 100),
         closed:Faker::Date.between(from: 2.days.ago, to: Date.today),
         age:nil,
@@ -54,7 +54,7 @@ UserBug.create(user_id: 8, bug_id: 8)
 UserBug.create(user_id: 9, bug_id: 9)
 UserBug.create(user_id: 10, bug_id: 10)
 
-10.times do
+20.times do
     UserProject.create(
         user_id: User.all.sample.id,
         project_id: Project.all.sample.id

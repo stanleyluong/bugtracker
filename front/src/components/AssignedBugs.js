@@ -304,13 +304,23 @@ class AssignedBugs extends React.Component{
         }))
     }
 
+    handleGreeting=()=>{
+        if(this.listBugs().length===0){
+            return <h1>Hello {`${this.props.userData.user.username}`}. You have no assigned bugs!</h1>
+        } else if(this.listBugs().length===1){
+        return <h1>Hello {`${this.props.userData.user.username}`}. You have {`${this.listBugs().length}`} assigned bug!</h1>
+        } else {
+            return <h1>Hello {`${this.props.userData.user.username}`}. You have {`${this.listBugs().length}`} assigned bugs!</h1>
+
+        }
+
+    }
+
     render(){
         {console.log(this.state.theBugs)}
         {console.log(this.props.userData)}
         return(<div>
-
-            <h1>Hello {`${this.props.userData.user.username}`}</h1>
-                {/* {this.listBugs()} */}
+                {this.handleGreeting()}
                 <BugList 
                 bugs={this.listBugs()}
                 jwt={this.props.jwt}
