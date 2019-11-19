@@ -9,7 +9,7 @@ const Search = (props) => {
   }
 
   return (
-    <div className="ui huge fluid icon input">
+    <div className="ui mini fluid icon input">
       <input
         type="text"
         placeholder={"Search Bugs"}

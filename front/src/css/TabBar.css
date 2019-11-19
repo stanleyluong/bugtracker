@@ -1,0 +1,12 @@
+.wrapped{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  /* .ui.column.grid>[class*="four wide"].column, .ui.grid>.column.row>[class*="four wide"].column, .ui.grid>.row>[class*="four wide"].column, .ui.grid>[class*="four wide"].column{
+    width:20%!important
+}  */
+
+/* .ui.column.grid>[class*="twelve wide"].column, .ui.grid>.column.row>[class*="twelve wide"].column, .ui.grid>.row>[class*="twelve wide"].column, .ui.grid>[class*="twelve wide"].column{
+    width: %!important
+} */

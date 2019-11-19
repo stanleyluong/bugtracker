@@ -1,20 +1,15 @@
 import React from 'react'
-// import Table from './components/Table'
 import './css/App.css'
-// import Project from './components/Project'
-import BugContainer from './components/BugContainer'
 import 'semantic-ui-css/semantic.min.css'
 import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
-import Home from './components/Home'
 import Navbar from './components/Navbar'
 import About from './components/About'
 import Contact from './components/Contact'
 import NewBug from './components/NewBug'
-import BugTracker from './components/BugTracker'
 import ButtonBar from './components/ButtonBar'
-import NewProject from './components/NewProject'
 import ProjectContainer from './components/ProjectContainer'
+import AssignedBugs from './components/AssignedBugs'
 class App extends React.Component{
   state = {
     userData: {},
@@ -29,7 +24,7 @@ class App extends React.Component{
 
   loginUser = (response) => {
         this.setState({
-          activeItem:'Projects',
+          activeItem:'Assigned Bugs',
           userData: response, 
           loggedIn: true, 
           jwt: response.jwt,
@@ -73,6 +68,7 @@ class App extends React.Component{
     if(this.state.activeItem==='Add Bug'){return <NewBug jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
     if(this.state.activeItem==='Sign Out'){this.setState({activeItem:'Home',loggedIn: false})}
+    if(this.state.activeItem==='Assigned Bugs'){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
   }
 
   
@@ -136,7 +132,7 @@ class App extends React.Component{
         </div> */}
         {this.handleNavBar()}
       
-      <h2>Bug Tracker 9000</h2>
+      <h2><img style={{width: "40px"}}src="https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg" alt="oops" />Bug Tracker 9000</h2>
 
         {this.handleRender()}
       </div>

@@ -1,3 +1,5 @@
 .project-container-div{
- overflow-x: auto;   
+ /* overflow-x: auto;  */
+ /* overflow-y:auto;   */
+ display: inline table
 }

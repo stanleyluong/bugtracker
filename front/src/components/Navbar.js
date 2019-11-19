@@ -16,7 +16,7 @@ export default class MenuExampleInverted extends Component {
     return (
        
 
-      <Menu inverted>
+      <Menu color='black' inverted>
 
         
         <Menu.Item

@@ -1,54 +1,45 @@
 import React from 'react'
-import StatusDropdown from './StatusDropdown'
-import PriorityDropdown from './PriorityDropdown'
-import Calendar from 'react-calendar'
-import Moment from 'react-moment'
-import EdiText from 'react-editext'
-import AssignedToDropdown from './AssignedToDropdown'
 import 'semantic-ui-css/semantic.min.css'
-// import { element } from 'prop-types'
-import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
-import Bugs from './Bugs'
 import BugContainer from './BugContainer'
 class Project extends React.Component {
 
     state = {
-        selectStatus: false,
-        showOpenedCalender: false,
-        showClosedCalendar: false,
-        showEditName: false,
-        showEditProject: false,
-        showEditDescription: false,
-        showEditSubmittedBy: false,
-        showProjectTitle: false,
-        pictures: []
+        // selectStatus: false,
+        // showOpenedCalender: false,
+        // showClosedCalendar: false,
+        // showEditName: false,
+        // showEditProject: false,
+        // showEditDescription: false,
+        // showEditSubmittedBy: false,
+        showProjectTitle: false
+        // pictures: []
     }
 
-    handleOpenedClick=()=>{this.setState({showOpenedCalender: true})}
-    onChangeOpened=(date)=>{
-        this.props.handleChangeOpened(date, this.props.bug)
-        this.setState({showOpenedCalender: false})
-    }
-    handleShowOpened=()=>{
-        if (this.state.showOpenedCalender === false){
-            return <Moment format="MM/DD/YYYY">{this.props.bug.opened}</Moment>
-        } else {
-            return <Calendar onChange={this.onChangeOpened}/>
-        }
-    }
-    handleClosedClick=()=>{this.setState({showClosedCalendar: true})}
-    onChangeClosed=(date)=>{
-        this.props.handleChangeClosed(date, this.props.bug)
-        this.setState({showClosedCalendar: false })
-    }
-    handleShowClosed=()=>{
-        if (this.state.showClosedCalendar === false){
-            return <Moment format="MM/DD/YYYY">{this.props.bug.closed}</Moment>
-        } else {
-            return <Calendar onChange={this.onChangeClosed}/>
-        }
-    }
+    // handleOpenedClick=()=>{this.setState({showOpenedCalender: true})}
+    // onChangeOpened=(date)=>{
+    //     this.props.handleChangeOpened(date, this.props.bug)
+    //     this.setState({showOpenedCalender: false})
+    // }
+    // handleShowOpened=()=>{
+    //     if (this.state.showOpenedCalender === false){
+    //         return <Moment format="MM/DD/YYYY">{this.props.bug.opened}</Moment>
+    //     } else {
+    //         return <Calendar onChange={this.onChangeOpened}/>
+    //     }
+    // }
+    // handleClosedClick=()=>{this.setState({showClosedCalendar: true})}
+    // onChangeClosed=(date)=>{
+    //     this.props.handleChangeClosed(date, this.props.bug)
+    //     this.setState({showClosedCalendar: false })
+    // }
+    // handleShowClosed=()=>{
+    //     if (this.state.showClosedCalendar === false){
+    //         return <Moment format="MM/DD/YYYY">{this.props.bug.closed}</Moment>
+    //     } else {
+    //         return <Calendar onChange={this.onChangeClosed}/>
+    //     }
+    // }
    
     handleShowProject=()=>{
         let projectTitle
@@ -58,78 +49,77 @@ class Project extends React.Component {
                 }
             })
             return projectTitle     
-   
     }
     
-    handleDescription=(val)=>{
-        this.props.handleChangeDescription(val, this.props.bug)
-        this.setState({showEditDescription: false})
-    }
-    handleDescriptionClick=()=>{this.setState({showEditDescription: true})}
-    handleShowDescription=()=>{
-        if (this.state.showEditDescription===false){
-            return this.props.bug.description
-        } else{
-            return <EdiText
-                value={this.props.bug.description}
-                type="textarea"
-                hint="Enter description"
-                editOnViewClick={true}
-                submitOnEnter
-                onSave={this.handleDescription}
-                onCancel={this.handleCancelShowDescription}
-                />
-        }
-    }
-    handleCancelShowDescription=()=>{this.setState({showEditDescription:false})}
-    
+    // handleDescription=(val)=>{
+    //     this.props.handleChangeDescription(val, this.props.bug)
+    //     this.setState({showEditDescription: false})
+    // }
+    // handleDescriptionClick=()=>{this.setState({showEditDescription: true})}
+    // handleShowDescription=()=>{
+    //     if (this.state.showEditDescription===false){
+    //         return this.props.bug.description
+    //     } else{
+    //         return <EdiText
+    //             value={this.props.bug.description}
+    //             type="textarea"
+    //             hint="Enter description"
+    //             editOnViewClick={true}
+    //             submitOnEnter
+    //             onSave={this.handleDescription}
+    //             onCancel={this.handleCancelShowDescription}
+    //             />
+    //     }
+    // }
+    // handleCancelShowDescription=()=>{this.setState({showEditDescription:false})}
 
-    handleShowName=()=>{
-        if (this.state.showEditName===false){
-            return this.props.bug.name
-        } else { 
-            return <EdiText 
-                value={this.props.bug.name}
-                type="textarea"
-                hint="Enter name"
-                editOnViewClick={true}
-                submitOnEnter
-                onSave={this.handleName}
-                onCancel={this.handleCancelShowName}
-                />}
-    }
-    handleCancelShowName=()=>{
-        this.setState({showEditName: false})
-    }
-    handleName=(val)=>{
-        this.props.handleChangeName(val, this.props.bug)
-        this.setState({showEditName: false})
-    }
-    handleNameClick=()=>{this.setState({showEditName: true})}
+    // handleShowName=()=>{
+    //     if (this.state.showEditName===false){
+    //         return this.props.bug.name
+    //     } else { 
+    //         return <EdiText 
+    //             value={this.props.bug.name}
+    //             type="textarea"
+    //             hint="Enter name"
+    //             editOnViewClick={true}
+    //             submitOnEnter
+    //             onSave={this.handleName}
+    //             onCancel={this.handleCancelShowName}
+    //             />}
+    // }
+    // handleCancelShowName=()=>{
+    //     this.setState({showEditName: false})
+    // }
+   
+    // handleName=(val)=>{
+    //     this.props.handleChangeName(val, this.props.bug)
+    //     this.setState({showEditName: false})
+    // }
+   
+    // handleNameClick=()=>{this.setState({showEditName: true})}
+     
+    // handleSubmittedBy=(val)=>{
+    //     this.props.handleChangeSubmittedBy(val, this.props.bug)
+    //     this.setState({showEditSubmittedBy: false})
+    // }
+    // handleSubmittedByClick=()=>{this.setState({showEditSubmittedBy:true})}
     
-    
-    
-    handleSubmittedBy=(val)=>{
-        this.props.handleChangeSubmittedBy(val, this.props.bug)
-        this.setState({showEditSubmittedBy: false})
-    }
-    handleSubmittedByClick=()=>{this.setState({showEditSubmittedBy:true})}
-    handleShowSubmittedBy=()=>{
-        if(this.state.showEditSubmittedBy===false){
-            return this.props.bug.submitted_by
-        } else {
-            return <EdiText 
-            value={this.props.bug.submitted_by}
-            type="textarea"
-            hint="Enter submitter"
-            editOnViewClick={true}
-            submitOnEnter
-            onSave={this.handleSubmittedBy}
-            onCancel={this.handleCancelSubmittedBy}
-            />
-        }
-    }
-    handleCancelSubmittedBy=()=>{this.setState({showEditSubmittedBy:false})}
+    // handleShowSubmittedBy=()=>{
+    //     if(this.state.showEditSubmittedBy===false){
+    //         return this.props.bug.submitted_by
+    //     } else {
+    //         return <EdiText 
+    //         value={this.props.bug.submitted_by}
+    //         type="textarea"
+    //         hint="Enter submitter"
+    //         editOnViewClick={true}
+    //         submitOnEnter
+    //         onSave={this.handleSubmittedBy}
+    //         onCancel={this.handleCancelSubmittedBy}
+    //         />
+    //     }
+    // }
+    // handleCancelSubmittedBy=()=>{this.setState({showEditSubmittedBy:false})}
     
     handleProjectTitle=(val)=>{
         this.props.handleProjectTitle(val, this.props.project)
@@ -139,18 +129,10 @@ class Project extends React.Component {
         this.setState({showProjectTitle:true})
     }
     handleShowProjectTitle=()=>{
+        let bugs = this.props.bugs.filter(bug=>{if (bug.project_id===this.props.project.id){return bug}})
         if(this.state.showProjectTitle===false){
             return this.props.project.title
         } else {
-            // return <EdiText 
-            // value={this.props.project.title}
-            // type="textarea"
-            // hint="Enter title"
-            // editOnViewClick={true}
-            // submitOnEnter
-            // onSave={this.handleProjectTitle}
-            // onCancel={this.handleCanceProjectTitle}
-            // />
             return <BugContainer
                         handleChangeStatus={this.props.handleChangeStatus}
                         handleChangePriority={this.props.handleChangePriority}
@@ -163,7 +145,7 @@ class Project extends React.Component {
                         handleChangeLocation={this.props.handleChangeLocation}
                         handleChangeAssignedTo={this.props.handleChangeAssignedTo}
                         addBug={this.props.addBug}
-                        bugs={this.props.bugs.filter(bug=>{if (bug.project_id===this.props.project.id){return bug}})}
+                        bugs={bugs}
                         user_bugs={this.props.user_bugs}
                         users={this.props.users}
                         projects={this.props.projects}
@@ -175,38 +157,35 @@ class Project extends React.Component {
     }
     handleCancelProjectTitle=()=>{this.setState({showProjectTitle:false})}
 
-    handleShowProjectBugs=()=>{
-        console.log(this.props.bugs)
-        console.log(this.props.project)
-        let project_bugs=[]
-        this.props.bugs.forEach(bug=>{
-            if(bug.project_id===this.props.project.id){
-                project_bugs.push(bug.name)
-            }
-        })
-        console.log(project_bugs)
-
-        // return project_bugs
-         project_bugs.forEach(bug=>{
-            return <li>{bug}</li>
-        })
-    }
+    // handleShowProjectBugs=()=>{
+    //     console.log(this.props.bugs)
+    //     console.log(this.props.project)
+    //     let project_bugs=[]
+    //     this.props.bugs.forEach(bug=>{
+    //         if(bug.project_id===this.props.project.id){
+    //             project_bugs.push(bug.name)
+    //         }
+    //     })
+    //      project_bugs.forEach(bug=>{
+    //         return <li>{bug}</li>
+    //     })
+    // }
 
 
-    findUsers=()=>{
-        let assignedUsers = []
-        this.props.user_bugs.forEach(user_bug=>{
-            if (user_bug.bug_id === this.props.bug.id){
-                this.props.users.forEach(user=>{
-                    if (user.id === user_bug.user_id){
-                        assignedUsers.push(user.id)
-                    }
-                })
-            }
-        })
-        console.log(assignedUsers)
-        return assignedUsers
-    }
+    // findUsers=()=>{
+    //     let assignedUsers = []
+    //     this.props.user_bugs.forEach(user_bug=>{
+    //         if (user_bug.bug_id === this.props.bug.id){
+    //             this.props.users.forEach(user=>{
+    //                 if (user.id === user_bug.user_id){
+    //                     assignedUsers.push(user.id)
+    //                 }
+    //             })
+    //         }
+    //     })
+    //     console.log(assignedUsers)
+    //     return assignedUsers
+    // }
     
     
     render(){

@@ -1,20 +1,20 @@
 import React from 'react'
-import ProjectSearch from './ProjectSearch'
-import 'semantic-ui-css/semantic.min.css'
-import '../css/BugContainer.css'
-import NewProject from './NewProject'
-import TabBar from './TabBar'
-class BugContainer extends React.Component{
-    state = {
+import BugList from './BugList'
+class AssignedBugs extends React.Component{
+    
+    state={
         projects: [],
         bugs: [],
         users: [],
         user_bugs: [],
         user_projects: [],
-        searchText: ""
-      }
-    
+        theBugs: []
+    }
+
     componentDidMount(){
+        this.setState({
+            theBugs: this.listBugs()
+        })
         Promise.all([
             fetch("http://localhost:3000/projects",{
                 method: 'GET',
@@ -71,10 +71,28 @@ class BugContainer extends React.Component{
         })
     }
 
-    handleChange = (searchText) => {
-        this.setState({
-            searchText
-        })
+    listBugs=()=>{
+        console.log(this.state.user_bugs)
+        console.log(this.state.bugs)
+        console.log(this.props.userData.user.id)
+        let myBugs=[]
+        this.state.user_bugs.forEach(user_bug=>{
+            if(user_bug.user_id === this.props.userData.user.id){
+                this.state.bugs.forEach(bug=>{
+                    if(user_bug.bug_id === bug.id){
+                    //     console.log(bug.name)
+                    // return <p>{bug.name}</p>
+                    myBugs.push(bug)
+                    }
+                })
+            }
+        }) 
+        console.log(myBugs, this.state.theBugs)
+        // return this.setState({theBugs:myBugs},()=>console.log(this.state.myBugs))
+        return myBugs
+        // return myBugs.map(bug=>{
+        // return <p>{bug.name}</p>
+        // })
     }
 
     handleChangeStatus=(e, data, id)=>{
@@ -267,50 +285,6 @@ class BugContainer extends React.Component{
 
     }
 
-    addBug=(bug)=>{
-       console.log(bug)
-        fetch('http://localhost:3000/bugs',{
-            method:'POST',
-            body: JSON.stringify({
-                bug:{
-                    name: bug.name,
-                    submitted_by: bug.submitted_by,
-                    description: bug.description,
-                    project_id: bug.project_id,
-                    opened: bug.opened
-                }
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
-            }
-        }).then(response=>response.json())
-        .then(response=>this.setState({
-            bugs: [response, ...this.state.bugs]
-        },()=>{console.log(this.state.bugs)}))
-    }
-
-    addProject=(project)=>{
-        console.log(project)
-            fetch('http://localhost:3000/projects',{
-                method:'POST',
-                body: JSON.stringify({
-                    project:{
-                      title: project.title
-                    }
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept':'application/json',
-                    'Authorization':`Bearer ${this.state.jwt}`
-                }
-            }).then(response=>response.json())
-            .then(response=>this.setState({
-                projects: [response, ...this.state.projects]
-            }))
-      }
-
     handleDeleteBug=(bug)=>{
         console.log("delete in projectcontainer")
         fetch(`http://localhost:3000/bugs/${bug.id}`,{
@@ -331,25 +305,19 @@ class BugContainer extends React.Component{
     }
 
     render(){
-        const re = new RegExp(this.state.searchText, "i");
-        console.log(this.state.bugs)
-        const projects = this.state.projects.filter((project)=>{
-            return re.test(project.title)
-        })
+        {console.log(this.state.theBugs)}
+        {console.log(this.props.userData)}
+        return(<div>
 
-        return(
-            <div className="project-container-div">
-                <ProjectSearch onChange={this.handleChange}/>
-                <NewProject projects={this.state.projects} jwt={this.state.jwt} addProject={this.addProject}/> 
-           
-                   <TabBar
-                jwt={this.state.jwt}
-                bugs={this.state.bugs} 
+            <h1>Hello {`${this.props.userData.user.username}`}</h1>
+                {/* {this.listBugs()} */}
+                <BugList 
+                bugs={this.listBugs()}
+                jwt={this.props.jwt}
                 user_bugs={this.state.user_bugs}
                 users={this.state.users}
-                projects={projects}
+                projects={this.state.projects}
                 user_projects={this.state.user_projects}
-                addBug={this.addBug}
                 handleChangeStatus={this.handleChangeStatus}
                 handleChangePriority={this.handleChangePriority}
                 handleChangeOpened={this.handleChangeOpened}
@@ -362,11 +330,10 @@ class BugContainer extends React.Component{
                 handleChangeAssignedTo={this.handleChangeAssignedTo}
                 handleProjectTitle={this.handleProjectTitle}
                 handleDeleteBug={this.handleDeleteBug}
-                /> 
-                
-            </div>
+                />
+        </div>
         )
     }
 }
 
-export default BugContainer
+export default AssignedBugs

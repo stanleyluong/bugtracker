@@ -6,11 +6,10 @@ import Moment from 'react-moment'
 import EdiText from 'react-editext'
 import AssignedToDropdown from './AssignedToDropdown'
 import 'semantic-ui-css/semantic.min.css'
-// import { element } from 'prop-types'
 import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
 
-class Project extends React.Component {
+class Bug extends React.Component {
 
     state = {
         selectStatus: false,
@@ -43,7 +42,9 @@ class Project extends React.Component {
     }
     handleShowClosed=()=>{
         if (this.state.showClosedCalendar === false){
-            return <Moment format="MM/DD/YYYY">{this.props.bug.closed}</Moment>
+            if(this.props.bug.closed===""){return ""}
+            else{ return <Moment format="MM/DD/YYYY">{this.props.bug.closed}</Moment>}
+           
         } else {
             return <Calendar onChange={this.onChangeClosed}/>
         }
@@ -188,15 +189,18 @@ class Project extends React.Component {
         return assignedUsers
     }
     
+    handleDeleteBug=()=>{
+        this.props.handleDeleteBug(this.props.bug)
+    }
     
     render(){
         // console.log(this.props)
         return(
             <tr>
-                <td className="td" style={{width: ".05em"}}>{this.props.bug.id}</td>
+                <td className="td" >{this.props.bug.id}</td>
                 {/* <td className="td" style={{width:".1em"}}>{this.handleShowProject()}</td> */}
                 <td className="td" onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
-                <td className="td" style={{width: "1em"}}><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
+                <td className="td" ><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
                 <td className="td" ><div className="grandparent"><ImageUploader  withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
                 <td className="td" ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
                 <td className="td" onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
@@ -205,7 +209,8 @@ class Project extends React.Component {
                 <td className="td" onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
                 <td className="td" onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td className="td" onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
-                <td className="td" width="300px"><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td>
+                <td className="td" ><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td>
+                <td><img onClick={()=>this.handleDeleteBug()} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td>
                 {/* <td>{this.props.project.id}</td>
                 <td onClick={()=>this.handleProjectTitleClick()}>{this.handleShowProjectTitle()}</td>
                 <td>{this.handleShowProjectBugs()}</td>
@@ -214,4 +219,4 @@ class Project extends React.Component {
         )
     }
 }
-export default Project
+export default Bug

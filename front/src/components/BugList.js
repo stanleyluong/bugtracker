@@ -1,7 +1,6 @@
 import React from 'react'
-import Project from './Project'
 import 'semantic-ui-css/semantic.min.css'
-import Bugs from './Bugs'
+import Bugs from './Bug'
 const BugList = (props) => {
 
     return (
@@ -13,11 +12,6 @@ const BugList = (props) => {
                 Bug ID
               </h3>
             </th>
-            {/* <th>
-              <h3 className="ui center aligned header">
-                Project Name
-              </h3>
-            </th> */}
             <th>
               <h3 className="ui center aligned header">
                 Bug Name
@@ -73,12 +67,17 @@ const BugList = (props) => {
                 Assigned To
               </h3>
             </th>
+            <th>
+              <h3 className="ui center aligned header icon">
+              Delete Bug
+              </h3>
+            </th>
           </tr>
   
           {/* {data.map((data) => {
             return <Project data={data} />
           })} */}
-          
+          {console.log('bugs' , props.bugs)}
           {props.bugs.map((bug,key) => {
               return <Bugs 
               bug={bug} 
@@ -99,6 +98,7 @@ const BugList = (props) => {
               handleChangeSubmittedBy={props.handleChangeSubmittedBy}
               handleChangeLocation={props.handleChangeLocation}
               handleChangeAssignedTo={props.handleChangeAssignedTo}
+              handleDeleteBug={props.handleDeleteBug}
               />
           })}
   

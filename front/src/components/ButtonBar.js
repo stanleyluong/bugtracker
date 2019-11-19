@@ -16,23 +16,18 @@ export default class ButtonBar extends Component {
     return (
        
 
-      <Menu inverted>
+      <Menu color='black' inverted>
 
-        {/* <Menu.Item
-        name='Tracker'
-        active={activeItem === 'Tracker'}
+        <Menu.Item
+        name='Assigned Bugs'
+        active={activeItem === 'Assigned Bugs'}
         onClick={this.handleItemClick}
-        /> */}
+        />
         <Menu.Item
           name='Projects'
           active={activeItem === 'Projects'}
           onClick={this.handleItemClick}
         />
-        {/* <Menu.Item
-          name='Add Bug'
-          active={activeItem === 'Add Bug'}
-          onClick={this.handleItemClick}
-        /> */}
         <Menu.Item
           name='About'
           active={activeItem === 'About'}

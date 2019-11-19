@@ -8,25 +8,30 @@ class SignUp extends React.Component {
     password: '', 
     firstname: '', 
     lastname: '', 
-    email: '', 
-    submittedUsername: '', 
-    submittedPassword: '', 
-    submittedFirstname:'',
-    submittedLastname:'',
-    submittedEmail: '' }
+    email: ''
+    // , 
+    // submittedUsername: '', 
+    // submittedPassword: '', 
+    // submittedFirstname:'',
+    // submittedLastname:'',
+    // submittedEmail: '' 
+  }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   handleSubmit = () => {
-    const { username, password, firstname, lastname, email } = this.state
+    // const { username, password, firstname, lastname, email } = this.state
 
-    this.setState({ 
-      submittedUsername: username, 
-      submittedPassword: password,
-      submittedFirstname: firstname,
-      submittedLastname: lastname,
-      submittedEmail: email
-    },()=>this.props.handleSignedUpandLoggedin(this.state))
+    // this.setState({ 
+    //   submittedUsername: username, 
+    //   submittedPassword: password,
+    //   submittedFirstname: firstname,
+    //   submittedLastname: lastname,
+    //   submittedEmail: email
+    // },()=>
+    this.props.handleSignedUpandLoggedin(this.state)
+    
+    // )
     
     //need to refactor this move code up to app and fetch login automatically to get jwt after signing up/posting new user
    
@@ -42,9 +47,9 @@ class SignUp extends React.Component {
             <Image src='https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg' /> Create an account
           </Header>
           
-          <Segment stacked>
+          <Segment>
             <Form onSubmit={this.handleSubmit}>
-              <Form.Group>
+              <Form.Group widths={5}>
                 <Form.Input
                   placeholder='Username'
                   name='username'
@@ -58,6 +63,7 @@ class SignUp extends React.Component {
                   value={password}
                   onChange={this.handleChange}
                   icon='lock'
+                  type="password"
                 />
                 <Form.Input
                   placeholder='First Name'
@@ -81,7 +87,15 @@ class SignUp extends React.Component {
                   icon='envelope'
                 />
           </Form.Group>
-          <Form.Button color='teal' fluid size='large' type='submit'>Submit</Form.Button>
+          <Form.Button 
+            disabled={!this.state.username 
+              || !this.state.firstname 
+              || !this.state.lastname 
+              || !this.state.password 
+              || !this.state.email
+            } 
+            color='green' fluid size='large' type='submit'
+            >Submit</Form.Button>
         </Form>
 
 

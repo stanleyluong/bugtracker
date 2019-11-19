@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
-import { Dropdown } from 'semantic-ui-react'
 
 class NewBug extends React.Component{
   
@@ -14,6 +13,7 @@ class NewBug extends React.Component{
 
     handleSubmit=(event)=>{
         event.preventDefault()
+        console.log(this.state)
         this.props.addBug(this.state)
     }
       
@@ -23,12 +23,12 @@ class NewBug extends React.Component{
       const { name, submitted_by, description } = this.state
       return(
             <Form onSubmit={this.handleSubmit}>
-                <Form.Group unstackable widths={2}>
-                <Form.Input name='name' value={name} onChange={this.handleChange} label='Bug Name' placeholder='Bug Name' />
-                <Form.Input name='description' value={description} onChange={this.handleChange} label='Description' placeholder='Description' />
-                <Form.Input name='submitted_by' value={submitted_by} onChange={this.handleChange} label='Submitted By' placeholder='Submitted By' />
+                <Form.Group style={{marginTop: "10px"}} widths={3}>
+                <Form.Input size="mini" name='name' value={name} onChange={this.handleChange}  placeholder='Bug Name' />
+                <Form.Input size="mini" name='description' value={description} onChange={this.handleChange}  placeholder='Description' />
+                <Form.Input size="mini" name='submitted_by' value={submitted_by} onChange={this.handleChange}  placeholder='Submitted By' />
                 </Form.Group>
-                <Button type='submit'>Add Bug</Button>
+                <Button size="mini" type='submit'>Add Bug</Button>
             </Form>
       )
   }
