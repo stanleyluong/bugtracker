@@ -2,8 +2,6 @@ import React from 'react'
 import { Form, Grid, Header, Message, Segment, Button } from 'semantic-ui-react'
 import '../css/LoginForm.css'
 
-
-
 class LoginForm extends React.Component{
 
   state={ 

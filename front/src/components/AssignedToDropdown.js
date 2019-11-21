@@ -14,8 +14,8 @@ class AssignedToDropdown extends React.Component{
 
     componentDidMount(){
         let assignedUsers = []
-        console.log(this.props.user_bugs)
-        console.log(this.props)
+        // console.log(this.props.user_bugs)
+        // console.log(this.props)
         this.props.user_bugs.forEach(user_bug=>{
             if (user_bug.bug_id === this.props.bug.id){
                 this.props.users.forEach(user=>{
@@ -26,8 +26,10 @@ class AssignedToDropdown extends React.Component{
             }
         })
 
-        console.log(assignedUsers)
-        this.setState({value: assignedUsers},()=> console.log(this.state.value))
+        // console.log(assignedUsers)
+        this.setState({value: assignedUsers}
+            // ,()=> console.log(this.state.value)
+        )
     }
     handleChange = (e, { searchQuery, value }) => {
         // console.log(e)
@@ -44,8 +46,8 @@ class AssignedToDropdown extends React.Component{
 
     handleSearchChange = (e, { searchQuery }) => {
         this.setState({ searchQuery })
-        console.log(searchQuery)
-        console.log(e)
+        // console.log(searchQuery)
+        // console.log(e)
     }
     // placeholder=()=>{
     //     // console.log(this.props.users)
@@ -80,7 +82,7 @@ class AssignedToDropdown extends React.Component{
         // console.log(developerOptions)
         //riven always on third line on front end. doesnt show up until 3rd addition.
         return(<div>
-                {console.log(value,"value")}
+                {/* {console.log(value,"value")} */}
             <Dropdown
             fluid
             multiple

@@ -6,9 +6,9 @@ Bug.destroy_all
 UserBug.destroy_all
 UserProject.destroy_all
 
-20.times do
+10.times do
     Project.create(
-        title:Faker::Games::LeagueOfLegends.masteries
+        title:Faker::Games::LeagueOfLegends.unique.masteries
         )
 end
 

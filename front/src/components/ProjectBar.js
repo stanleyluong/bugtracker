@@ -4,11 +4,11 @@ import { Tab } from 'semantic-ui-react'
 import '../css/TabBar.css'
 const TabExampleBasic = (props) => {
     const panes = []
-    props.projects.forEach((project)=>{
+    props.projects.map((project)=>{
         let bugs = props.bugs.filter(bug=>bug.project_id===project.id)
         return panes.push({menuItem: `${project.title}`, render: ()=> <Tab.Pane>
             <BugContainer
-            key={project.id}
+            // key={project.id}
             project={project}
             jwt={props.jwt}
             bugs={bugs} 

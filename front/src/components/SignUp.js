@@ -100,7 +100,10 @@ class SignUp extends React.Component {
 
 
           <Form.Field>
-            <Checkbox label='I agree to the Terms and Conditions' />
+            <Checkbox label='I agree to the Terms and Conditions' error={{
+        content: 'You must agree to the terms and conditions',
+        pointing: 'left'
+      }} />
           </Form.Field>
 
         </Segment>

@@ -30,10 +30,10 @@ const ProjectList = (props) => {
             </th> */}
           </tr>
           
-          {props.projects.map((project,key) => {
+          {props.projects.map((project) => {
               return <Project 
               project={project}
-              key={key}
+              key={project.id}
               bugs={props.bugs}
               user_bugs={props.user_bugs}
               users={props.users}

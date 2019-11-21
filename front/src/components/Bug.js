@@ -36,6 +36,7 @@ class Bug extends React.Component {
         }
     }
     handleClosedClick=()=>{this.setState({showClosedCalendar: true})}
+    
     onChangeClosed=(date)=>{
         this.props.handleChangeClosed(date, this.props.bug)
         this.setState({showClosedCalendar: false })
@@ -68,7 +69,7 @@ class Bug extends React.Component {
     handleDescriptionClick=()=>{this.setState({showEditDescription: true})}
     handleShowDescription=()=>{
         if (this.state.showEditDescription===false){
-            return <ReadMoreReact text={this.props.bug.description} readMoreText={"see more"}/>
+            return <ReadMoreReact text={this.props.bug.description} readMoreText={"See More"}/>
         } else{
             return <EdiText
                 value={this.props.bug.description}
@@ -145,7 +146,7 @@ class Bug extends React.Component {
             return <EdiText 
             value={this.props.bug.location}
             type="textarea"
-            hint="Enter title"
+            hint="Enter location"
             editOnViewClick={true}
             submitOnEnter
             onSave={this.handleLocation}
@@ -214,24 +215,20 @@ class Bug extends React.Component {
             <tr>
                 {/* <td className="td" >{this.props.bug.id}</td> */}
                 {/* <td className="td" style={{width:".1em"}}>{this.handleShowProject()}</td> */}
-                <td className="td" onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
-                <td className="td" 
+                <td style={{cursor:"pointer"}}onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
+                <td 
                 // style={this.handlePriorityColor()}
                 ><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
-                <td className="td" ><div className="grandparent"><ImageUploader  withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
-                <td className="td" ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
-                <td className="td" onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
-                <td className="td" onClick={()=>this.handleOpenedClick()}>{this.handleShowOpened()}</td>
-                <td className="td" ><Moment fromNow>{this.props.bug.opened}</Moment></td>
-                <td className="td" onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
-                <td className="td" onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
-                <td className="td" onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
-                <td className="td" width="200px" ><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td>
-                <td><img onClick={()=>this.handleDeleteBug()} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td>
-                {/* <td>{this.props.project.id}</td>
-                <td onClick={()=>this.handleProjectTitleClick()}>{this.handleShowProjectTitle()}</td>
-                <td>{this.handleShowProjectBugs()}</td>
-                <td>project users</td> */}
+                <td ><div className="grandparent"><ImageUploader  withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
+                <td ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
+                <td style={{minWidth:"100px"}} onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
+                <td style={{cursor:"pointer"}} onClick={()=>this.handleOpenedClick()}>{this.handleShowOpened()}</td>
+                <td ><Moment fromNow>{this.props.bug.opened}</Moment></td>
+                <td style={{cursor:"pointer"}} onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
+                <td style={{cursor:"pointer"}} onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
+                <td style={{cursor:"pointer"}} onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
+                <td width="200px" ><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td>
+                <td style={{cursor:"pointer"}}><img onClick={()=>this.handleDeleteBug()} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td>
             </tr>
         )
     }

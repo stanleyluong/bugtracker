@@ -10,11 +10,13 @@ import NewBug from './components/NewBug'
 import ButtonBar from './components/ButtonBar'
 import ProjectContainer from './components/ProjectContainer'
 import AssignedBugs from './components/AssignedBugs'
+import Profile from './components/Profile'
+
 class App extends React.Component{
   state = {
     userData: {},
     loggedIn: false,
-    renderSignUp:false,
+    // renderSignUp:false,
     jwt: "",
     showAbout: false,
     showLogin: true,
@@ -23,12 +25,13 @@ class App extends React.Component{
    }
 
   loginUser = (response) => {
+    console.log(response)
         this.setState({
           activeItem:'Assigned Bugs',
           userData: response, 
           loggedIn: true, 
           jwt: response.jwt,
-          renderSignUp: false
+          // renderSignUp: false
         },
         ()=>console.log('state after loginUser', this.state, 'response',response))
   }
@@ -60,7 +63,9 @@ class App extends React.Component{
 
   handleRender=()=>{
     // if(this.state.loggedIn===false){return <Navbar homeAboutContact={this.homeAboutContact}/>}
-    if(this.state.activeItem==='Home'){return <LoginForm handleLogin={this.handleLogin} handleRenderSignUp={this.handleRenderSignUp}/>}
+    if(this.state.activeItem==='Home'){return <LoginForm handleLogin={this.handleLogin} 
+    handleRenderSignUp={this.handleRenderSignUp}
+    />}
     if(this.state.activeItem==='SignUp'){return <SignUp handleRenderLogin={this.handleRenderLogin} handleSignedUpandLoggedin={this.handleSignedUpandLoggedin}/>}
     if(this.state.activeItem==='About'){return <About/> }
     if(this.state.activeItem==='Contact'){return <Contact/>}
@@ -69,9 +74,66 @@ class App extends React.Component{
     if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
     if(this.state.activeItem==='Sign Out'){this.setState({activeItem:'Home',loggedIn: false})}
     if(this.state.activeItem==='Assigned Bugs'){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
+    if(this.state.activeItem==='Profile'){return <Profile updateUserData={this.updateUserData} userData={this.state.userData}/>}
   }
 
-  
+  updateUserData=(props)=>{
+    console.log(props)
+    let formattedProps = {
+      user:{
+        username: props.username,
+        password: props.password,
+        firstname: props.firstname,
+        lastname: props.lastname,
+        email: props.email,
+        image: props.avatar,
+        job: props.job
+      },
+      jwt: this.state.jwt
+    }
+    console.log(formattedProps)
+    // let updatedUser = {
+    //   user:{
+    //     username: props.username,
+    //     password: props.password
+    //   }
+    // }
+    fetch(`http://localhost:3000/users/${this.state.userData.user.id}`,{
+      method:'PATCH',
+      headers:{
+        'Content-Type':'application/json',
+        'Accept':'applicatiom/json',
+        'Authorization':`Bearer ${this.state.jwt}`
+      },
+      body: JSON.stringify({
+        "user":{
+          "username": props.username,
+          "firstname": props.firstname,
+          "lastname": props.lastname,
+          "email": props.email,
+          "image": props.avatar,
+          "job": props.job,
+          "password": props.password
+          // "id": this.state.userData.user.id
+        }
+      })
+    }
+    // .then(response=>response.json())
+    // .then(response=>console.log(response))
+    ,()=>this.setState({
+        activeItem: "Assigned Bugs",
+        userData: formattedProps
+      })
+      ).then(this.setState({
+        activeItem: "Assigned Bugs",
+        userData: formattedProps
+      }))
+      .then(console.log)
+    // ,()=>this.handleLogin()
+    // ,()=>{this.setState({
+    //   userData: formattedProps
+    // })}
+  }
 
   handleRenderSignUp=()=>{
     this.setState({activeItem: 'SignUp'})
