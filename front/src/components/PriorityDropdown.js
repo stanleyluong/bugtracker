@@ -31,12 +31,12 @@ const priorityOptions = [
 ]
 
 function handlePriorityColor(priority){
-  console.log(priority)
+  // console.log(priority)
   if (priority==='Low'){
-      return {backgroundColor:"blue"}
+      return {backgroundColor:"#80e5ff"}
   }
   if (priority==='Normal'){
-      return {backgroundColor:"grey"}
+      return {backgroundColor:"#c2c2d6"}
   }
   if(priority==='High'){
       return {backgroundColor:"yellow"}
@@ -51,7 +51,7 @@ const PriorityDropdown = (props) => {
   return (
     // console.log(props)
     <Dropdown
-    style={handlePriorityColor(priority)}
+      style={handlePriorityColor(priority)}
       placeholder={priority}
       fluid
       selection

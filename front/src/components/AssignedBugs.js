@@ -1,7 +1,10 @@
 import React from 'react'
 import BugList from './BugList'
+import Provider from './Provider'
+import Context from './Provider'
+
 class AssignedBugs extends React.Component{
-    
+    MyContext = React.createContext()
     state={
         projects: [],
         bugs: [],
@@ -60,21 +63,23 @@ class AssignedBugs extends React.Component{
         .then(([res1,res2,res3,res4,res5])=>
         Promise.all([res1.json(),res2.json(),res3.json(),res4.json(),res5.json()])
         ).then(([res1,res2,res3,res4,res5])=>{
-            console.log(res1)
+            // console.log(res1)
             this.setState({
                 projects: res1,
                 bugs: res2,
                 users: res3,
                 user_bugs: res4,
                 user_projects: res5
-            }, ()=>console.log(this.state))
+            }
+            // , ()=>console.log(this.state)
+            )
         })
     }
 
     listBugs=()=>{
-        console.log(this.state.user_bugs)
-        console.log(this.state.bugs)
-        console.log(this.props.userData.user.id)
+        // console.log(this.state.user_bugs)
+        // console.log(this.state.bugs)
+        // console.log(this.props.userData.user.id)
         let myBugs=[]
         this.state.user_bugs.forEach(user_bug=>{
             if(user_bug.user_id === this.props.userData.user.id){
@@ -87,7 +92,7 @@ class AssignedBugs extends React.Component{
                 })
             }
         }) 
-        console.log(myBugs, this.state.theBugs)
+        // console.log(myBugs, this.state.theBugs)
         // return this.setState({theBugs:myBugs},()=>console.log(this.state.myBugs))
         return myBugs
         // return myBugs.map(bug=>{
@@ -96,7 +101,7 @@ class AssignedBugs extends React.Component{
     }
 
     handleChangeStatus=(e, data, id)=>{
-        console.log('in project container finally wtf', e, data, id)
+        // console.log('in project container finally wtf', e, data, id)
         let option = e.target.innerText
         let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
         currentbug.status = data.value
@@ -133,7 +138,7 @@ class AssignedBugs extends React.Component{
     }
     
     handleChangeOpened=(date, bug)=>{
-        console.log(date, bug)
+        // console.log(date, bug)
         // return <Calendar />
         bug.opened = date
         fetch(`http://localhost:3000/bugs/${bug.id}`,{
@@ -225,7 +230,7 @@ class AssignedBugs extends React.Component{
     }
 
     handleChangeLocation=(val, bug)=>{
-        console.log(bug)
+        // console.log(bug)
         bug.location=val
         fetch(`http://localhost:3000/bugs/${bug.id}`,{
             method: 'PATCH',
@@ -248,12 +253,12 @@ class AssignedBugs extends React.Component{
                 usersthatareassociatedwithbug.push(user_bug)
             }
         })
-        console.log(val.length)
-        console.log(val[val.length-1])
-        console.log(usersthatareassociatedwithbug)
-        console.log(bug.id)
+        // console.log(val.length)
+        // console.log(val[val.length-1])
+        // console.log(usersthatareassociatedwithbug)
+        // console.log(bug.id)
         if (val.length > usersthatareassociatedwithbug.length){
-            console.log("insideif")
+            // console.log("insideif")
             fetch (`http://localhost:3000/user_bugs`,{
                 method: 'POST',
                 body: JSON.stringify({
@@ -296,8 +301,8 @@ class AssignedBugs extends React.Component{
             }
         })
         .then(response=>{
-            console.log(this.state.jwt)
-            console.log(response.status)
+            // console.log(this.state.jwt)
+            // console.log(response.status)
         })
         .then(this.setState({
             bugs: this.state.bugs.filter(bog=>bog.id!==bug.id)
@@ -317,9 +322,11 @@ class AssignedBugs extends React.Component{
     }
 
     render(){
-        {console.log(this.state.theBugs)}
-        {console.log(this.props.userData)}
+        // {console.log(this.state.theBugs)}
+        // {console.log(this.props.userData)}
         return(<div>
+                <Provider>
+                
                 {this.handleGreeting()}
                 <BugList 
                 bugs={this.listBugs()}
@@ -341,6 +348,7 @@ class AssignedBugs extends React.Component{
                 handleProjectTitle={this.handleProjectTitle}
                 handleDeleteBug={this.handleDeleteBug}
                 />
+                </Provider>
         </div>
         )
     }

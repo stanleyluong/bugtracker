@@ -1,19 +1,15 @@
 .grandparent {
     width: 9em;
-    /* overflow-x: scroll; */
-    /* background: gray */
 }
 
 .fileContainer{
     display: inline-flex;
-    /* background: green; */
 }
 
 .fileContainer .uploadPictureContainer {
     padding: 1%;
     margin: 1%;
     display: inline-table;
-    /* background: red */
 }
 
 .fileContainer .uploadPictureContainer:hover {
@@ -31,7 +27,3 @@
 .text{
     color: black
 }
-
-/* .td:hover {
-    transform: scale(2)
-} */

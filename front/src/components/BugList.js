@@ -1,17 +1,15 @@
 import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import Bugs from './Bug'
-const BugList = (props) => {
-
+import {Context} from './Provider'
+class BugList extends React.Component {
+  static contextType= Context
+  render(){
+    console.log(this.context)
     return (
-        <table className="ui celled striped padded table">
+      <table className="ui celled striped padded table">
         <tbody>
           <tr>
-          {/* <th>
-              <h3 className="ui center aligned header">
-                Bug ID
-              </h3>
-            </th> */}
             <th>
               <h3 className="ui center aligned header">
                 Bug Name
@@ -77,34 +75,35 @@ const BugList = (props) => {
           {/* {data.map((data) => {
             return <Project data={data} />
           })} */}
-          {console.log('bugs' , props.bugs)}
-          {props.bugs.map((bug,key) => {
-              return <Bugs 
-              bug={bug} 
-              key={key}
-              bugs={props.bugs}
-              // setAssignedUsers={props.setAssignedUsers}
-              // assignedUsersToBugs={props.assignedUsersToBugs}
-              user_bugs={props.user_bugs}
-              users={props.users}
-              projects={props.projects}
-              handleChangeStatus={props.handleChangeStatus}
-              handleChangePriority={props.handleChangePriority}
-              handleChangeOpened={props.handleChangeOpened}
-              handleChangeClosed={props.handleChangeClosed}
-              handleChangeProject={props.handleChangeProject}
-              handleChangeDescription={props.handleChangeDescription}
-              handleChangeName={props.handleChangeName}
-              handleChangeSubmittedBy={props.handleChangeSubmittedBy}
-              handleChangeLocation={props.handleChangeLocation}
-              handleChangeAssignedTo={props.handleChangeAssignedTo}
-              handleDeleteBug={props.handleDeleteBug}
+          {/* {console.log('bugs' , this.this.props.bugs)} */}
+          {this.props.bugs.map((bug,key) => {
+            return <Bugs 
+            bug={bug} 
+            key={key}
+            bugs={this.props.bugs}
+            // setAssignedUsers={this.props.setAssignedUsers}
+            // assignedUsersToBugs={this.props.assignedUsersToBugs}
+            user_bugs={this.props.user_bugs}
+            users={this.props.users}
+            projects={this.props.projects}
+            handleChangeStatus={this.props.handleChangeStatus}
+              handleChangePriority={this.props.handleChangePriority}
+              handleChangeOpened={this.props.handleChangeOpened}
+              handleChangeClosed={this.props.handleChangeClosed}
+              handleChangeProject={this.props.handleChangeProject}
+              handleChangeDescription={this.props.handleChangeDescription}
+              handleChangeName={this.props.handleChangeName}
+              handleChangeSubmittedBy={this.props.handleChangeSubmittedBy}
+              handleChangeLocation={this.props.handleChangeLocation}
+              handleChangeAssignedTo={this.props.handleChangeAssignedTo}
+              handleDeleteBug={this.props.handleDeleteBug}
               />
           })}
   
         </tbody>
       </table>
     )
+  }
 }
-
+  
 export default BugList

@@ -39,11 +39,15 @@ export default class ButtonBar extends Component {
           onClick={this.handleItemClick}
         />
         <Menu.Item
+          name='Profile'
+          active={activeItem === 'Profile'}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
           name='Sign Out'
           active={activeItem === 'Sign Out'}
           onClick={this.handleItemClick}
         />
-        
       </Menu>
        
     )

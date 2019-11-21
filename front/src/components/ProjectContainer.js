@@ -3,8 +3,8 @@ import ProjectSearch from './ProjectSearch'
 import 'semantic-ui-css/semantic.min.css'
 import '../css/BugContainer.css'
 import NewProject from './NewProject'
-import TabBar from './TabBar'
-class BugContainer extends React.Component{
+import ProjectBar from './ProjectBar'
+class ProjectContainer extends React.Component{
     state = {
         projects: [],
         bugs: [],
@@ -342,7 +342,7 @@ class BugContainer extends React.Component{
                 <ProjectSearch onChange={this.handleChange}/>
                 <NewProject projects={this.state.projects} jwt={this.state.jwt} addProject={this.addProject}/> 
            
-                   <TabBar
+                   <ProjectBar
                 jwt={this.state.jwt}
                 bugs={this.state.bugs} 
                 user_bugs={this.state.user_bugs}
@@ -369,4 +369,4 @@ class BugContainer extends React.Component{
     }
 }
 
-export default BugContainer
+export default ProjectContainer
