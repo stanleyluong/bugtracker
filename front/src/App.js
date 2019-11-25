@@ -18,9 +18,9 @@ class App extends React.Component{
     loggedIn: false,
     // renderSignUp:false,
     jwt: "",
-    showAbout: false,
-    showLogin: true,
-    showing: '',
+    // showAbout: false,
+    // showLogin: true,
+    // showing: '',
     activeItem: 'Login'
    }
 
@@ -67,17 +67,26 @@ class App extends React.Component{
     handleRenderSignUp={this.handleRenderSignUp}
     />}
     if(this.state.activeItem==='SignUp'){return <SignUp handleRenderLogin={this.handleRenderLogin} handleSignedUpandLoggedin={this.handleSignedUpandLoggedin}/>}
-    if(this.state.activeItem==='Home'){return <Home jwt={this.state.jwt} userData={this.state.userData}/> }
+    if(this.state.activeItem==='Home'){return <Home handleSignOut={this.handleSignOut} jwt={this.state.jwt} userData={this.state.userData} handleLogin={this.handleLogin}/> }
     if(this.state.activeItem==='About'){return <About/> }
     if(this.state.activeItem==='Contact'){return <Contact/>}
     // if(this.state.activeItem==='BugTracker'){return <BugTracker jwt={this.state.jwt}/>}
-    if(this.state.activeItem==='Add Bug'){return <NewBug jwt={this.state.jwt}/>}
-    if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
-    if(this.state.activeItem==='Sign Out'){this.setState({activeItem:'Login',loggedIn: false})}
-    if(this.state.activeItem==='Assigned Bugs'){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
-    if(this.state.activeItem==='Profile'){return <Profile updateUserData={this.updateUserData} userData={this.state.userData}/>}
+    // if(this.state.activeItem==='Add Bug'){return <NewBug jwt={this.state.jwt}/>}
+    // if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
+    // if(this.state.activeItem==='Sign Out'){this.setState({activeItem:'Login',loggedIn: false})}
+    // if(this.state.activeItem==='Assigned Bugs'){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
+    // if(this.state.activeItem==='Profile'){return <Profile updateUserData={this.updateUserData} userData={this.state.userData}/>}
   }
 
+  handleSignOut=()=>{
+    this.setState({
+      activeItem: 'Login',
+      loggedIn: false,
+      jwt: "",
+      userData: {}
+    })
+  
+  }
   updateUserData=(props)=>{
     console.log(props)
     let formattedProps = {

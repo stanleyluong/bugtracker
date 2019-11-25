@@ -322,8 +322,30 @@ class Provider extends Component {
                 }
             })
         }
-
     }
+
+    handleLogin=(user)=>{
+        console.log(user)
+        fetch('http://localhost:3000/login',{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json',
+            'Accept':'application/json'
+          },
+          body:JSON.stringify({ "user": {
+            "username": user.username,
+            "password": user.password
+            }
+            })
+        })
+        .then(response=>{if(response.status!==202){
+          alert("Invalid username or password")
+        }
+        else {
+          return response.json()
+        }})
+        .then(response=>{if (response!==undefined){this.loginUser(response)}})
+      }
 
     render(){
         return(
@@ -341,6 +363,7 @@ class Provider extends Component {
                 handleChangeSubmittedBy: this.handleChangeSubmittedBy,
                 handleChangeLocation: this.handleChangeLocation,
                 handleChangeAssignedTo: this.handleChangeAssignedTo,
+                handleLogin: this.handleLogin
                 }}>
                 {this.props.children}
             </Context.Provider>

@@ -16,7 +16,7 @@ class Home extends Component {
   state={activeItem:"Home"}
 
   handleRender=()=>{
-    if(this.state.activeItem==='Login'){return <LoginForm handleLogin={this.handleLogin} 
+    if(this.state.activeItem==='Login'){return <LoginForm handleLogin={this.props.handleLogin} 
     handleRenderSignUp={this.handleRenderSignUp}
     />}
     if(this.state.activeItem==='SignUp'){return <SignUp handleRenderLogin={this.handleRenderLogin} handleSignedUpandLoggedin={this.handleSignedUpandLoggedin}/>}
@@ -26,7 +26,7 @@ class Home extends Component {
     // if(this.state.activeItem==='BugTracker'){return <BugTracker jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Add Bug'){return <NewBug jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
-    if(this.state.activeItem==='Sign Out'){this.setState({activeItem:'Login',loggedIn: false})}
+    if(this.state.activeItem==='Sign Out'){this.props.handleSignOut()}
     if(this.state.activeItem==='Assigned Bugs'){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Profile'){return <Profile updateUserData={this.updateUserData} userData={this.state.userData}/>}
   }
