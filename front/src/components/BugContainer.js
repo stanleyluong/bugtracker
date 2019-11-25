@@ -4,18 +4,18 @@ import Search from './Search'
 import 'semantic-ui-css/semantic.min.css'
 import '../css/BugContainer.css'
 import NewBug from './NewBug'
-class BugContainer extends React.Component{
-    state = {
-        searchText: ""
-      }
+import { Context } from './Provider'
 
-    handleChange = (searchText) => {
-        this.setState({
-            searchText
-        })
-    }
+class BugContainer extends React.Component{
+
+    static contextType = Context
+
+    state = {searchText:""}
+
+    handleChange = (searchText) => {this.setState({searchText})}
    
     render(){
+        console.log(this.props.project)
         const re = new RegExp(this.state.searchText, "i");
         const bugs = this.props.bugs.filter((bug) => {
             return re.test(bug.id) 
@@ -34,23 +34,9 @@ class BugContainer extends React.Component{
         return(
             <div className="project-container-div">
                 <Search onChange={this.handleChange}/>
-                <NewBug addBug={this.props.addBug} jwt={this.props.jwt} project={this.props.project}/>
+                <NewBug jwt={this.props.jwt} project={this.props.project}/>
                 <BugList 
-                bugs={bugs} 
-                users={this.props.users}
-                projects={this.props.projects}
-                user_bugs={this.props.user_bugs}
-                handleChangeStatus={this.props.handleChangeStatus}
-                handleChangePriority={this.props.handleChangePriority}
-                handleChangeOpened={this.props.handleChangeOpened}
-                handleChangeClosed={this.props.handleChangeClosed}
-                handleChangeProject={this.props.handleChangeProject}
-                handleChangeDescription={this.props.handleChangeDescription}
-                handleChangeName={this.props.handleChangeName}
-                handleChangeSubmittedBy={this.props.handleChangeSubmittedBy}
-                handleChangeLocation={this.props.handleChangeLocation}
-                handleChangeAssignedTo={this.props.handleChangeAssignedTo}
-                handleDeleteBug={this.props.handleDeleteBug}
+                bugs={bugs}
                 />
             </div>
         )

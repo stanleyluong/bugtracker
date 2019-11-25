@@ -4,7 +4,6 @@ const ProjectSearch = (props) => {
   const { onChange } = props;
 
   function handleChange(e) {
-    // console.log(e.target.value)
     onChange(e.target.value)
   }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 
 export default class ButtonBar extends Component {
-  state = { activeItem: '' }
+  state = { activeItem: 'Home' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name },()=>{
     console.log(this.state)
@@ -17,7 +17,11 @@ export default class ButtonBar extends Component {
        
 
       <Menu color='black' inverted>
-
+        <Menu.Item
+        name='Home'
+        active={activeItem === 'Home'}
+        onClick={this.handleItemClick}
+        />
         <Menu.Item
         name='Assigned Bugs'
         active={activeItem === 'Assigned Bugs'}

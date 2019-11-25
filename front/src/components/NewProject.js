@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
+import { Context } from './Provider'
 
 class NewProject extends React.Component{
-  
+    static contextType = Context
     state={
         title: ''
     }
@@ -10,13 +11,16 @@ class NewProject extends React.Component{
     handleSubmit=(event)=>{
         event.preventDefault()
         if(this.state.title.length===0){alert("Enter project name")}
-        
-        this.props.projects.forEach(project=>{
-            if(project.title === this.state.title){
-                return alert("Project name unavailable, please try again.")
-            } else {this.props.addProject(this.state)}
+        let projectNames = []
+        this.context.projects.forEach(project=>{
+            projectNames.push(project.name)
         })
-        
+        if(projectNames.includes(this.state.title)){
+            alert("Project with this name already exists")
+        } else {
+            this.context.handleAddProject(this.state)
+            this.setState({title:""})
+        }        
         console.log(this.state)
     }
       

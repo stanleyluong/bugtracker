@@ -70,14 +70,14 @@ class SignUp extends React.Component {
                   name='firstname'
                   value={firstname}
                   onChange={this.handleChange}
-                  icon='user outline'
+                  icon='user'
                 />
                 <Form.Input
                   placeholder='Last Name'
                   name='lastname'
                   value={lastname}
                   onChange={this.handleChange}
-                  icon='user outline'
+                  icon='user'
                 />
                 <Form.Input
                   placeholder='E-mail'
@@ -94,17 +94,17 @@ class SignUp extends React.Component {
               || !this.state.password 
               || !this.state.email
             } 
-            color='green' fluid size='large' type='submit'
+            color='black' fluid size='large' type='submit'
             >Submit</Form.Button>
         </Form>
 
 
-          <Form.Field>
-            <Checkbox label='I agree to the Terms and Conditions' error={{
+          {/* <Form.Field> */}
+            {/* <Checkbox label='I agree to the Terms and Conditions' error={{
         content: 'You must agree to the terms and conditions',
         pointing: 'left'
-      }} />
-          </Form.Field>
+      }} /> */}
+          {/* </Form.Field> */}
 
         </Segment>
       {/* </Form> */}

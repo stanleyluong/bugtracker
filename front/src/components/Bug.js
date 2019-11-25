@@ -9,7 +9,10 @@ import 'semantic-ui-css/semantic.min.css'
 import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
 import ReadMoreReact from 'read-more-react'
+import { Context } from './Provider'
 class Bug extends React.Component {
+
+    static contextType = Context
 
     state = {
         selectStatus: false,
@@ -25,7 +28,7 @@ class Bug extends React.Component {
 
     handleOpenedClick=()=>{this.setState({showOpenedCalender: true})}
     onChangeOpened=(date)=>{
-        this.props.handleChangeOpened(date, this.props.bug)
+        this.context.handleChangeOpened(date, this.props.bug)
         this.setState({showOpenedCalender: false})
     }
     handleShowOpened=()=>{
@@ -38,7 +41,7 @@ class Bug extends React.Component {
     handleClosedClick=()=>{this.setState({showClosedCalendar: true})}
     
     onChangeClosed=(date)=>{
-        this.props.handleChangeClosed(date, this.props.bug)
+        this.context.handleChangeClosed(date, this.props.bug)
         this.setState({showClosedCalendar: false })
     }
     handleShowClosed=()=>{
@@ -50,20 +53,9 @@ class Bug extends React.Component {
             return <Calendar onChange={this.onChangeClosed}/>
         }
     }
-   
-    handleShowProject=()=>{
-        let projectTitle
-            this.props.projects.forEach(project=>{
-                if (project.id === this.props.bug.project_id){
-                    projectTitle = project.title
-                }
-            })
-            return projectTitle     
-   
-    }
     
     handleDescription=(val)=>{
-        this.props.handleChangeDescription(val, this.props.bug)
+        this.context.handleChangeDescription(val, this.props.bug)
         this.setState({showEditDescription: false})
     }
     handleDescriptionClick=()=>{this.setState({showEditDescription: true})}
@@ -83,7 +75,6 @@ class Bug extends React.Component {
         }
     }
     handleCancelShowDescription=()=>{this.setState({showEditDescription:false})}
-    
 
     handleShowName=()=>{
         if (this.state.showEditName===false){
@@ -103,15 +94,13 @@ class Bug extends React.Component {
         this.setState({showEditName: false})
     }
     handleName=(val)=>{
-        this.props.handleChangeName(val, this.props.bug)
+        this.context.handleChangeName(val, this.props.bug)
         this.setState({showEditName: false})
     }
     handleNameClick=()=>{this.setState({showEditName: true})}
     
-    
-    
     handleSubmittedBy=(val)=>{
-        this.props.handleChangeSubmittedBy(val, this.props.bug)
+        this.context.handleChangeSubmittedBy(val, this.props.bug)
         this.setState({showEditSubmittedBy: false})
     }
     handleSubmittedByClick=()=>{this.setState({showEditSubmittedBy:true})}
@@ -133,7 +122,7 @@ class Bug extends React.Component {
     handleCancelSubmittedBy=()=>{this.setState({showEditSubmittedBy:false})}
     
     handleLocation=(val)=>{
-        this.props.handleChangeLocation(val, this.props.bug)
+        this.context.handleChangeLocation(val, this.props.bug)
         this.setState({showLocation: false})
     }
     handleLocationClick=()=>{
@@ -157,24 +146,6 @@ class Bug extends React.Component {
     }
     handleCancelLocation=()=>{this.setState({showLocation:false})}
 
-    handleShowProjectBugs=()=>{
-        console.log(this.props.bugs)
-        console.log(this.props.project)
-        let project_bugs=[]
-        this.props.bugs.forEach(bug=>{
-            if(bug.project_id===this.props.project.id){
-                project_bugs.push(bug.name)
-            }
-        })
-        console.log(project_bugs)
-
-        // return project_bugs
-         project_bugs.forEach(bug=>{
-            return <li>{bug}</li>
-        })
-    }
-
-
     findUsers=()=>{
         let assignedUsers = []
         this.props.user_bugs.forEach(user_bug=>{
@@ -186,39 +157,14 @@ class Bug extends React.Component {
                 })
             }
         })
-        console.log(assignedUsers)
         return assignedUsers
     }
-    
-    handleDeleteBug=()=>{
-        this.props.handleDeleteBug(this.props.bug)
-    }
-    
-    // handlePriorityColor=()=>{
-    //     if (this.props.bug.priority==='Low'){
-    //         return {backgroundColor:"blue"}
-    //     }
-    //     if (this.props.bug.priority==='Normal'){
-    //         return {backgroundColor:"grey"}
-    //     }
-    //     if(this.props.bug.priority==='High'){
-    //         return {backgroundColor:"yellow"}
-    //     }
-    //     if(this.props.bug.priority==='Critical'){
-    //         return {backgroundColor:"red"}
-    //     }
-    // }
 
     render(){
-        // console.log(this.props)
         return(
             <tr>
-                {/* <td className="td" >{this.props.bug.id}</td> */}
-                {/* <td className="td" style={{width:".1em"}}>{this.handleShowProject()}</td> */}
                 <td style={{cursor:"pointer"}}onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
-                <td 
-                // style={this.handlePriorityColor()}
-                ><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
+                <td ><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
                 <td ><div className="grandparent"><ImageUploader  withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
                 <td ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
                 <td style={{minWidth:"100px"}} onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
@@ -227,8 +173,8 @@ class Bug extends React.Component {
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
-                <td width="200px" ><AssignedToDropdown handleChangeAssignedTo={this.props.handleChangeAssignedTo} users={this.props.users} bug={this.props.bug} user_bugs={this.props.user_bugs}/></td>
-                <td style={{cursor:"pointer"}}><img onClick={()=>this.handleDeleteBug()} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td>
+                <td width="200px" ><AssignedToDropdown bug={this.props.bug} /></td>
+                <td style={{cursor:"pointer"}}><img onClick={()=>this.context.handleDeleteBug(this.props.bug)} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td>
             </tr>
         )
     }
