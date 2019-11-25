@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 
 export default class MenuExampleInverted extends Component {
-  state = { activeItem: 'home' }
+  state = { activeItem: 'Login' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name },()=>{
     console.log(this.state)
@@ -20,8 +20,8 @@ export default class MenuExampleInverted extends Component {
 
         
         <Menu.Item
-          name='Home'
-          active={activeItem === 'Home'}
+          name='Login'
+          active={activeItem === 'Login'}
           onClick={this.handleItemClick}
         />
         <Menu.Item

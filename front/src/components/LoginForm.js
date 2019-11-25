@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Grid, Header, Message, Segment, Button } from 'semantic-ui-react'
+import { Image, Form, Grid, Header, Message, Segment, Button } from 'semantic-ui-react'
 import '../css/LoginForm.css'
 
 class LoginForm extends React.Component{
@@ -35,8 +35,8 @@ class LoginForm extends React.Component{
           <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 500 }}>
               <Header as='h2' color='teal' textAlign='center'>
-                {/* <Image src='https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg' />  */}
-                Log-in to your account
+                <Image src='https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg' /> 
+                {/* Log-in to your account */}
               </Header>
               
                 <Segment>

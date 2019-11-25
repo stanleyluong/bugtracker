@@ -3,7 +3,7 @@ import { Dropdown } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import {Context} from './Provider'
 
-class AssignedToDropdown extends Component{
+class AssignUserToNewBug extends Component{
     static contextType = Context
     state = {
         searchQuery: "",
@@ -11,23 +11,7 @@ class AssignedToDropdown extends Component{
         addUser: [],
         removeUser: []
     }
-
-    componentDidMount(){
-        let assignedUsers = []
-        this.context.user_bugs.forEach(user_bug=>{
-            if (user_bug.bug_id === this.props.bug.id){
-                this.context.users.forEach(user=>{
-                    if (user.id === user_bug.user_id){
-                        assignedUsers.push(user.id)
-                    }
-                })
-            }
-        })
-        if(assignedUsers.length === 0){this.setState({value: []})}
-        else {this.setState({value: assignedUsers})}
-        console.log(assignedUsers)
-        console.log(this.state.value)
-    }
+    
     handleChange = (e, { searchQuery, value }) => {
         this.setState({ searchQuery, value },()=>{this.context.handleChangeAssignedTo(this.state.value,this.props.bug)})
     }
@@ -60,4 +44,4 @@ class AssignedToDropdown extends Component{
 
 }
 
-export default AssignedToDropdown
+export default AssignUserToNewBug

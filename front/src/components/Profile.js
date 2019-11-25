@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
-
+import { Form } from 'semantic-ui-react'
+import { Context } from './Provider'
 class Profile extends React.Component{
     
     state={
@@ -9,7 +9,7 @@ class Profile extends React.Component{
             firstname:'',
             lastname:'',
             password:'',
-            passwordconfirmation:null,
+            passwordconfirmation:"",
             email:'',
             avatar: '',
             job: '',
@@ -17,20 +17,20 @@ class Profile extends React.Component{
 
     }
 
-    componentDidMount(){
-        this.setState({
-            // user:{
-                username: this.props.userData.user.username,
-                firstname:this.props.userData.user.firstname,
-                lastname:this.props.userData.user.lastname,
-                password:this.props.userData.user.password,
-                passwordconfirmation:this.props.userData.user.password,
-                email:this.props.userData.user.email,
-                avatar: this.props.userData.user.image,
-                job: this.props.userData.user.job
-            // }
-        })
-    }
+    // componentDidMount(){
+    //     this.setState({
+    //         // user:{
+    //             username: this.props.userData.user.username,
+    //             firstname:this.props.userData.user.firstname,
+    //             lastname:this.props.userData.user.lastname,
+    //             // password:this.props.userData.user.password,
+    //             // passwordconfirmation:this.props.userData.user.password,
+    //             email:this.props.userData.user.email,
+    //             avatar: this.props.userData.user.image,
+    //             job: this.props.userData.user.job
+    //         // }
+    //     })
+    // }
 
     handleSubmit=(event)=>{
         event.preventDefault()

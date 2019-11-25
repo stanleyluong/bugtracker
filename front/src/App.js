@@ -11,7 +11,7 @@ import ButtonBar from './components/ButtonBar'
 import ProjectContainer from './components/ProjectContainer'
 import AssignedBugs from './components/AssignedBugs'
 import Profile from './components/Profile'
-
+import Home from './components/Home'
 class App extends React.Component{
   state = {
     userData: {},
@@ -21,13 +21,13 @@ class App extends React.Component{
     showAbout: false,
     showLogin: true,
     showing: '',
-    activeItem: 'Home'
+    activeItem: 'Login'
    }
 
   loginUser = (response) => {
     console.log(response)
         this.setState({
-          activeItem:'Assigned Bugs',
+          activeItem:'Home',
           userData: response, 
           loggedIn: true, 
           jwt: response.jwt,
@@ -63,16 +63,17 @@ class App extends React.Component{
 
   handleRender=()=>{
     // if(this.state.loggedIn===false){return <Navbar homeAboutContact={this.homeAboutContact}/>}
-    if(this.state.activeItem==='Home'){return <LoginForm handleLogin={this.handleLogin} 
+    if(this.state.activeItem==='Login'){return <LoginForm handleLogin={this.handleLogin} 
     handleRenderSignUp={this.handleRenderSignUp}
     />}
     if(this.state.activeItem==='SignUp'){return <SignUp handleRenderLogin={this.handleRenderLogin} handleSignedUpandLoggedin={this.handleSignedUpandLoggedin}/>}
+    if(this.state.activeItem==='Home'){return <Home jwt={this.state.jwt} userData={this.state.userData}/> }
     if(this.state.activeItem==='About'){return <About/> }
     if(this.state.activeItem==='Contact'){return <Contact/>}
     // if(this.state.activeItem==='BugTracker'){return <BugTracker jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Add Bug'){return <NewBug jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
-    if(this.state.activeItem==='Sign Out'){this.setState({activeItem:'Home',loggedIn: false})}
+    if(this.state.activeItem==='Sign Out'){this.setState({activeItem:'Login',loggedIn: false})}
     if(this.state.activeItem==='Assigned Bugs'){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Profile'){return <Profile updateUserData={this.updateUserData} userData={this.state.userData}/>}
   }
@@ -139,7 +140,7 @@ class App extends React.Component{
     this.setState({activeItem: 'SignUp'})
   }
   handleRenderLogin=()=>{
-    this.setState({activeItem: 'Home'})
+    this.setState({activeItem: 'Login'})
   }
   handleSignedUpandLoggedin=(props)=>{
     fetch("http://localhost:3000/users",{
@@ -178,23 +179,24 @@ class App extends React.Component{
   handleNavBar=()=>{
     if(this.state.loggedIn===false){
       return <Navbar homeAboutContact={this.homeAboutContact}/>
-    } else {return <ButtonBar loggedInNavBarState={this.loggedInNavBarState}/>}
+    } 
+    // else {return <ButtonBar loggedInNavBarState={this.loggedInNavBarState}/>}
   } 
   loggedInNavBarState=(item)=>{
     this.setState({
       activeItem: item
     },()=>{console.log(this.state.activeItem)})
     console.log(item)
-    
   }
+
   render(){
     return(
       <div className="ui raised segment">
         {/* <div className="ui segment  ">
         </div> */}
         {this.handleNavBar()}
+      {/* <h2><img style={{width: "40px"}}src="https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg" alt="oops" />Bug Tracker 9000</h2> */}
       
-      <h2><img style={{width: "40px"}}src="https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg" alt="oops" />Bug Tracker 9000</h2>
 
         {this.handleRender()}
       </div>

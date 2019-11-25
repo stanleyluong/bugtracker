@@ -1,43 +1,31 @@
 import BugContainer from './BugContainer'
-import React from 'react'
+import React, {Component} from 'react'
 import { Tab } from 'semantic-ui-react'
 import '../css/TabBar.css'
-const TabExampleBasic = (props) => {
+import {Context} from './Provider'
+
+class ProjectBar extends Component{
+    static contextType=Context
+    render(){
     const panes = []
-    props.projects.map((project)=>{
-        let bugs = props.bugs.filter(bug=>bug.project_id===project.id)
+    this.props.projects.map((project)=>{
+        console.log(this.context.bugs)
+        let bugs = this.context.bugs.filter(bug=>bug.project_id===project.id)
         return panes.push({menuItem: `${project.title}`, render: ()=> <Tab.Pane>
             <BugContainer
-            // key={project.id}
+            key={project.id}
             project={project}
-            jwt={props.jwt}
             bugs={bugs} 
-            user_bugs={props.user_bugs}
-            users={props.users}
-            projects={props.projects}
-            user_projects={props.user_projects}
-            addBug={props.addBug}
-            handleChangeStatus={props.handleChangeStatus}
-            handleChangePriority={props.handleChangePriority}
-            handleChangeOpened={props.handleChangeOpened}
-            handleChangeClosed={props.handleChangeClosed}
-            handleChangeProject={props.handleChangeProject}
-            handleChangeDescription={props.handleChangeDescription}
-            handleChangeName={props.handleChangeName}
-            handleChangeSubmittedBy={props.handleChangeSubmittedBy}
-            handleChangeLocation={props.handleChangeLocation}
-            handleChangeAssignedTo={props.handleChangeAssignedTo}
-            handleProjectTitle={props.handleProjectTitle}
-            handleDeleteBug={props.handleDeleteBug}
             />
             </Tab.Pane>})
     })
-    return (
-        <div>
-            <Tab  menu={{  tabular: true ,pointing: true, className:"wrapped" }} panes={panes} props={props}/>
-            
-        </div>
-    )
+
+        return (            
+            <div>
+                <Tab  menu={{  tabular: true ,pointing: true, className:"wrapped" }} panes={panes} props={this.props}/>            
+            </div>
+        )
     }
-export default TabExampleBasic
+}
+export default ProjectBar
 

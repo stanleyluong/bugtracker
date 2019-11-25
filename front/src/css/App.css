@@ -5,6 +5,7 @@
 
 .App {
   text-align: center;
+  /* background-image: "https://thumbs.dreamstime.com/z/bug-tracking-icon-bug-tracking-icon-vector-image-isolated-white-background-118938714.jpg"; */
 }
 
 
@@ -17,3 +18,4 @@
 .ui.center.aligned.header {
   color: rgb(0, 0, 0)!important;
 }
+
