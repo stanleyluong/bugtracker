@@ -1,15 +1,21 @@
 .grandparent {
-    width: 9em;
+    /* width: 9em; */
+    /* text-align: center; */
+    margin: 0 auto;
 }
 
 .fileContainer{
     display: inline-flex;
+    /* text-align: center; */
+
 }
 
 .fileContainer .uploadPictureContainer {
     padding: 1%;
     margin: 1%;
     display: inline-table;
+    /* text-align: center; */
+
 }
 
 .fileContainer .uploadPictureContainer:hover {
