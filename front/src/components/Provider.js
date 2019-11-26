@@ -424,16 +424,6 @@ class Provider extends Component {
         })
     )
     .then(alert("Updated successfully!"))
-        // .then(response=>console.log("response",response))
-        // .then(this.setState({
-        // activeItem: "Assigned Bugs",
-        // userData: formattedProps
-        // }))
-        // .then(console.log)
-    // ,()=>this.handleLogin()
-    // ,()=>{this.setState({
-    //   userData: formattedProps
-    // })}
     }
 
     render(){

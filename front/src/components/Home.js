@@ -23,7 +23,6 @@ class Home extends Component {
     // if(this.state.activeItem==='Home'){return <Home/> }
     if(this.state.activeItem==='About'){return <About/> }
     if(this.state.activeItem==='Contact'){return <Contact/>}
-    // if(this.state.activeItem==='BugTracker'){return <BugTracker jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Add Bug'){return <NewBug jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
     if(this.state.activeItem==='Sign Out'){this.props.handleSignOut()}

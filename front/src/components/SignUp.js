@@ -9,32 +9,12 @@ class SignUp extends React.Component {
     firstname: '', 
     lastname: '', 
     email: ''
-    // , 
-    // submittedUsername: '', 
-    // submittedPassword: '', 
-    // submittedFirstname:'',
-    // submittedLastname:'',
-    // submittedEmail: '' 
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   handleSubmit = () => {
-    // const { username, password, firstname, lastname, email } = this.state
-
-    // this.setState({ 
-    //   submittedUsername: username, 
-    //   submittedPassword: password,
-    //   submittedFirstname: firstname,
-    //   submittedLastname: lastname,
-    //   submittedEmail: email
-    // },()=>
     this.props.handleSignedUpandLoggedin(this.state)
-    
-    // )
-    
-    //need to refactor this move code up to app and fetch login automatically to get jwt after signing up/posting new user
-   
   }
 
   render(){
@@ -99,20 +79,10 @@ class SignUp extends React.Component {
         </Form>
 
 
-          {/* <Form.Field> */}
-            {/* <Checkbox label='I agree to the Terms and Conditions' error={{
-        content: 'You must agree to the terms and conditions',
-        pointing: 'left'
-      }} /> */}
-          {/* </Form.Field> */}
+      
 
         </Segment>
-      {/* </Form> */}
-      {/* <strong>for testing: onChange:</strong>
-        <pre>{JSON.stringify({ username, password, firstname, lastname, email }, null, 2)}</pre>
-        <strong>onSubmit:</strong>
-        <pre>{JSON.stringify({ submittedUsername, submittedPassword, submittedFirstname, submittedLastname, submittedEmail }, null, 2)}</pre> */}
-      <Message>
+         <Message>
         Have an existing account? <Button onClick={()=>this.props.handleRenderLogin()}>Sign In</Button>
       </Message>
 
