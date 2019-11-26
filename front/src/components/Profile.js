@@ -47,11 +47,10 @@ class Profile extends React.Component{
 
     render(){
         return(
-            // <Form widths='equal' onSubmit={this.handleSubmit}>
-            //     <Form.Input style={{marginTop:"10px"}} size="mini" name='title' value={avatar} onChange={this.handleChange} placeholder='Enter avatar URL' />
-               
-            //     <Button style={{marginBottom:"10px"}} size="mini" type='submit'>Add Avatar</Button>
-            // </Form>
+           
+            <div>
+            <img src={this.context.userData.user.image} alt="oops" />
+            
              <Form onSubmit={this.handleSubmit}>
                 <Form.Group unstackable widths={3}>
                     <Form.Input onChange={this.handleChange} name="username" label='Username' placeholder='Enter username' value={this.state.username}/>
@@ -60,22 +59,13 @@ class Profile extends React.Component{
                     <Form.Input onChange={this.handleChange} name="email" label='E-mail' placeholder='Enter e-mail' value={this.state.email} />
                     <Form.Input onChange={this.handleChange} name="avatar" label='Avatar' placeholder='Enter avatar URL' value={this.state.avatar}/>
                     <Form.Input onChange={this.handleChange} name="job" label='Job' placeholder='Enter job' value={this.state.job} />
-                    {/* <Form.Input onChange={this.handleChange} name="password" label='Password' placeholder='Enter password' type='password' value={this.state.password} />
-                    <Form.Input onChange={this.handleChange} name="passwordconfirmation" label='Confirm Password' placeholder='Confirm password' type='password' value={this.state.passwordconfirmation}/> */}
-                {/* </Form.Group> */}
-
-                {/* <Form.Group widths={2}> */}
-                {/* </Form.Group> */}
-
-                {/* <Form.Group widths={2}> */}
-                {/* </Form.Group> */}
-
-                {/* <Form.Group widths={2}> */}
+                    
                 </Form.Group>
 
                 <Form.Button type='submit'>Update Info</Form.Button>
 
             </Form>
+            </div>
       )
   }
 }

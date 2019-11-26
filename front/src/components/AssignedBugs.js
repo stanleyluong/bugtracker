@@ -3,26 +3,8 @@ import BugList from './BugList'
 import {Context} from './Provider'
 
 class AssignedBugs extends Component{
+    
     static contextType=Context
-    
-    // state={theBugs: []}
-
-    // componentDidMount(){this.setState({theBugs: this.listBugs()})}
-
-    
-    // listBugs=()=>{
-        //     let myBugs=[]
-        //     this.context.user_bugs.forEach(user_bug=>{
-            //         if(user_bug.user_id === this.context.userData.user.id){
-                //             this.context.bugs.forEach(bug=>{
-    //                 if(user_bug.bug_id === bug.id){
-    //                 myBugs.push(bug)
-    //                 }
-    //             })
-    //         }
-    //     }) 
-    //     return myBugs
-    // }
     
     render(){
         let myBugs=[]

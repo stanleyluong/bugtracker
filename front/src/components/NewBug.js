@@ -69,8 +69,4 @@ class NewBug extends React.Component {
 
 }
 
-
-
-
-
 export default NewBug

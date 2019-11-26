@@ -21,37 +21,15 @@ class AssignedToDropdown extends Component{
                 })
             }
         })
-        // console.log(assignedUsers)
         return assignedUsers
-        // if(assignedUsers.length === 0){this.setState({value: []})}
-        // else {
-        //     return(this.setState({value: assignedUsers}),()=>console.log(this.state))
-        // }
     }
 
     componentDidMount(){
         this.findAssignedUsers()
-        // let assignedUsers = []
-        // this.context.user_bugs.forEach(user_bug=>{
-        //     if (user_bug.bug_id === this.props.bug.id){
-        //         this.context.users.forEach(user=>{
-        //             if (user.id === user_bug.user_id){
-        //                 assignedUsers.push(user.id)
-        //             }
-        //         })
-        //     }
-        // })
-        // if(assignedUsers.length === 0){this.setState({value: []})}
-        // else {
-        //     this.setState({value: assignedUsers})
-        // }
-        // console.log(assignedUsers)
-        // console.log(this.state.value)
     }
     handleChange = ({ searchQuery, value }) => {
-        // console.log("foo")
-        this.setState({ searchQuery, value },()=> this.context.handleChangeAssignedTo(this.state.value,this.props.bug, this.findAssignedUsers)
-        // ,()=> this.findAssignedUsers()
+        this.setState({ searchQuery, value },
+            ()=> this.context.handleChangeAssignedTo(this.state.value,this.props.bug, this.findAssignedUsers)
         )
         
     }
@@ -59,9 +37,6 @@ class AssignedToDropdown extends Component{
     handleSearchChange = (e, { searchQuery }) => {this.setState({ searchQuery })}
     render(){
         const { searchQuery } = this.state
-
-        // console.log("foo3", value, this.props.bug.name)
-       
         const developerOptions = this.context.users.map((user)=>{
             return {key:user.id, text: user.username, value:user.id, image: user.image}
         })
@@ -83,7 +58,6 @@ class AssignedToDropdown extends Component{
         </div>
         )
     }
-
 }
 
 export default AssignedToDropdown
