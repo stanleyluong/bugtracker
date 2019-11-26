@@ -87,63 +87,7 @@ class App extends React.Component{
     })
   
   }
-  updateUserData=(props)=>{
-    console.log(props)
-    let formattedProps = {
-      user:{
-        username: props.username,
-        password: props.password,
-        firstname: props.firstname,
-        lastname: props.lastname,
-        email: props.email,
-        image: props.avatar,
-        job: props.job
-      },
-      jwt: this.state.jwt
-    }
-    console.log(formattedProps)
-    // let updatedUser = {
-    //   user:{
-    //     username: props.username,
-    //     password: props.password
-    //   }
-    // }
-    fetch(`http://localhost:3000/users/${this.state.userData.user.id}`,{
-      method:'PATCH',
-      headers:{
-        'Content-Type':'application/json',
-        'Accept':'applicatiom/json',
-        'Authorization':`Bearer ${this.state.jwt}`
-      },
-      body: JSON.stringify({
-        "user":{
-          "username": props.username,
-          "firstname": props.firstname,
-          "lastname": props.lastname,
-          "email": props.email,
-          "image": props.avatar,
-          "job": props.job,
-          "password": props.password
-          // "id": this.state.userData.user.id
-        }
-      })
-    }
-    // .then(response=>response.json())
-    // .then(response=>console.log(response))
-    ,()=>this.setState({
-        activeItem: "Assigned Bugs",
-        userData: formattedProps
-      })
-      ).then(this.setState({
-        activeItem: "Assigned Bugs",
-        userData: formattedProps
-      }))
-      .then(console.log)
-    // ,()=>this.handleLogin()
-    // ,()=>{this.setState({
-    //   userData: formattedProps
-    // })}
-  }
+  
 
   handleRenderSignUp=()=>{
     this.setState({activeItem: 'SignUp'})
