@@ -291,7 +291,8 @@ class Provider extends Component {
             }
         })
     }
-    handleChangeAssignedTo=(val, bug)=>{
+    handleChangeAssignedTo=(val, bug, findAssignedUsers)=>{
+        console.log("foo2", val, bug, findAssignedUsers)
         let userbugbugidsthatarethesameasbugbugid = []
         let usersthatareassociatedwithbug = []
         this.state.user_bugs.forEach(user_bug=>{
@@ -317,23 +318,33 @@ class Provider extends Component {
                     'Accept':'application/json',
                     'Authorization':`Bearer ${this.props.jwt}`
                 }
-            })
+            }).then(response=>response.json()).then(response=>this.setState({user_bugs: [response, ...this.state.user_bugs]}))
         }
 
         if(val.length < usersthatareassociatedwithbug.length){
+            
             this.state.user_bugs.forEach(user_bug=>{
                 if(user_bug.bug_id===bug.id && !val.includes(user_bug.user_id)){
-                     fetch (`http://localhost:3000/user_bugs/${user_bug.id}`,{
+                    //search through this.state.user_bugs. if user_bug.bug_id
+                    console.log(user_bug)
+                    console.log(this.state.user_bugs)
+                    let otherUserBugs = this.state.user_bugs.filter(userbug=> {return userbug !== user_bug})
+                    console.log(otherUserBugs)
+                    fetch (`http://localhost:3000/user_bugs/${user_bug.id}`,{
                                     method: 'DELETE',
                                     headers: {
                                         'Content-Type': 'application/json',
                                         'Accept':'application/json',
                                         'Authorization':`Bearer ${this.props.jwt}`
                                     }
-                    }).then(res=>console.log(res))
+                    })
+                    this.setState({user_bugs: otherUserBugs})
                 }
             })
         }
+
+        findAssignedUsers()
+
     }
 
     handleLogin=(user)=>{
