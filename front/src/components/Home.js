@@ -11,9 +11,10 @@ import AssignedBugs from './AssignedBugs'
 import Profile from './Profile'
 import ButtonBar from './ButtonBar'
 import {Context} from './Provider'
+import Statistics from './Statistics'
 class Home extends Component {
   static contextType=Context
-  state={activeItem:"Home"}
+  state={activeItem:"Assigned Bugs"}
 
   handleRender=()=>{
     if(this.state.activeItem==='Login'){return <LoginForm handleLogin={this.props.handleLogin} 
@@ -42,7 +43,9 @@ class Home extends Component {
       <div>
         <Provider jwt={this.props.jwt} userData={this.props.userData}>
         <ButtonBar loggedInNavBarState={this.loggedInNavBarState}/>
-        <h4>{`Hello ${this.props.userData.user.username}`}</h4>
+        <Statistics />
+        {/* <h4>{`Hello ${this.props.userData.user.username} ${console.log(this.context)}`}</h4> */}
+        
         {this.handleRender()}
         </Provider>
       </div>
