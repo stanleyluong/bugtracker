@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import { Context } from './Provider'
-// import AssignedToDropdown from './AssignedToDropdown'
 
 class NewBug extends React.Component {
 
