@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Form, Grid, Header, Image , Message, Button} from 'semantic-ui-react'
+import { Segment, Form, Grid, Header, Image , Message, Button, Icon} from 'semantic-ui-react'
 
 class SignUp extends React.Component {
 
@@ -35,7 +35,7 @@ class SignUp extends React.Component {
                   name='username'
                   value={username}
                   onChange={this.handleChange}
-                  icon='user'
+                  icon='user secret'
                 />
                 <Form.Input
                   placeholder='Password'
@@ -57,7 +57,7 @@ class SignUp extends React.Component {
                   name='lastname'
                   value={lastname}
                   onChange={this.handleChange}
-                  icon='user'
+                  icon='user circle'
                 />
                 <Form.Input
                   placeholder='E-mail'
@@ -75,7 +75,7 @@ class SignUp extends React.Component {
               || !this.state.email
             } 
             color='black' fluid size='large' type='submit'
-            >Submit</Form.Button>
+            ><Icon name='smile'/>Submit</Form.Button>
         </Form>
 
 

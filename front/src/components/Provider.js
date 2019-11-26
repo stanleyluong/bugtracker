@@ -301,10 +301,10 @@ class Provider extends Component {
                 usersthatareassociatedwithbug.push(user_bug)
             }
         })
-        // console.log(val.length)
-        // console.log(val[val.length-1])
-        // console.log(usersthatareassociatedwithbug)
-        // console.log(bug.id)
+        console.log(val.length)
+        console.log(val[val.length-1])
+        console.log(usersthatareassociatedwithbug)
+        console.log(bug.id)
         if (val.length > usersthatareassociatedwithbug.length){
             // console.log("insideif")
             fetch (`http://localhost:3000/user_bugs`,{

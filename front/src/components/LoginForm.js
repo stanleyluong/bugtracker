@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Form, Grid, Header, Message, Segment, Button } from 'semantic-ui-react'
+import { Image, Form, Grid, Header, Message, Segment, Button, Icon } from 'semantic-ui-react'
 import '../css/LoginForm.css'
 
 class LoginForm extends React.Component{
@@ -55,7 +55,7 @@ class LoginForm extends React.Component{
                       />
                     </Form.Group>
                     <Form.Button color='black' fluid size='large' type='submit'>
-                      Login
+                      <Icon name='sign in'/>Login
                     </Form.Button>
                   </Form>
                 </Segment>

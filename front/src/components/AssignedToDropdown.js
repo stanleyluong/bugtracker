@@ -27,7 +27,7 @@ class AssignedToDropdown extends Component{
     componentDidMount(){
         this.findAssignedUsers()
     }
-    handleChange = ({ searchQuery, value }) => {
+    handleChange = (e, { searchQuery, value }) => {
         this.setState({ searchQuery, value },
             ()=> this.context.handleChangeAssignedTo(this.state.value,this.props.bug, this.findAssignedUsers)
         )

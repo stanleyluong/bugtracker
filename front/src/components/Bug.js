@@ -10,6 +10,8 @@ import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
 import ReadMoreReact from 'read-more-react'
 import { Context } from './Provider'
+import { Icon } from 'semantic-ui-react'
+
 class Bug extends React.Component {
 
     static contextType = Context
@@ -174,7 +176,9 @@ class Bug extends React.Component {
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
                 <td width="200px" ><AssignedToDropdown bug={this.props.bug} /></td>
-                <td style={{cursor:"pointer"}}><img onClick={()=>this.context.handleDeleteBug(this.props.bug)} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td>
+                {/* <td style={{cursor:"pointer"}}><img onClick={()=>this.context.handleDeleteBug(this.props.bug)} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td> */}
+                <td style={{cursor:"pointer"}}><Icon onClick={()=>this.context.handleDeleteBug(this.props.bug)} style={{transform: "scale(2)"}} name="trash alternate"/></td>
+
             </tr>
         )
     }
