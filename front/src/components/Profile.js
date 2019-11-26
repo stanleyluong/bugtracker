@@ -2,14 +2,14 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 import { Context } from './Provider'
 class Profile extends React.Component{
-    
+    static contextType = Context
     state={
         // user:{
             username:'',
             firstname:'',
             lastname:'',
-            password:'',
-            passwordconfirmation:"",
+            // password:'',
+            // passwordconfirmation:"",
             email:'',
             avatar: '',
             job: '',
@@ -17,26 +17,28 @@ class Profile extends React.Component{
 
     }
 
-    // componentDidMount(){
-    //     this.setState({
-    //         // user:{
-    //             username: this.props.userData.user.username,
-    //             firstname:this.props.userData.user.firstname,
-    //             lastname:this.props.userData.user.lastname,
-    //             // password:this.props.userData.user.password,
-    //             // passwordconfirmation:this.props.userData.user.password,
-    //             email:this.props.userData.user.email,
-    //             avatar: this.props.userData.user.image,
-    //             job: this.props.userData.user.job
-    //         // }
-    //     })
-    // }
+    componentDidMount(){
+        this.setState({
+            // user:{
+                username: this.context.userData.user.username,
+                firstname:this.context.userData.user.firstname,
+                lastname:this.context.userData.user.lastname,
+                // password:this.props.userData.user.password,
+                // passwordconfirmation:this.props.userData.user.password,
+                email:this.context.userData.user.email,
+                avatar: this.context.userData.user.image,
+                job: this.context.userData.user.job
+            // }
+        })
+    }
 
-    handleSubmit=(event)=>{
-        event.preventDefault()
-        if(this.state.password!==this.state.passwordconfirmation){
-            alert("Password does not match")
-        } else {this.props.updateUserData(this.state)}
+    handleSubmit=()=>{
+        // event.preventDefault()
+        // if(this.state.password!==this.state.passwordconfirmation){
+        //     alert("Password does not match")
+        // } else {
+            this.context.updateUserData(this.state)
+        // }
         console.log(this.state)
     }
       
@@ -58,8 +60,8 @@ class Profile extends React.Component{
                     <Form.Input onChange={this.handleChange} name="email" label='E-mail' placeholder='Enter e-mail' value={this.state.email} />
                     <Form.Input onChange={this.handleChange} name="avatar" label='Avatar' placeholder='Enter avatar URL' value={this.state.avatar}/>
                     <Form.Input onChange={this.handleChange} name="job" label='Job' placeholder='Enter job' value={this.state.job} />
-                    <Form.Input onChange={this.handleChange} name="password" label='Password' placeholder='Enter password' type='password' value={this.state.password} />
-                    <Form.Input onChange={this.handleChange} name="passwordconfirmation" label='Confirm Password' placeholder='Confirm password' type='password' value={this.state.passwordconfirmation}/>
+                    {/* <Form.Input onChange={this.handleChange} name="password" label='Password' placeholder='Enter password' type='password' value={this.state.password} />
+                    <Form.Input onChange={this.handleChange} name="passwordconfirmation" label='Confirm Password' placeholder='Confirm password' type='password' value={this.state.passwordconfirmation}/> */}
                 {/* </Form.Group> */}
 
                 {/* <Form.Group widths={2}> */}

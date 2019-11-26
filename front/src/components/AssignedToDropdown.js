@@ -48,7 +48,7 @@ class AssignedToDropdown extends Component{
         // console.log(assignedUsers)
         // console.log(this.state.value)
     }
-    handleChange = (e, { searchQuery, value }) => {
+    handleChange = ({ searchQuery, value }) => {
         // console.log("foo")
         this.setState({ searchQuery, value },()=> this.context.handleChangeAssignedTo(this.state.value,this.props.bug, this.findAssignedUsers)
         // ,()=> this.findAssignedUsers()
@@ -58,7 +58,7 @@ class AssignedToDropdown extends Component{
 
     handleSearchChange = (e, { searchQuery }) => {this.setState({ searchQuery })}
     render(){
-        const { searchQuery, value } = this.state
+        const { searchQuery } = this.state
 
         // console.log("foo3", value, this.props.bug.name)
        

@@ -369,6 +369,72 @@ class Provider extends Component {
         }})
         .then(response=>{if (response!==undefined){this.loginUser(response)}})
       }
+    
+    updateUserData=(props)=>{
+    console.log(props)
+    let formattedProps = {
+        user:{
+        username: props.username,
+        // password: null,
+        firstname: props.firstname,
+        lastname: props.lastname,
+        email: props.email,
+        image: props.avatar,
+        job: props.job
+        },
+        jwt: this.state.jwt
+    }
+    console.log(formattedProps)
+    // let updatedUser = {
+    //   user:{
+    //     username: props.username,
+    //     password: props.password
+    //   }
+    // }
+    let oldUser = this.state.users.filter(user=>{return user.id===this.state.userData.user.id})
+    console.log(oldUser[0])
+    let otherUsers = this.state.users.filter(user=>{return user.id!==this.state.userData.user.id})
+    console.log(otherUsers)
+    fetch(`http://localhost:3000/users/${this.state.userData.user.id}`,{
+        method:'PATCH',
+        headers:{
+        'Content-Type':'application/json',
+        'Accept':'applicatiom/json',
+        'Authorization':`Bearer ${this.state.jwt}`
+        },
+        body: JSON.stringify({
+        "user":{
+            "username": props.username,
+            "firstname": props.firstname,
+            "lastname": props.lastname,
+            "email": props.email,
+            "image": props.avatar,
+            "job": props.job,
+            // "password": props.password
+            // "id": this.state.userData.user.id
+        }
+        })
+    }
+    )
+    .then(response=>response.json())
+    .then(response=>this.setState({
+            activeItem: "Home",
+            userData: formattedProps,
+            users: [response, ...otherUsers]
+        })
+    )
+    .then(alert("Updated successfully!"))
+        // .then(response=>console.log("response",response))
+        // .then(this.setState({
+        // activeItem: "Assigned Bugs",
+        // userData: formattedProps
+        // }))
+        // .then(console.log)
+    // ,()=>this.handleLogin()
+    // ,()=>{this.setState({
+    //   userData: formattedProps
+    // })}
+    }
 
     render(){
         return(
@@ -386,7 +452,8 @@ class Provider extends Component {
                 handleChangeSubmittedBy: this.handleChangeSubmittedBy,
                 handleChangeLocation: this.handleChangeLocation,
                 handleChangeAssignedTo: this.handleChangeAssignedTo,
-                handleLogin: this.handleLogin
+                handleLogin: this.handleLogin,
+                updateUserData: this.updateUserData
                 }}>
                 {this.props.children}
             </Context.Provider>
