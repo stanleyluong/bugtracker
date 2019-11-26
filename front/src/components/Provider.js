@@ -171,8 +171,18 @@ class Provider extends Component {
     
     handleChangePriority=(e, data, id)=>{
         let option = e.target.innerText
+        console.log(option)
         let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
-        currentbug.status = data.value
+        let otherbugs = this.state.bugs.filter(bug=>{return bug.id !== id})
+        console.log(currentbug[0])
+        currentbug[0].priority = option
+        console.log(data)
+        console.log(currentbug[0].priority)
+        console.log(currentbug[0])
+        
+        // currentbug.status = data.value
+
+
         let url = `http://localhost:3000/bugs/${id}`
         fetch(url, {
             method: 'PATCH', 
@@ -184,7 +194,9 @@ class Provider extends Component {
                 'Accept':'application/json',
                 'Authorization':`Bearer ${this.props.jwt}`
             }
-        });
+        }).then(response=>response.json()).then(response=>this.setState({
+            bugs: [response, ...otherbugs]
+        }))
     }
     
     handleChangeOpened=(date, bug)=>{

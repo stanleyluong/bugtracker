@@ -8,6 +8,8 @@ const priorityOptions = [
       key: 'Low',
       text: 'Low',
       value: 'Low',
+      // style: "background-color: green"
+      color: 'green'
     },
     {
       key: 'Normal',
@@ -48,11 +50,15 @@ class PriorityDropdown extends Component{
     return (
       <Dropdown
         style={handlePriorityColor(priority)}
+        // style={{className: "priorityItem"}}
         placeholder={priority}
         fluid
         selection
         options={priorityOptions}
-        onChange={(e, data)=> this.context.handleChangePriority(e, data, id)}
+        onChange={(e, data)=> {
+          this.context.handleChangePriority(e, data, id)
+          handlePriorityColor(priority)
+        }}
       />
 
       )
