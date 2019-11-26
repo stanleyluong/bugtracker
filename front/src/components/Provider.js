@@ -301,12 +301,12 @@ class Provider extends Component {
                 usersthatareassociatedwithbug.push(user_bug)
             }
         })
-        console.log(val.length)
-        console.log(val[val.length-1])
-        console.log(usersthatareassociatedwithbug)
-        console.log(bug.id)
+        // console.log(val.length)
+        // console.log(val[val.length-1])
+        // console.log(usersthatareassociatedwithbug)
+        // console.log(bug.id)
         if (val.length > usersthatareassociatedwithbug.length){
-            console.log("insideif")
+            // console.log("insideif")
             fetch (`http://localhost:3000/user_bugs`,{
                 method: 'POST',
                 body: JSON.stringify({
@@ -326,10 +326,10 @@ class Provider extends Component {
             this.state.user_bugs.forEach(user_bug=>{
                 if(user_bug.bug_id===bug.id && !val.includes(user_bug.user_id)){
                     //search through this.state.user_bugs. if user_bug.bug_id
-                    console.log(user_bug)
-                    console.log(this.state.user_bugs)
+                    // console.log(user_bug)
+                    // console.log(this.state.user_bugs)
                     let otherUserBugs = this.state.user_bugs.filter(userbug=> {return userbug !== user_bug})
-                    console.log(otherUserBugs)
+                    // console.log(otherUserBugs)
                     fetch (`http://localhost:3000/user_bugs/${user_bug.id}`,{
                                     method: 'DELETE',
                                     headers: {

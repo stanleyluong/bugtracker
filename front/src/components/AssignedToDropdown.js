@@ -21,7 +21,7 @@ class AssignedToDropdown extends Component{
                 })
             }
         })
-        console.log(assignedUsers)
+        // console.log(assignedUsers)
         return assignedUsers
         // if(assignedUsers.length === 0){this.setState({value: []})}
         // else {
@@ -49,8 +49,10 @@ class AssignedToDropdown extends Component{
         // console.log(this.state.value)
     }
     handleChange = (e, { searchQuery, value }) => {
-        console.log("foo")
-        this.setState({ searchQuery, value },()=> this.context.handleChangeAssignedTo(this.state.value,this.props.bug, this.findAssignedUsers),()=> this.findAssignedUsers())
+        // console.log("foo")
+        this.setState({ searchQuery, value },()=> this.context.handleChangeAssignedTo(this.state.value,this.props.bug, this.findAssignedUsers)
+        // ,()=> this.findAssignedUsers()
+        )
         
     }
 
@@ -58,7 +60,7 @@ class AssignedToDropdown extends Component{
     render(){
         const { searchQuery, value } = this.state
 
-        console.log("foo3", value, this.props.bug.name)
+        // console.log("foo3", value, this.props.bug.name)
        
         const developerOptions = this.context.users.map((user)=>{
             return {key:user.id, text: user.username, value:user.id, image: user.image}

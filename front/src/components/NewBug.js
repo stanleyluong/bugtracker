@@ -13,6 +13,7 @@ class NewBug extends React.Component {
         opened: `${new Date()}`,
         project_id: this.props.project.id,
         searchQuery: "",
+        assign_to: []
     }
 
     handleSubmit=(event)=>{
@@ -52,7 +53,7 @@ class NewBug extends React.Component {
                 fluid 
                 size="mini" 
                 name='assign_to' 
-                // value={assign_to} 
+                value={assign_to} 
                 onChange={this.handleChange} 
                 placeholder='....search Devs' 
                 options={developerOptions} 
