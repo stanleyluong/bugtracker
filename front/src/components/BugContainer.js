@@ -7,13 +7,9 @@ import NewBug from './NewBug'
 import { Context } from './Provider'
 
 class BugContainer extends React.Component{
-
     static contextType = Context
-
     state = {searchText:""}
-
     handleChange = (searchText) => {this.setState({searchText})}
-   
     render(){
         console.log(this.props.project)
         const re = new RegExp(this.state.searchText, "i");
@@ -30,7 +26,6 @@ class BugContainer extends React.Component{
             || re.test(bug.submitted_by)
             || re.test(bug.location)
         })
-        
         return(
             <div className="project-container-div">
                 <Search onChange={this.handleChange}/>

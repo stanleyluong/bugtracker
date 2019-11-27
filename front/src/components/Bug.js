@@ -40,8 +40,7 @@ class Bug extends React.Component {
             return <Calendar onChange={this.onChangeOpened}/>
         }
     }
-    handleClosedClick=()=>{this.setState({showClosedCalendar: true})}
-    
+    handleClosedClick=()=>{this.setState({showClosedCalendar: true})} 
     onChangeClosed=(date)=>{
         this.context.handleChangeClosed(date, this.props.bug)
         this.setState({showClosedCalendar: false })
@@ -60,24 +59,28 @@ class Bug extends React.Component {
         this.context.handleChangeDescription(val, this.props.bug)
         this.setState({showEditDescription: false})
     }
-    handleDescriptionClick=()=>{this.setState({showEditDescription: true})}
     handleShowDescription=()=>{
         if (this.state.showEditDescription===false){
             return <ReadMoreReact text={this.props.bug.description} readMoreText={"See More"}/>
         } else{
             return <EdiText
-                value={this.props.bug.description}
+            value={this.props.bug.description}
                 type="textarea"
                 hint="Enter description"
                 editOnViewClick={true}
                 submitOnEnter
                 onSave={this.handleDescription}
                 onCancel={this.handleCancelShowDescription}
-                />
+            />
         }
     }
+    handleDescriptionClick=()=>{this.setState({showEditDescription: true})}
     handleCancelShowDescription=()=>{this.setState({showEditDescription:false})}
 
+    handleName=(val)=>{
+        this.context.handleChangeName(val, this.props.bug)
+        this.setState({showEditName: false})
+    }
     handleShowName=()=>{
         if (this.state.showEditName===false){
             return this.props.bug.name
@@ -92,14 +95,8 @@ class Bug extends React.Component {
                 onCancel={this.handleCancelShowName}
                 />}
     }
-    handleCancelShowName=()=>{
-        this.setState({showEditName: false})
-    }
-    handleName=(val)=>{
-        this.context.handleChangeName(val, this.props.bug)
-        this.setState({showEditName: false})
-    }
     handleNameClick=()=>{this.setState({showEditName: true})}
+    handleCancelShowName=()=>{this.setState({showEditName: false})}
     
     handleSubmittedBy=(val)=>{
         this.context.handleChangeSubmittedBy(val, this.props.bug)
@@ -143,33 +140,18 @@ class Bug extends React.Component {
             onSave={this.handleLocation}
             onCancel={this.handleCanceLocation}
             />
-            
         }
     }
     handleCancelLocation=()=>{this.setState({showLocation:false})}
-
-    findUsers=()=>{
-        let assignedUsers = []
-        this.props.user_bugs.forEach(user_bug=>{
-            if (user_bug.bug_id === this.props.bug.id){
-                this.props.users.forEach(user=>{
-                    if (user.id === user_bug.user_id){
-                        assignedUsers.push(user.id)
-                    }
-                })
-            }
-        })
-        return assignedUsers
-    }
 
     render(){
         return(
             <tr>
                 <td style={{cursor:"pointer"}}onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
-                <td ><PriorityDropdown handleChangePriority={this.props.handleChangePriority} id={this.props.bug.id} priority={this.props.bug.priority}/></td>
-                <td ><div className="grandparent"><ImageUploader  withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
+                <td ><PriorityDropdown id={this.props.bug.id} priority={this.props.bug.priority}/></td>
+                <td ><div className="grandparent"><ImageUploader withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
                 <td ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
-                <td style={{minWidth:"100px"}} onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
+                <td style={{minWidth:"100px", cursor:"pointer"}} onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleOpenedClick()}>{this.handleShowOpened()}</td>
                 <td ><Moment fromNow>{this.props.bug.opened}</Moment></td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>

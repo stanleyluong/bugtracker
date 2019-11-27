@@ -5,8 +5,6 @@ import {Context} from './Provider'
 class BugList extends React.Component {
   static contextType= Context
   render(){
-    console.log(this.context)
-    console.log(this.props.bugs)
     return (
       <table className="ui celled striped padded table">
         <tbody>
@@ -72,15 +70,12 @@ class BugList extends React.Component {
               </h3>
             </th>
           </tr>
-  
-         
           {this.props.bugs.map((bug,key) => {
             return <Bug
             bug={bug} 
             key={key}
               />
           })}
-  
         </tbody>
       </table>
     )

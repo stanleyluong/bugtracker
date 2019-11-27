@@ -9,7 +9,6 @@ class ProjectBar extends Component{
     render(){
     const panes = []
     this.props.projects.map((project)=>{
-        console.log(this.context.bugs)
         let bugs = this.context.bugs.filter(bug=>bug.project_id===project.id)
         return panes.push({menuItem: `${project.title}`, render: ()=> <Tab.Pane>
             <BugContainer
@@ -19,10 +18,10 @@ class ProjectBar extends Component{
             />
             </Tab.Pane>})
     })
-
         return (            
             <div>
-                <Tab  menu={{  tabular: true ,pointing: true, className:"wrapped" }} panes={panes} props={this.props}/>            
+                <Tab  menu={{  tabular: true ,pointing: true, className:"wrapped" }} panes={panes} 
+                />            
             </div>
         )
     }

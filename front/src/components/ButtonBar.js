@@ -3,19 +3,12 @@ import { Menu } from 'semantic-ui-react'
 
 export default class ButtonBar extends Component {
   state = { activeItem: 'Assigned Bugs' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name },()=>{
-    console.log(this.state)
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name },()=>{console.log(this.state)
     console.log(name)
-
     this.props.loggedInNavBarState(this.state.activeItem)})
-
   render() {
     const { activeItem } = this.state
-
     return (
-       
-
       <Menu color='black' inverted>
         <Menu.Item
         icon="home"
@@ -60,7 +53,6 @@ export default class ButtonBar extends Component {
           onClick={this.handleItemClick}
         />
       </Menu>
-       
     )
   }
 }
