@@ -71,22 +71,37 @@ class Provider extends Component {
 
     handleAddAttachment=(pictures, id)=>{
         let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
+        let otherbugs = this.state.bugs.filter(bug=>{return bug.id !== id})
+
         console.log(currentbug[0])
-        console.log(currentbug[0].attachment)
-        pictures.forEach(picture=>{
-            currentbug[0].attachment.push(picture)
-        })
+        console.log(currentbug[0].attachments[0])
+        console.log(pictures[0])
+        // pictures.forEach(picture=>{
+        //     currentbug[0].attachments.push(picture)
+        // })
+        console.log(currentbug[0].attachments)
+        // let formData = new FormData()
+        // formData.append("link",JSON.stringify(pictures[0]))
         fetch(`http://localhost:3000/bugs/${id}`,{
             method: 'PATCH',
-            body: JSON.stringify({
-                attachment: pictures
-            }),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
                 'Authorization':`Bearer ${this.props.jwt}`
-            }
-        }).then(response=>response.json()).then(success=>console.log(success))
+            },
+            body: JSON.stringify({
+                // "bug":{
+                    // "attachments"
+                    attachments:[...currentbug[0].attachments,pictures[0]]
+                // }
+            })
+            // mimeType: 'multipart/form-data',
+            // body: {
+            //     attachments:formData
+            // }
+        }).then(response=> response.json())
+        .then(response=>console.log(response))
+        // .then(response=>response.json()).then(response=>console.log(response))
     }
    
     handleAddProject=(title)=>{
@@ -104,7 +119,6 @@ class Provider extends Component {
                     'Authorization':`Bearer ${this.props.jwt}`
                 }
             }).then(response=>response.json())
-            // .then(response=>console.log(response))
             .then(response=>this.setState({
                 projects: [response, ...this.state.projects]
             }))
@@ -425,7 +439,7 @@ class Provider extends Component {
         method:'PATCH',
         headers:{
         'Content-Type':'application/json',
-        'Accept':'applicatiom/json',
+        'Accept':'application/json',
         'Authorization':`Bearer ${this.state.jwt}`
         },
         body: JSON.stringify({
@@ -436,8 +450,6 @@ class Provider extends Component {
             "email": props.email,
             "image": props.avatar,
             "job": props.job,
-            // "password": props.password
-            // "id": this.state.userData.user.id
         }
         })
     }

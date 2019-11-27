@@ -26,7 +26,7 @@ class BugsController < ApplicationController
 
   # PATCH/PUT /bugs/1
   def update
-    
+    # byebug
     if @bug.update(bug_params)
       render json: @bug
     else
@@ -47,6 +47,6 @@ class BugsController < ApplicationController
 
     # Only allow a trusted parameter    white list" through.
     def bug_params
-      params.require(:bug).permit(:name, :project_id, :priority, :attachment, :status, :description , :opened, :closed, :age, :submitted_by, :location)
+      params.require(:bug).permit(:name, :project_id, :priority, :status, :description , :opened, :closed, :age, :submitted_by, :location, attachments: [])
     end
 end
