@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ProjectSearch from './ProjectSearch'
-import 'semantic-ui-css/semantic.min.css'
 import '../css/BugContainer.css'
 import NewProject from './NewProject'
 import ProjectBar from './ProjectBar'
 import {Context} from './Provider'
 
-class ProjectContainer extends React.Component{
+class ProjectContainer extends Component{
     static contextType=Context
 
     state = {searchText: ""}

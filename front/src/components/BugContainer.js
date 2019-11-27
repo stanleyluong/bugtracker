@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import BugList from './BugList'
 import Search from './Search'
-import 'semantic-ui-css/semantic.min.css'
 import '../css/BugContainer.css'
 import NewBug from './NewBug'
 import { Context } from './Provider'
-
-class BugContainer extends React.Component{
+class BugContainer extends Component{
     static contextType = Context
     state = {searchText:""}
     handleChange = (searchText) => {this.setState({searchText})}

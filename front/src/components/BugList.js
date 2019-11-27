@@ -1,8 +1,7 @@
-import React from 'react'
-import 'semantic-ui-css/semantic.min.css'
+import React, { Component } from 'react'
 import Bug from './Bug'
 import {Context} from './Provider'
-class BugList extends React.Component {
+class BugList extends Component {
   static contextType= Context
   render(){
     return (

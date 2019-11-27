@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Segment, Form, Grid, Header, Image , Message, Button, Icon} from 'semantic-ui-react'
 
-class SignUp extends React.Component {
+class SignUp extends Component {
 
   state = { 
     username: '', 

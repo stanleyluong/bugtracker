@@ -18,17 +18,7 @@ class AssignedBugs extends Component{
             }
         }) 
         console.log("myBugs", myBugs)
-        // let handleGreeting=()=>{
-        //     if(myBugs.length===0){
-        //         return <h1>Hello {`${this.context.userData.user.username}`}. You have no assigned bugs!</h1>
-        //     } else if(myBugs.length===1){
-        //     return <h1>Hello {`${this.context.userData.user.username}`}. You have {`${myBugs.length}`} assigned bug!</h1>
-        //     } else {
-        //         return <h1>Hello {`${this.context.userData.user.username}`}. You have {`${myBugs.length}`} assigned bugs!</h1>
-        //     }
-        // }
         return(<div>
-                {/* {handleGreeting()} */}
                 <BugList 
                 bugs={myBugs}
                 jwt={this.props.jwt}

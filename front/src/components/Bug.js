@@ -1,21 +1,17 @@
-import React from 'react'
+import React, { Component } from 'react'
 import StatusDropdown from './StatusDropdown'
 import PriorityDropdown from './PriorityDropdown'
 import Calendar from 'react-calendar'
 import Moment from 'react-moment'
 import EdiText from 'react-editext'
 import AssignedToDropdown from './AssignedToDropdown'
-import 'semantic-ui-css/semantic.min.css'
 import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
 import ReadMoreReact from 'read-more-react'
 import { Context } from './Provider'
 import { Icon } from 'semantic-ui-react'
-
-class Bug extends React.Component {
-
+class Bug extends Component {
     static contextType = Context
-
     state = {
         selectStatus: false,
         showOpenedCalender: false,
@@ -27,7 +23,26 @@ class Bug extends React.Component {
         showLocation: false,
         pictures: []
     }
-
+    handleName=(val)=>{
+        this.context.handleChangeName(val, this.props.bug)
+        this.setState({showEditName: false})
+    }
+    handleShowName=()=>{
+        if (this.state.showEditName===false){
+            return this.props.bug.name
+        } else { 
+            return <EdiText 
+                value={this.props.bug.name}
+                type="textarea"
+                hint="Enter name"
+                editOnViewClick={true}
+                submitOnEnter
+                onSave={this.handleName}
+                onCancel={this.handleCancelShowName}
+                />}
+    }
+    handleNameClick=()=>{this.setState({showEditName: true})}
+    handleCancelShowName=()=>{this.setState({showEditName: false})}
     handleOpenedClick=()=>{this.setState({showOpenedCalender: true})}
     onChangeOpened=(date)=>{
         this.context.handleChangeOpened(date, this.props.bug)
@@ -54,7 +69,6 @@ class Bug extends React.Component {
             return <Calendar onChange={this.onChangeClosed}/>
         }
     }
-    
     handleDescription=(val)=>{
         this.context.handleChangeDescription(val, this.props.bug)
         this.setState({showEditDescription: false})
@@ -76,27 +90,6 @@ class Bug extends React.Component {
     }
     handleDescriptionClick=()=>{this.setState({showEditDescription: true})}
     handleCancelShowDescription=()=>{this.setState({showEditDescription:false})}
-
-    handleName=(val)=>{
-        this.context.handleChangeName(val, this.props.bug)
-        this.setState({showEditName: false})
-    }
-    handleShowName=()=>{
-        if (this.state.showEditName===false){
-            return this.props.bug.name
-        } else { 
-            return <EdiText 
-                value={this.props.bug.name}
-                type="textarea"
-                hint="Enter name"
-                editOnViewClick={true}
-                submitOnEnter
-                onSave={this.handleName}
-                onCancel={this.handleCancelShowName}
-                />}
-    }
-    handleNameClick=()=>{this.setState({showEditName: true})}
-    handleCancelShowName=()=>{this.setState({showEditName: false})}
     
     handleSubmittedBy=(val)=>{
         this.context.handleChangeSubmittedBy(val, this.props.bug)
@@ -119,7 +112,6 @@ class Bug extends React.Component {
         }
     }
     handleCancelSubmittedBy=()=>{this.setState({showEditSubmittedBy:false})}
-    
     handleLocation=(val)=>{
         this.context.handleChangeLocation(val, this.props.bug)
         this.setState({showLocation: false})
@@ -143,7 +135,6 @@ class Bug extends React.Component {
         }
     }
     handleCancelLocation=()=>{this.setState({showLocation:false})}
-
     render(){
         return(
             <tr>
@@ -158,9 +149,7 @@ class Bug extends React.Component {
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
                 <td width="200px" ><AssignedToDropdown bug={this.props.bug} /></td>
-                {/* <td style={{cursor:"pointer"}}><img onClick={()=>this.context.handleDeleteBug(this.props.bug)} style={{width: "30px"}}src="https://image.flaticon.com/icons/svg/54/54195.svg" alt="oops"/></td> */}
                 <td style={{cursor:"pointer"}}><Icon onClick={()=>this.context.handleDeleteBug(this.props.bug)} style={{transform: "scale(2)"}} name="trash alternate"/></td>
-
             </tr>
         )
     }

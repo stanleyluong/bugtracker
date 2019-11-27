@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Image, Form, Grid, Header, Message, Segment, Button, Icon } from 'semantic-ui-react'
 import '../css/LoginForm.css'
 
-class LoginForm extends React.Component{
+class LoginForm extends Component{
 
   state={ 
       username:'',
