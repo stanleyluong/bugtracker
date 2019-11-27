@@ -17,24 +17,16 @@ class Home extends Component {
   state={activeItem:"Assigned Bugs"}
 
   handleRender=()=>{
-    if(this.state.activeItem==='Login'){return <LoginForm handleLogin={this.props.handleLogin} 
-    handleRenderSignUp={this.handleRenderSignUp}
-    />}
-    if(this.state.activeItem==='SignUp'){return <SignUp handleRenderLogin={this.handleRenderLogin} handleSignedUpandLoggedin={this.handleSignedUpandLoggedin}/>}
-    // if(this.state.activeItem==='Home'){return <Home/> }
+    if(this.state.activeItem==='Assigned Bugs'){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
+    if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
     if(this.state.activeItem==='About'){return <About/> }
     if(this.state.activeItem==='Contact'){return <Contact/>}
-    if(this.state.activeItem==='Add Bug'){return <NewBug jwt={this.state.jwt}/>}
-    if(this.state.activeItem==='Projects'){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
-    if(this.state.activeItem==='Sign Out'){this.props.handleSignOut()}
-    if(this.state.activeItem==='Assigned Bugs'){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
     if(this.state.activeItem==='Profile'){return <Profile updateUserData={this.updateUserData} userData={this.state.userData}/>}
+    if(this.state.activeItem==='Sign Out'){this.props.handleSignOut()}
   }
 
   loggedInNavBarState=(item)=>{
-    this.setState({
-      activeItem: item
-    },()=>{console.log(this.state.activeItem)})
+    this.setState({activeItem: item},()=>{console.log(this.state.activeItem)})
     console.log(item)
   }
 
@@ -44,8 +36,6 @@ class Home extends Component {
         <Provider jwt={this.props.jwt} userData={this.props.userData}>
         <ButtonBar loggedInNavBarState={this.loggedInNavBarState}/>
         <Statistics />
-        {/* <h4>{`Hello ${this.props.userData.user.username} ${console.log(this.context)}`}</h4> */}
-        
         {this.handleRender()}
         </Provider>
       </div>

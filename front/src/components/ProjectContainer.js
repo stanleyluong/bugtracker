@@ -24,25 +24,7 @@ class ProjectContainer extends React.Component{
                 <ProjectSearch onChange={this.handleChange}/>
                 <NewProject /> 
                 <ProjectBar
-                    jwt={this.state.jwt}
-                    bugs={this.state.bugs} 
-                    user_bugs={this.state.user_bugs}
-                    users={this.state.users}
                     projects={projects}
-                    user_projects={this.state.user_projects}
-                    // addBug={this.addBug}
-                    handleChangeStatus={this.handleChangeStatus}
-                    handleChangePriority={this.handleChangePriority}
-                    handleChangeOpened={this.handleChangeOpened}
-                    handleChangeClosed={this.handleChangeClosed}
-                    handleChangeProject={this.handleChangeProject}
-                    handleChangeDescription={this.handleChangeDescription}
-                    handleChangeName={this.handleChangeName}
-                    handleChangeSubmittedBy={this.handleChangeSubmittedBy}
-                    handleChangeLocation={this.handleChangeLocation}
-                    handleChangeAssignedTo={this.handleChangeAssignedTo}
-                    handleProjectTitle={this.handleProjectTitle}
-                    // handleDeleteBug={this.handleDeleteBug}
                 /> 
                 
             </div>

@@ -194,7 +194,9 @@ class Provider extends Component {
                 'Accept':'application/json',
                 'Authorization':`Bearer ${this.props.jwt}`
             }
-        }).then(response=>response.json()).then(response=>this.setState({
+        })
+        .then(response=>response.json())
+        .then(response=>this.setState({
             bugs: [response, ...otherbugs]
         }))
     }
