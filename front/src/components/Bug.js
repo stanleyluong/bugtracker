@@ -47,7 +47,7 @@ class Bug extends React.Component {
     }
     handleShowClosed=()=>{
         if (this.state.showClosedCalendar === false){
-            if(this.props.bug.closed===""){return ""}
+            if(this.props.bug.closed===null){return ""}
             else{ return <Moment format="MM/DD/YYYY">{this.props.bug.closed}</Moment>}
            
         } else {
