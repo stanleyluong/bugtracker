@@ -20,12 +20,17 @@ class BugList extends Component {
             </th>
             <th>
               <h3 className="ui center aligned header">
-                Attachment
+                Attachments
               </h3>
             </th>
             <th>
               <h3 className="ui center aligned header">
                 Status
+              </h3>
+            </th>
+            <th>
+              <h3 className="ui center aligned header">
+                Assigned To
               </h3>
             </th>
             <th>
@@ -56,11 +61,6 @@ class BugList extends Component {
             <th>
               <h3 className="ui center aligned header">
                 Location
-              </h3>
-            </th>
-            <th>
-              <h3 className="ui center aligned header">
-                Assigned To
               </h3>
             </th>
             <th>
