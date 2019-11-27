@@ -18,14 +18,14 @@ ActiveRecord::Schema.define(version: 2019_11_01_204216) do
   create_table "bugs", force: :cascade do |t|
     t.string "name"
     t.string "priority"
-    t.string "submitted_by"
-    t.string "attachment"
+    t.string "attachments", default: [], array: true
     t.string "status"
     t.string "description"
-    t.string "location"
     t.string "opened"
-    t.string "closed"
     t.string "age"
+    t.string "closed"
+    t.string "submitted_by"
+    t.string "location"
     t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

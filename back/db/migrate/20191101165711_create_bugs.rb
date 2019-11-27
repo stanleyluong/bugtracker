@@ -3,14 +3,14 @@ class CreateBugs < ActiveRecord::Migration[5.2]
     create_table :bugs do |t|
       t.string :name
       t.string :priority
-      t.string :submitted_by
-      t.string :attachment
+      t.string :attachments, array: true, default: []
       t.string :status
       t.string :description
-      t.string :location
       t.string :opened
-      t.string :closed
       t.string :age
+      t.string :closed
+      t.string :submitted_by
+      t.string :location
       t.integer :project_id
       t.timestamps
     end

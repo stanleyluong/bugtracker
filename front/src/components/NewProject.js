@@ -8,20 +8,26 @@ class NewProject extends Component{
         title: ''
     }
 
-    handleSubmit=(event)=>{
-        event.preventDefault()
-        if(this.state.title.length===0){alert("Enter project name")}
-        let projectNames = []
+    handleSubmit=()=>{
+        // event.preventDefault()
+        let projectTitles = []
         this.context.projects.forEach(project=>{
-            projectNames.push(project.name)
+            projectTitles.push(project.title)
         })
-        if(projectNames.includes(this.state.title)){
+        // console.log(projectTitles)
+        // console.log(this.context.projects)
+        if(this.state.title.length===0){alert("Enter project name")}
+        if(projectTitles.includes(this.state.title)===true){
             alert("Project with this name already exists")
-        } else {
-            this.context.handleAddProject(this.state)
-            this.setState({title:""})
-        }        
-        console.log(this.state)
+            // console.log(projectTitles.includes(this.state.title))
+        } 
+        if(this.state.title.length!==0 && projectTitles.includes(this.state.title)===false){
+            // console.log(projectTitles.includes(this.state.title))
+            this.context.handleAddProject(this.state.title)
+            
+        }
+        // console.log(this.state)
+        return this.setState({title:""})        
     }
       
     handleChange = (e, { name, value }) => this.setState({ [name]: value })

@@ -31,7 +31,7 @@ end
     Bug.create(
         name:Faker::Games::LeagueOfLegends.rank,
         priority:["Low","Medium","High","Critical"].sample,
-        attachment:Faker::Avatar.image(size: "75x75"),
+        # attachment:Faker::Avatar.image(size: "75x75"),
         status:["Can't reproduce","In progress","Complete","Blocked","Won't fix","Duplicate"].sample,
         description:Faker::Games::LeagueOfLegends.quote + Faker::Games::LeagueOfLegends.quote + Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote,
         opened:Faker::Date.backward(days: 100),
