@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
 import { Context } from './Provider'
-class Profile extends React.Component{
+class Profile extends Component{
     static contextType = Context
     state={
         // user:{

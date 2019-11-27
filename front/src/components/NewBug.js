@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import { Context } from './Provider'
 
-class NewBug extends React.Component {
+class NewBug extends Component {
 
     static contextType=Context
 

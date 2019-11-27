@@ -1,5 +1,4 @@
-import React from 'react'
-import 'semantic-ui-css/semantic.min.css'
+import React, { Component } from 'react'
 import '../css/Project.css'
 import BugContainer from './BugContainer'
 class Project extends React.Component {
