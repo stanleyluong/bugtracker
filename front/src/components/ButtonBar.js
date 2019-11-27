@@ -9,7 +9,7 @@ export default class ButtonBar extends Component {
   render() {
     const { activeItem } = this.state
     return (
-      <Menu color='black' inverted>
+      <Menu color='black' inverted widths={7}>
         <Menu.Item
         icon="home"
         name='Home'

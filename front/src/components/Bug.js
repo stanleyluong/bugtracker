@@ -9,7 +9,7 @@ import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
 import ReadMoreReact from 'read-more-react'
 import { Context } from './Provider'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Image } from 'semantic-ui-react'
 class Bug extends Component {
     static contextType = Context
     state = {
@@ -137,12 +137,8 @@ class Bug extends Component {
     handleCancelLocation=()=>{this.setState({showLocation:false})}
     onDrop=(picture)=>{
         console.log(picture[0])
-        // this.setState({
-        //     pictures: this.state.pictures.concat(picture[0]),
-        // });
         let formData = new FormData()
         let clientId = '21b623c50654eda'
-        let link
         formData.append("image", picture[0])
         fetch(`https://api.imgur.com/3/image`,{
             method: 'POST',
@@ -162,7 +158,7 @@ class Bug extends Component {
             <tr>
                 <td style={{cursor:"pointer"}}onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
                 <td ><PriorityDropdown id={this.props.bug.id} priority={this.props.bug.priority}/></td>
-                <td ><div className="grandparent"><ImageUploader withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.jpeg', '.gif', '.png']} maxFileSize={20000000}/></div></td>
+                <td ><div className="grandparent"><ImageUploader withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.jpeg', '.gif', '.png']} maxFileSize={20000000}/> </div> </td>
                 <td ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
                 <td width="200px" ><AssignedToDropdown bug={this.props.bug} /></td>
                 <td style={{minWidth:"100px", cursor:"pointer"}} onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
