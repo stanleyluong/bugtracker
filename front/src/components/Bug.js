@@ -142,13 +142,13 @@ class Bug extends Component {
                 <td ><PriorityDropdown id={this.props.bug.id} priority={this.props.bug.priority}/></td>
                 <td ><div className="grandparent"><ImageUploader withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880}/></div></td>
                 <td ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
+                <td width="200px" ><AssignedToDropdown bug={this.props.bug} /></td>
                 <td style={{minWidth:"100px", cursor:"pointer"}} onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleOpenedClick()}>{this.handleShowOpened()}</td>
                 <td ><Moment fromNow>{this.props.bug.opened}</Moment></td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
-                <td width="200px" ><AssignedToDropdown bug={this.props.bug} /></td>
                 <td style={{cursor:"pointer"}}><Icon onClick={()=>this.context.handleDeleteBug(this.props.bug)} style={{transform: "scale(2)"}} name="trash alternate"/></td>
             </tr>
         )
