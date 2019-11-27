@@ -135,6 +135,24 @@ class Bug extends Component {
         }
     }
     handleCancelLocation=()=>{this.setState({showLocation:false})}
+    onDrop=(picture)=>{
+        console.log(picture[0])
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+        let formData = new FormData()
+        let clientId = '21b623c50654eda'
+        formData.append("image", picture[0])
+        fetch(`https://api.imgur.com/3/image`,{
+            method: 'POST',
+            headers:{
+                'Authorization': 'Client-ID '+ clientId,
+                'Accept':'application/json'
+            },
+            mimeType: 'multipart/form-data',
+            body: formData
+        }).then(response=>response.json()).then(success=>console.log(success))
+    }
     render(){
         return(
             <tr>
