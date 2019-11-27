@@ -68,14 +68,34 @@ class Provider extends Component {
             })
         })
     }
+
+    handleAddAttachment=(pictures, id)=>{
+        let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
+        console.log(currentbug[0])
+        console.log(currentbug[0].attachment)
+        pictures.forEach(picture=>{
+            currentbug[0].attachment.push(picture)
+        })
+        fetch(`http://localhost:3000/bugs/${id}`,{
+            method: 'PATCH',
+            body: JSON.stringify({
+                attachment: pictures
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${this.props.jwt}`
+            }
+        }).then(response=>response.json()).then(success=>console.log(success))
+    }
    
-    handleAddProject=(project)=>{
-        console.log(project)
+    handleAddProject=(title)=>{
+        console.log(title)
             fetch('http://localhost:3000/projects',{
                 method:'POST',
                 body: JSON.stringify({
                     project:{
-                      title: project.title
+                      title: title
                     }
                 }),
                 headers: {
@@ -84,6 +104,7 @@ class Provider extends Component {
                     'Authorization':`Bearer ${this.props.jwt}`
                 }
             }).then(response=>response.json())
+            // .then(response=>console.log(response))
             .then(response=>this.setState({
                 projects: [response, ...this.state.projects]
             }))
@@ -151,10 +172,13 @@ class Provider extends Component {
     }
 
     handleChangeStatus=(e, data, id)=>{
-        console.log('in project container finally wtf', e, data, id)
+        // console.log('in project container finally wtf', e, data, id)
         let option = e.target.innerText
         let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
+        // console.log(currentbug)
         currentbug.status = data.value
+        // console.log(currentbug.status)
+        // console.log(data.value)
         let url = `http://localhost:3000/bugs/${id}`
         fetch(url, {
             method: 'PATCH', 
@@ -434,6 +458,7 @@ class Provider extends Component {
                 ...this.state,
                 handleAddBug: this.handleAddBug,
                 handleAddProject: this.handleAddProject,
+                handleAddAttachment: this.handleAddAttachment,
                 handleDeleteBug: this.handleDeleteBug,
                 handleChangeStatus: this.handleChangeStatus,
                 handleChangePriority: this.handleChangePriority,
