@@ -49,7 +49,7 @@ class Profile extends Component{
         return(
            
             <div>
-            <img src={this.context.userData.user.image} alt="oops" />
+            <img src={this.context.userData.user.image} alt="Upload an avatar" />
             
              <Form onSubmit={this.handleSubmit}>
                 <Form.Group unstackable widths={3}>

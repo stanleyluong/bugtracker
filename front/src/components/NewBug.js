@@ -43,7 +43,7 @@ class NewBug extends Component {
       return(
             <Form onSubmit={this.handleSubmit}>
             {/* //     <Form.Group style={{marginTop: "10px"}} widths={3}>
-            //     <Form.Input size="mini" name='name' value={name} onChange={this.handleChange}  placeholder='Bug Name' />
+                <Form.Input size="mini" name='name' value={name} onChange={this.handleChange}  placeholder='Bug Name' />
             //     <Form.Input size="mini" name='description' value={description} onChange={this.handleChange}  placeholder='Description' />
             //     <Form.Input size="mini" name='submitted_by' value={submitted_by} onChange={this.handleChange}  placeholder='Submitted By' />
             //     <Form.Select  */}
@@ -62,7 +62,7 @@ class NewBug extends Component {
             //     closeOnBlur 
             //     onSearchChange={this.handleSearchChange}/> */}
             {/* //     </Form.Group> */}
-                <Button style={{margin:"10px", float:"left"}} size="medium" type='submit'><Icon name="plus square outline"/>Bug</Button>
+                <Button style={{margin:"10px", float:"left"}} size="mini" type='submit'><Icon name="plus square outline"/></Button>
             </Form>
       )
   }

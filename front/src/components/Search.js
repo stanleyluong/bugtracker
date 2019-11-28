@@ -9,7 +9,7 @@ const Search = (props) => {
   }
 
   return (
-    <div style={{float:"left"}} className="ui mini icon input">
+    <div style={{float:"left", top:"10px"}} className="ui mini icon input">
       <input
       
         type="text"

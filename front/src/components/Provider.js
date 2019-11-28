@@ -10,7 +10,8 @@ class Provider extends Component {
         user_bugs: [],
         user_projects: [],
         jwt: this.props.jwt,
-        userData:this.props.userData
+        userData:this.props.userData,
+        currentProject:""
     }
 
     componentDidMount(){
@@ -106,13 +107,13 @@ class Provider extends Component {
         // .then(response=>response.json()).then(response=>console.log(response))
     }
    
-    handleAddProject=()=>{
+    handleAddProject=(title)=>{
         console.log()
             fetch('http://localhost:3000/projects',{
                 method:'POST',
                 body: JSON.stringify({
                     project:{
-                      title: <Moment>{`${new Date()}`}</Moment>
+                      title: title
                     }
                 }),
                 headers: {
@@ -468,6 +469,10 @@ class Provider extends Component {
     .then(alert("Updated successfully!"))
     }
 
+    // setCurrentProject=(id)=>{
+    //     console.log(id)
+    //     this.setState({currentProject:id},()=>console.log('state after setstate',this.state.currentProject))
+    // }
     render(){
         return(
             <Context.Provider value={{
@@ -486,7 +491,8 @@ class Provider extends Component {
                 handleChangeLocation: this.handleChangeLocation,
                 handleChangeAssignedTo: this.handleChangeAssignedTo,
                 handleLogin: this.handleLogin,
-                updateUserData: this.updateUserData
+                updateUserData: this.updateUserData,
+                // setCurrentProject: this.setCurrentProject
                 }}>
                 {this.props.children}
             </Context.Provider>

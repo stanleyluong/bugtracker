@@ -34,6 +34,7 @@ class ProjectContainer extends Component{
             <div className="project-container-div">
                 {/* <ProjectSearch onChange={this.handleChange}/> */}
                 <NewProject /> 
+                
                 <ProjectBar
                     // projects={projects}
                     // bugs={bugs}

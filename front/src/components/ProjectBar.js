@@ -6,11 +6,18 @@ import {Context} from './Provider'
 
 class ProjectBar extends Component{
     static contextType=Context
+    state = {}
+
+    handleChange = (e, data) => {
+        this.setState(data)
+        console.log(data.activeIndex)
+    }
+
     render(){
     const panes = []
     this.context.projects.map((project)=>{
-        console.log(typeof(project.title))
-        if(typeof(project.title!=="Object")){
+        // console.log(typeof(project.title))
+        // if(typeof(project.title!=="Object")){
             let bugs = this.context.bugs.filter(bug=>bug.project_id===project.id)
             return panes.push({menuItem: `${project.title}`, render: ()=> <Tab.Pane>
             <BugContainer
@@ -18,14 +25,15 @@ class ProjectBar extends Component{
             project={project}
             bugs={bugs} 
             />
+            
             </Tab.Pane>})
-        } else {
-            return
-        }
+        // } else {
+            // return
+        // }
     })
         return (            
             <div>
-                <Tab  menu={{  pointing: true, className:"wrapped" }} panes={panes} 
+                <Tab  menu={{ secondary: true, className:"wrapped" }} grid={{ paneWidth: 14, tabWidth: 2 }} panes={panes} onTabChange={this.handleChange}
                 />            
             </div>
         )
