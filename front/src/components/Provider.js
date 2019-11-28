@@ -69,19 +69,21 @@ class Provider extends Component {
         })
     }
 
-    handleAddAttachment=(pictures, id)=>{
-        let currentbug = this.state.bugs.filter(bug=>{return bug.id === id})
+    handleAddAttachment=(picture, id)=>{
+        let currentbug = this.state.bugs.find(bug=>{return bug.id === id})
         let otherbugs = this.state.bugs.filter(bug=>{return bug.id !== id})
-
-        console.log(currentbug[0])
-        console.log(currentbug[0].attachments[0])
-        console.log(pictures[0])
+        // currentbug.attachments = [picture, ...currentbug.attachments]
+        console.log(currentbug.attachments)
+        console.log(picture)
+        // console.log(currentbug[0].attachments[0])
+        // console.log(pictures[0])
         // pictures.forEach(picture=>{
         //     currentbug[0].attachments.push(picture)
         // })
-        console.log(currentbug[0].attachments)
+        // console.log(currentbug[0].attachments)
         // let formData = new FormData()
         // formData.append("link",JSON.stringify(pictures[0]))
+        
         fetch(`http://localhost:3000/bugs/${id}`,{
             method: 'PATCH',
             headers: {
@@ -92,7 +94,7 @@ class Provider extends Component {
             body: JSON.stringify({
                 // "bug":{
                     // "attachments"
-                    attachments:[...currentbug[0].attachments,pictures[0]]
+                    attachments:[picture, ...currentbug.attachments]
                 // }
             })
             // mimeType: 'multipart/form-data',
@@ -100,7 +102,7 @@ class Provider extends Component {
             //     attachments:formData
             // }
         }).then(response=> response.json())
-        .then(response=>console.log(response))
+        .then(response=>this.setState({bugs:[response, ...otherbugs]}))
         // .then(response=>response.json()).then(response=>console.log(response))
     }
    

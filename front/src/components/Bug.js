@@ -21,7 +21,7 @@ class Bug extends Component {
         showEditDescription: false,
         showEditSubmittedBy: false,
         showLocation: false,
-        pictures: []
+        // pictures: []
     }
     handleName=(val)=>{
         this.context.handleChangeName(val, this.props.bug)
@@ -135,30 +135,61 @@ class Bug extends Component {
         }
     }
     handleCancelLocation=()=>{this.setState({showLocation:false})}
-    onDrop=(picture)=>{
-        console.log(picture[0])
-        let formData = new FormData()
+    onDrop=(pictures)=>{
+        // console.log(picture[0])
         let clientId = '21b623c50654eda'
-        formData.append("image", picture[0])
-        fetch(`https://api.imgur.com/3/image`,{
-            method: 'POST',
-            headers:{
-                'Authorization': 'Client-ID '+ clientId,
-                'Accept':'application/json'
-            },
-            mimeType: 'multipart/form-data',
-            body: formData
-        }).then(response=>response.json())
-        // .then(success=>console.log(success.data.link))
-        .then(success=> this.context.handleAddAttachment(this.state.pictures.concat(success.data.link),this.props.bug.id))
+        
+        pictures.forEach(picture=>{
+            let formData = new FormData()
+            formData.append("image", picture)
+            
+            fetch(`https://api.imgur.com/3/image`,{
+                method: 'POST',
+                headers:{
+                    'Authorization': 'Client-ID '+ clientId,
+                    'Accept':'application/json'
+                },
+                mimeType: 'multipart/form-data',
+                body: formData
+            }).then(response=>response.json())
+            // .then(success=>console.log(success.data.link))
+            .then(success=> this.context.handleAddAttachment(success.data.link,this.props.bug.id))
+        })
         // console.log(link)
+        
+        
+    }
+    handleShowAttachments=()=>{
+        return this.props.bug.attachments.map(image=>{
+            return <img onClick={()=>this.handleAttachmentClick(image)} className="attachment" key={image} src={image} alt="oops"/>
+        })
+    }
+    handleAttachmentClick=(image)=>{
+        console.log("clicked icon", image)
+        // return<div>
+
+        // </div> 
     }
     render(){
-        return(
+        return( 
             <tr>
                 <td style={{cursor:"pointer"}}onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
                 <td ><PriorityDropdown id={this.props.bug.id} priority={this.props.bug.priority}/></td>
-                <td ><div className="grandparent"><ImageUploader withLabel={false} withPreview={true} withIcon={false} buttonText='Upload' onChange={this.onDrop} imgExtension={['.jpg', '.jpeg', '.gif', '.png']} maxFileSize={20000000}/> </div> </td>
+                <td ><div className="grandparent">
+                    <ImageUploader 
+                    buttonStyles={{height:"100%"}}
+                    // fileContainerStyle={{width:"100%"}}
+                    withLabel={false} 
+                    // withPreview={true} 
+                    withIcon={false} 
+                    buttonText='Upload' 
+                    onChange={this.onDrop} 
+                    imgExtension={['.jpg', '.jpeg', '.gif', '.png']} 
+                    maxFileSize={20000000}/> 
+                    {this.handleShowAttachments()}
+                    </div> 
+
+                    </td>
                 <td ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
                 <td width="200px" ><AssignedToDropdown bug={this.props.bug} /></td>
                 <td style={{minWidth:"100px", cursor:"pointer"}} onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>

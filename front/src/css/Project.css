@@ -1,19 +1,26 @@
 .grandparent {
     /* width: 9em; */
-    /* text-align: center; */
-    margin: 0 auto;
+    text-align: center;
+    /* margin: 0 auto; */
 }
 
 .fileContainer{
-    display: inline-flex;
+    display: inline-block;
     /* text-align: center; */
+    padding: 0
+
+}
+
+.attachment{
+    width: 25%;
+    padding: 1px
 
 }
 
 .fileContainer .uploadPictureContainer {
-    padding: 1%;
+    /* padding: 1%;
     margin: 1%;
-    display: inline-table;
+    display: inline-table; */
     /* text-align: center; */
 
 }
