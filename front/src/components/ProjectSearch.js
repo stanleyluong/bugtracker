@@ -8,7 +8,7 @@ const ProjectSearch = (props) => {
   }
 
   return (
-    <div className="ui mini fluid icon input">
+    <div className="ui mini icon input">
       <input
         type="text"
         placeholder={"Search Projects"}

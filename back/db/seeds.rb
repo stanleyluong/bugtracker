@@ -31,7 +31,7 @@ end
     Bug.create(
         name:Faker::Games::LeagueOfLegends.rank,
         priority:["Low","Medium","High","Critical"].sample,
-        attachments:[Faker::Avatar.image(size: "75x75")],
+        attachments:[],
         status:["Can't reproduce","In progress","Complete","Blocked","Won't fix","Duplicate"].sample,
         description:Faker::Games::LeagueOfLegends.quote + Faker::Games::LeagueOfLegends.quote + Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote,
         opened:Faker::Date.backward(days: 100),
@@ -54,10 +54,10 @@ UserBug.create(user_id: 8, bug_id: 8)
 UserBug.create(user_id: 9, bug_id: 9)
 UserBug.create(user_id: 10, bug_id: 10)
 
-20.times do
-    UserProject.create(
-        user_id: User.all.sample.id,
-        project_id: Project.all.sample.id
-    )
-end 
+# 20.times do
+#     UserProject.create(
+#         user_id: User.all.sample.id,
+#         project_id: Project.all.sample.id
+#     )
+# end 
 

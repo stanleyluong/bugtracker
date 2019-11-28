@@ -8,19 +8,24 @@ class ProjectBar extends Component{
     static contextType=Context
     render(){
     const panes = []
-    this.props.projects.map((project)=>{
-        let bugs = this.context.bugs.filter(bug=>bug.project_id===project.id)
-        return panes.push({menuItem: `${project.title}`, render: ()=> <Tab.Pane>
+    this.context.projects.map((project)=>{
+        console.log(typeof(project.title))
+        if(typeof(project.title!=="Object")){
+            let bugs = this.context.bugs.filter(bug=>bug.project_id===project.id)
+            return panes.push({menuItem: `${project.title}`, render: ()=> <Tab.Pane>
             <BugContainer
             key={project.id}
             project={project}
             bugs={bugs} 
             />
             </Tab.Pane>})
+        } else {
+            return
+        }
     })
         return (            
             <div>
-                <Tab  menu={{  tabular: true ,pointing: true, className:"wrapped" }} panes={panes} 
+                <Tab  menu={{  pointing: true, className:"wrapped" }} panes={panes} 
                 />            
             </div>
         )
