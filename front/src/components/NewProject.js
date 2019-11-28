@@ -4,9 +4,9 @@ import { Context } from './Provider'
 
 class NewProject extends Component{
     static contextType = Context
-    // state={
-    //     title: ''
-    // }
+    state={
+        title: ''
+    }
 
     handleSubmit=()=>{
         // let projectTitles = []
@@ -19,21 +19,21 @@ class NewProject extends Component{
         // } 
         // if(this.state.title.length!==0 && projectTitles.includes(this.state.title)===false){
             this.context.handleAddProject(
-                // this.state.title
+                this.state.title
                 )
         // }
-        // return this.setState({title:""})        
+        return this.setState({title:""})        
     }
       
-    // handleChange = (e, { name, value }) => this.setState({ [name]: value })
+    handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
     render(){
-        // const { title } = this.state
+        const { title } = this.state
         return(
-            <Form onSubmit={this.handleSubmit}>
-                {/* <Form.Input style={{marginTop:"10px"}} size="mini" name='title' value={title} onChange={this.handleChange} placeholder='Enter New Project Name' /> */}
+            <Form widths={2} onSubmit={this.handleSubmit}>
+                <Form.Input style={{marginTop:"10px"}} float="left" size="mini" name='title' value={title} onChange={this.handleChange} placeholder='Enter New Project Name' />
                
-                <Button style={{margin:"10px", float:"left"}} size="medium" type='submit'><Icon name="plus square outline"/>Project</Button>
+                <Button style={{float:"left"}} size="mini" type='submit'><Icon name="plus square outline"/></Button>
             </Form>
       )
   }
