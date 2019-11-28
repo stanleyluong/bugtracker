@@ -8,22 +8,35 @@ import {Context} from './Provider'
 class ProjectContainer extends Component{
     static contextType=Context
 
-    state = {searchText: ""}
+    // state = {searchText: ""}
 
-    handleChange = (searchText) => {this.setState({searchText })}
+    // handleChange = (searchText) => {this.setState({searchText })}
     
     render(){
-        const re = new RegExp(this.state.searchText, "i");
-        const projects = this.context.projects.filter((project)=>{
-            return re.test(project.title)
-        })
-
+        // const re = new RegExp(this.state.searchText, "i");
+        // const projects = this.context.projects.filter((project)=>{
+        //     return re.test(project.title)
+        // })
+        // const bugs = this.context.bugs.filter((bug) => {
+        //     return re.test(bug.id) 
+        //     || re.test(bug.name)
+        //     || re.test(bug.priority)
+        //     || re.test(bug.project)
+        //     || re.test(bug.status)
+        //     || re.test(bug.description)
+        //     || re.test(bug.opened)
+        //     || re.test(bug.closed)
+        //     || re.test(bug.age)
+        //     || re.test(bug.submitted_by)
+        //     || re.test(bug.location)
+        // })
         return(
             <div className="project-container-div">
-                <ProjectSearch onChange={this.handleChange}/>
+                {/* <ProjectSearch onChange={this.handleChange}/> */}
                 <NewProject /> 
                 <ProjectBar
-                    projects={projects}
+                    // projects={projects}
+                    // bugs={bugs}
                 /> 
                 
             </div>

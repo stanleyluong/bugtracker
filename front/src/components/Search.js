@@ -9,8 +9,9 @@ const Search = (props) => {
   }
 
   return (
-    <div className="ui mini fluid icon input">
+    <div style={{float:"left"}} className="ui mini icon input">
       <input
+      
         type="text"
         placeholder={"Search Bugs"}
         onChange={(searchText) => handleChange(searchText)}

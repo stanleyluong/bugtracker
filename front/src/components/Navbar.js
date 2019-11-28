@@ -15,7 +15,7 @@ export default class MenuExampleInverted extends Component {
 
     return (
        
-      <Menu color='black' inverted widths={3}>
+      <Menu color='black' inverted widths={2}>
         <Menu.Item
         icon='sign in alternate'
         name='Login'
@@ -24,16 +24,16 @@ export default class MenuExampleInverted extends Component {
         />
         <Menu.Item
         icon='info'
-          name='About'
+          name='Info'
           active={activeItem === 'About'}
           onClick={this.handleItemClick}
         />
-        <Menu.Item
+        {/* <Menu.Item
         icon='address card'
           name='Contact'
           active={activeItem === 'Contact'}
           onClick={this.handleItemClick}
-        />  
+        />   */}
       </Menu>
     )
   }

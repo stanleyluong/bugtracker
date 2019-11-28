@@ -9,7 +9,7 @@ import ImageUploader from 'react-images-upload';
 import '../css/Project.css'
 import ReadMoreReact from 'read-more-react'
 import { Context } from './Provider'
-import { Icon, Image } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 class Bug extends Component {
     static contextType = Context
     state = {
@@ -21,7 +21,6 @@ class Bug extends Component {
         showEditDescription: false,
         showEditSubmittedBy: false,
         showLocation: false,
-        // pictures: []
     }
     handleName=(val)=>{
         this.context.handleChangeName(val, this.props.bug)
@@ -75,8 +74,12 @@ class Bug extends Component {
     }
     handleShowDescription=()=>{
         if (this.state.showEditDescription===false){
-            return <ReadMoreReact text={this.props.bug.description} readMoreText={"See More"}/>
-        } else{
+            if(this.props.bug.description===null){
+                return ""
+            }else{
+                return <ReadMoreReact text={this.props.bug.description} readMoreText={"See More"}/>
+            }       
+        } else {
             return <EdiText
             value={this.props.bug.description}
                 type="textarea"
@@ -174,7 +177,9 @@ class Bug extends Component {
         return( 
             <tr>
                 <td style={{cursor:"pointer"}}onClick={()=>this.handleNameClick()}>{this.handleShowName()}</td>
-                <td ><PriorityDropdown id={this.props.bug.id} priority={this.props.bug.priority}/></td>
+                <td ><PriorityDropdown 
+                    id={this.props.bug.id} 
+                    priority={this.props.bug.priority}/></td>
                 <td ><div className="grandparent">
                     <ImageUploader 
                     buttonStyles={{height:"100%"}}
@@ -190,15 +195,24 @@ class Bug extends Component {
                     </div> 
 
                     </td>
-                <td ><StatusDropdown handleChangeStatus={this.props.handleChangeStatus} id={this.props.bug.id} status={this.props.bug.status}/></td>
+                <td ><StatusDropdown 
+                    handleChangeStatus={this.props.handleChangeStatus} 
+                    id={this.props.bug.id} 
+                    status={this.props.bug.status}/></td>
                 <td width="200px" ><AssignedToDropdown bug={this.props.bug} /></td>
-                <td style={{minWidth:"100px", cursor:"pointer"}} onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
+                <td style={{minWidth:"100px", 
+                    cursor:"pointer"}} 
+                    onClick={()=>this.handleDescriptionClick()} >{this.handleShowDescription()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleOpenedClick()}>{this.handleShowOpened()}</td>
                 <td ><Moment fromNow>{this.props.bug.opened}</Moment></td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleClosedClick()}>{this.handleShowClosed()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleSubmittedByClick()}>{this.handleShowSubmittedBy()}</td>
                 <td style={{cursor:"pointer"}} onClick={()=>this.handleLocationClick()}>{this.handleShowLocation()}</td>
-                <td style={{cursor:"pointer"}}><Icon onClick={()=>this.context.handleDeleteBug(this.props.bug)} style={{transform: "scale(2)"}} name="trash alternate"/></td>
+                <td style={{cursor:"pointer"}}>
+                    <Icon 
+                    onClick={()=>this.context.handleDeleteBug(this.props.bug)} 
+                    style={{transform: "scale(2)"}} 
+                    name="trash alternate"/></td>
             </tr>
         )
     }

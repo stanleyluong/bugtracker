@@ -1,5 +1,5 @@
 import React, { createContext, Component } from 'react'
-
+import Moment from 'react-moment'
 export const Context = createContext()
 
 class Provider extends Component {
@@ -106,13 +106,13 @@ class Provider extends Component {
         // .then(response=>response.json()).then(response=>console.log(response))
     }
    
-    handleAddProject=(title)=>{
-        console.log(title)
+    handleAddProject=()=>{
+        console.log()
             fetch('http://localhost:3000/projects',{
                 method:'POST',
                 body: JSON.stringify({
                     project:{
-                      title: title
+                      title: <Moment>{`${new Date()}`}</Moment>
                     }
                 }),
                 headers: {
@@ -148,23 +148,25 @@ class Provider extends Component {
         //  .then(console.log)
          .then(response=>this.setState({
              bugs: [response, ...this.state.bugs]
-         },()=>{
-            let bugid = response.id
-            bug.assign_to.forEach(user=>{
-            console.log(user)
-            fetch('http://localhost:3000/user_bugs',{
-                method: 'POST',
-                body: JSON.stringify({
-                    user_id: user,
-                    bug_id: bugid
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept':'application/json',
-                    'Authorization':`Bearer ${this.props.jwt}`
-                }
-            }).then(response=>response.json()).then(response=>this.setState({user_bugs:[response,...this.state.user_bugs]}))
-        })}))
+         }
+        //  ,()=>{
+        //     let bugid = response.id
+        //     bug.assign_to.forEach(user=>{
+        //     console.log(user)
+        //     fetch('http://localhost:3000/user_bugs',{
+        //         method: 'POST',
+        //         body: JSON.stringify({
+        //             user_id: user,
+        //             bug_id: bugid
+        //         }),
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Accept':'application/json',
+        //             'Authorization':`Bearer ${this.props.jwt}`
+        //         }
+        //     }).then(response=>response.json()).then(response=>this.setState({user_bugs:[response,...this.state.user_bugs]}))
+        // })}
+        ))
         
     }
 
