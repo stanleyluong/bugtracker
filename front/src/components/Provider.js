@@ -358,7 +358,6 @@ class Provider extends Component {
         job: props.job
         }
     }
-    let oldUser = this.state.users.filter(user=>{return user.id===this.state.userData.user.id})
     let otherUsers = this.state.users.filter(user=>{return user.id!==this.state.userData.user.id})
     fetch(`http://localhost:3000/users/${this.state.userData.user.id}`,{
         method:'PATCH',

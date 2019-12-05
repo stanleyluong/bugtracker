@@ -10,7 +10,7 @@ class User extends Component {
                 <td>{this.props.user.lastname}</td>
                 <td>{this.props.user.email}</td>
                 <td>{this.props.user.job}</td>
-                <td><img src={`${this.props.user.image}`}/></td>
+                <td><img src={`${this.props.user.image}`} alt="oops"/></td>
             </tr>
         )
     }

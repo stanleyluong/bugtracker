@@ -11,11 +11,11 @@ import TeamMembers from './TeamMembers'
 // import Statistics from './Statistics'
 class Home extends Component {
   static contextType=Context
-  state={activeItem:"Bugs"}
+  state={activeItem:"Projects"}
 
   handleRender=()=>{
-    if(this.state.activeItem==="Bugs"){return <AssignedBugs userData={this.state.userData} />}
-    if(this.state.activeItem==="Projects"){return <div><ProjectContainer /></div>}
+    if(this.state.activeItem==="Bugs"){return <AssignedBugs/>}
+    if(this.state.activeItem==="Projects"){return <div><ProjectContainer/></div>}
     if(this.state.activeItem==="Team Members"){return <TeamMembers /> }
     if(this.state.activeItem==='About'){return <About/> }
     if(this.state.activeItem==='Contact'){return <Contact/>}
