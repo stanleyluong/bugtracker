@@ -12,7 +12,7 @@ const ProjectSearch = (props) => {
       <input
         type="text"
         placeholder={"Search Projects"}
-        onChange={(searchText) => handleChange(searchText)}
+        onChange={handleChange}
       />
       <i className="circular search link icon"></i>
     </div>

@@ -1,18 +1,21 @@
 * {
   box-sizing: border-box;
   text-align: center;
+  /* background: url(1_BB7rhYkn_Nk1DRMICcC-Qw.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover; */
 }
 
 .App {
   text-align: center;
-  /* background-image: "https://thumbs.dreamstime.com/z/bug-tracking-icon-bug-tracking-icon-vector-image-isolated-white-background-118938714.jpg"; */
+  
 }
-
 
 .App-header {
   background-color: #222;
   padding: 20px;
   color: white;
+  
 }
 
 .ui.center.aligned.header {
