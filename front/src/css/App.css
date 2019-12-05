@@ -22,3 +22,6 @@
   color: rgb(0, 0, 0)!important;
 }
 
+.ui.raised.segment, .ui.raised.segments {
+  height: 100vh
+}

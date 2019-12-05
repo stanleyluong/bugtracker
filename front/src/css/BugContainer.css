@@ -1,8 +1,12 @@
-.project-container-div{
+/* .project-container-div{
  overflow: auto ; 
-}
+} */
 
 .read-more-button {
     color: blue;
     cursor: pointer;
+}
+
+.styles_Editext__view_container__2l2kB{
+    margin: 0 auto
 }

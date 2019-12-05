@@ -10,7 +10,7 @@ class BugList extends Component {
           <tr>
             <th>
               <h3 className="ui center aligned header">
-                Bug Name
+                ID & Name
               </h3>
             </th>
             <th>
