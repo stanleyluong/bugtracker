@@ -1,5 +1,4 @@
 import React, { createContext, Component } from 'react'
-import Moment from 'react-moment'
 export const Context = createContext()
 
 class Provider extends Component {
@@ -9,19 +8,19 @@ class Provider extends Component {
         users: [],
         user_bugs: [],
         user_projects: [],
-        jwt: this.props.jwt,
         userData:this.props.userData,
         currentProject:""
     }
 
     componentDidMount(){
+        console.log(localStorage.getItem('jwt'))
         Promise.all([
             fetch("http://localhost:3000/projects",{
                 method: 'GET',
                 headers: {
                     'Content-Type':'application/json',
                     'Accept':'application/json',
-                    'Authorization':`Bearer ${this.props.jwt}`
+                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
                 }
             }),
             fetch("http://localhost:3000/bugs",{
@@ -29,7 +28,7 @@ class Provider extends Component {
                 headers: {
                     'Content-Type':'application/json',
                     'Accept':'application/json',
-                    'Authorization':`Bearer ${this.props.jwt}`
+                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
                 }
             }),
             fetch("http://localhost:3000/users",{
@@ -37,7 +36,7 @@ class Provider extends Component {
                 headers: {
                     'Content-Type':'application/json',
                     'Accept':'application/json',
-                    'Authorization':`Bearer ${this.props.jwt}`
+                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
                 }
             }),
             fetch("http://localhost:3000/user_bugs",{
@@ -45,7 +44,7 @@ class Provider extends Component {
                 headers: {
                     'Content-Type':'application/json',
                     'Accept':'application/json',
-                    'Authorization':`Bearer ${this.props.jwt}`
+                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
                 }
             }),
             fetch("http://localhost:3000/user_projects",{
@@ -53,7 +52,7 @@ class Provider extends Component {
                 headers: {
                     'Content-Type':'application/json',
                     'Accept':'application/json',
-                    'Authorization':`Bearer ${this.props.jwt}`
+                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
                 }
             })
         ])
@@ -78,7 +77,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             },
             body: JSON.stringify({
                 attachments:[picture, ...currentbug.attachments]
@@ -99,7 +98,7 @@ class Provider extends Component {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept':'application/json',
-                    'Authorization':`Bearer ${this.props.jwt}`
+                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
                 }
             }).then(response=>response.json())
             .then(response=>this.setState({
@@ -123,7 +122,7 @@ class Provider extends Component {
              headers: {
                  'Content-Type': 'application/json',
                  'Accept':'application/json',
-                 'Authorization':`Bearer ${this.props.jwt}`
+                 'Authorization':`Bearer ${localStorage.getItem('jwt')}`
              }
          }).then(response=>response.json())
          .then(response=>this.setState({
@@ -139,11 +138,10 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         })
         .then(response=>{
-            console.log(this.state.jwt)
             console.log(response.status)
         })
         .then(this.setState({
@@ -164,7 +162,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         });
     }
@@ -183,7 +181,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         })
         .then(response=>response.json())
@@ -203,7 +201,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type':'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         })
     }
@@ -218,7 +216,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         })
     }
@@ -233,7 +231,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         })  
     }
@@ -248,7 +246,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         })
     }
@@ -263,7 +261,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         })
     }
@@ -279,7 +277,7 @@ class Provider extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept':'application/json',
-                'Authorization':`Bearer ${this.props.jwt}`
+                'Authorization':`Bearer ${localStorage.getItem('jwt')}`
             }
         })
     }
@@ -302,7 +300,7 @@ class Provider extends Component {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept':'application/json',
-                    'Authorization':`Bearer ${this.props.jwt}`
+                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
                 }
             }).then(response=>response.json()).then(response=>this.setState({user_bugs: [response, ...this.state.user_bugs]}))
         }
@@ -315,7 +313,7 @@ class Provider extends Component {
                                     headers: {
                                         'Content-Type': 'application/json',
                                         'Accept':'application/json',
-                                        'Authorization':`Bearer ${this.props.jwt}`
+                                        'Authorization':`Bearer ${localStorage.getItem('jwt')}`
                                     }
                     })
                     this.setState({user_bugs: otherUserBugs})
@@ -358,8 +356,7 @@ class Provider extends Component {
         email: props.email,
         image: props.avatar,
         job: props.job
-        },
-        jwt: this.state.jwt
+        }
     }
     let oldUser = this.state.users.filter(user=>{return user.id===this.state.userData.user.id})
     let otherUsers = this.state.users.filter(user=>{return user.id!==this.state.userData.user.id})

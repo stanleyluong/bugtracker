@@ -21,7 +21,6 @@ class AssignedBugs extends Component{
         return(<div>
                 <BugList 
                 bugs={myBugs}
-                jwt={this.props.jwt}
                 />
         </div>
         )

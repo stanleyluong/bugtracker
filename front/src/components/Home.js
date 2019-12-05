@@ -14,8 +14,8 @@ class Home extends Component {
   state={activeItem:"Bugs"}
 
   handleRender=()=>{
-    if(this.state.activeItem==="Bugs"){return <AssignedBugs userData={this.state.userData} jwt={this.state.jwt}/>}
-    if(this.state.activeItem==="Projects"){return <div><ProjectContainer jwt={this.state.jwt}/></div>}
+    if(this.state.activeItem==="Bugs"){return <AssignedBugs userData={this.state.userData} />}
+    if(this.state.activeItem==="Projects"){return <div><ProjectContainer /></div>}
     if(this.state.activeItem==="Team Members"){return <TeamMembers /> }
     if(this.state.activeItem==='About'){return <About/> }
     if(this.state.activeItem==='Contact'){return <Contact/>}
@@ -32,7 +32,7 @@ class Home extends Component {
   render(){
     return(
       <div>
-        <Provider jwt={this.props.jwt} userData={this.props.userData}>
+        <Provider userData={this.props.userData}>
         <ButtonBar loggedInNavBarState={this.loggedInNavBarState}/>
         {/* <Statistics /> */}
         {this.handleRender()}

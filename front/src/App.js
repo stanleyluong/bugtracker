@@ -12,7 +12,6 @@ class App extends React.Component{
   state = {
     userData: {},
     loggedIn: false,
-    jwt: "",
     activeItem: 'Login'
    }
 
@@ -22,9 +21,9 @@ class App extends React.Component{
           activeItem:'Home',
           userData: response, 
           loggedIn: true, 
-          jwt: response.jwt,
         },
         ()=>console.log('state after loginUser', this.state, 'response',response))
+    localStorage.setItem('jwt', response.jwt)
   }
 
   handleLogin=(user)=>{
@@ -41,10 +40,10 @@ class App extends React.Component{
         }
         })
     })
-    .then(response=>{if(response.status!==202){
+    .then(response=>{
+      if(response.status!==202){
       alert("Invalid username or password")
-    }
-    else {
+    } else {
       return response.json()
     }})
     .then(response=>{if (response!==undefined){this.loginUser(response)}})
@@ -53,7 +52,7 @@ class App extends React.Component{
   handleRender=()=>{
     if(this.state.activeItem==='Login'){return <LoginForm handleLogin={this.handleLogin} handleRenderSignUp={this.handleRenderSignUp}/>}
     if(this.state.activeItem==='SignUp'){return <SignUp handleRenderLogin={this.handleRenderLogin} handleSignedUpandLoggedin={this.handleSignedUpandLoggedin}/>}
-    if(this.state.activeItem==='Home'){return <Home handleSignOut={this.handleSignOut} jwt={this.state.jwt} userData={this.state.userData} handleLogin={this.handleLogin}/> }
+    if(this.state.activeItem==='Home'){return <Home handleSignOut={this.handleSignOut} userData={this.state.userData} handleLogin={this.handleLogin}/> }
     if(this.state.activeItem==='About'){return <About/> }
     if(this.state.activeItem==='Contact'){return <Contact/>}
   }
@@ -62,10 +61,9 @@ class App extends React.Component{
     this.setState({
       activeItem: 'Login',
       loggedIn: false,
-      jwt: "",
       userData: {}
     })
-  
+    localStorage.clear()
   }
   
 
@@ -124,12 +122,7 @@ class App extends React.Component{
   render(){
     return(
       <div className="ui raised segment">
-      {/* // <div className="ui segment  "> */}
-        {/* </div>  */}
         {this.handleNavBar()}
-      {/* <h2><img style={{width: "40px"}}src="https://previews.123rf.com/images/dzm1try/dzm1try1806/dzm1try180600232/103506531-bug-tracking-icon.jpg" alt="oops" />Bug Tracker 9000</h2> */}
-      
-
         {this.handleRender()}
       </div>
     )

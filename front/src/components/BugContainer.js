@@ -26,7 +26,7 @@ class BugContainer extends Component{
         })
         return(
             <div className="project-container-div">
-                <NewBug jwt={this.props.jwt} project={this.props.project}/>
+                <NewBug project={this.props.project}/>
                 <Search onChange={this.handleChange}/>
                 <BugList 
                 bugs={bugs}
