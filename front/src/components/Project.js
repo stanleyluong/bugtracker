@@ -37,7 +37,6 @@ class Project extends React.Component {
                         users={this.props.users}
                         projects={this.props.projects}
                         user_projects={this.props.user_projects}
-                        jwt={this.props.jwt}
                         project={this.props.project}
                         />
         }

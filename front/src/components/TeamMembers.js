@@ -67,13 +67,7 @@ class TeamMembers extends Component{
           })}
         </tbody>
       </table>
-        // <div>
-        //         <BugList 
-        //         bugs={myBugs}
-        //         jwt={this.props.jwt}
-        //         />
-        // </div>
-        )
+      )
     }
 }
 

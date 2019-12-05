@@ -3,12 +3,19 @@ import Bug from './Bug'
 import {Context} from './Provider'
 class BugList extends Component {
   static contextType= Context
+  
+  sortById=(bugs)=>{
+    console.log('sort', bugs)
+    bugs.sort(function(a,b){return b-a})
+  }
+  
   render(){
+    let bugs = this.props.bugs
     return (
       <table className="ui celled striped padded table">
         <tbody>
           <tr>
-            <th>
+            <th onClick={this.sortById(bugs)} >
               <h3 className="ui center aligned header">
                 ID & Name
               </h3>
