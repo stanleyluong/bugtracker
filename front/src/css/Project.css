@@ -1,62 +1,31 @@
 .grandparent {
-    /* width: 9em; */
-    text-align: center;
-    /* margin: 0 auto; */
+    width: 9em;
 }
 
-.fileContainer{
-    display: inline-block;
-    /* text-align: center; */
+.fileContainer {
+    display: inline-flex;
     padding: 0
-
 }
 
-.attachment{
+.attachment {
     width: 52px;
     padding: 1px
-
-}
-
-.fileContainer .uploadPictureContainer {
-    /* padding: 1%;
-    margin: 1%;
-    display: inline-table; */
-    /* text-align: center; */
-
 }
 
 .attachment:hover {
     transform: scale(4.5);
-    z-index: 1 ;  
+    z-index: 2 ;  
     transition: all 0.5s ease-in-out;
 }
-.deleteImage{
+
+.deleteImage {
     transform: scale(.5)
 }
+
 .ui.dropdown:not(.button)>.default.text {
     color: black
 }
 
-.text{
+.text {
     color: black
 }
-
-/* #Low{
-    background-color: lightblue
-}
-
-#Normal{
-    background-color: grey
-}
-
-#High{
-    background-color: yellow
-}
-
-#Critical{
-    background-color: red
-}
-
-.ui .active .visible .fluid .selection .dropdown{
-    background-color: white
-} */

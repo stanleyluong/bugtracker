@@ -1,7 +1,5 @@
 .project-container-div{
- overflow-x: auto ; 
- /* overflow-y:auto;   */
- /* display: inline table */
+ overflow: auto ; 
 }
 
 .read-more-button {

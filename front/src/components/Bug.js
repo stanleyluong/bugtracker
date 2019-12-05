@@ -138,6 +138,7 @@ class Bug extends Component {
         }
     }
     handleCancelLocation=()=>{this.setState({showLocation:false})}
+    
     onDrop=(pictures)=>{
         // console.log(picture[0])
         let clientId = '21b623c50654eda'

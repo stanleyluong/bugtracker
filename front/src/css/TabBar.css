@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* margin-top:"10px" */
   }
 
   .ui .pointing .wrapped .menu{

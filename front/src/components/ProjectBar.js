@@ -15,13 +15,12 @@ class ProjectBar extends Component{
 
     render(){
     const panes = []
-    this.context.projects.map((project)=>{
+    this.context.projects.map((project, key)=>{
         // console.log(typeof(project.title))
         // if(typeof(project.title!=="Object")){
             let bugs = this.context.bugs.filter(bug=>bug.project_id===project.id)
             return panes.push({menuItem: `${project.title}`, render: ()=> <Tab.Pane>
             <BugContainer
-            key={project.id}
             project={project}
             bugs={bugs} 
             />
@@ -33,7 +32,7 @@ class ProjectBar extends Component{
     })
         return (            
             <div>
-                <Tab  menu={{ secondary: true, className:"wrapped" }} grid={{ paneWidth: 14, tabWidth: 2 }} panes={panes} onTabChange={this.handleChange}
+                <Tab  menu={{ secondary: true, className:"wrapped" }} grid={{ paneWidth: 14, tabWidth: 2 }} panes={panes} onTabChange={this.handleChange} 
                 />            
             </div>
         )
