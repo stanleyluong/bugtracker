@@ -28,7 +28,7 @@ class Bug extends Component {
     }
     handleShowName=()=>{
         if (this.state.showEditName===false){
-            return this.props.bug.name
+            return (`(${this.props.bug.id})`+` ${this.props.bug.name}`)
         } else { 
             return <EdiText 
                 value={this.props.bug.name}
