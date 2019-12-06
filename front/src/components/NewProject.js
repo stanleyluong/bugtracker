@@ -30,7 +30,7 @@ class NewProject extends Component{
     render(){
         const { title } = this.state
         return(
-            <Form widths={2} onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
                 <Form.Input style={{marginTop:"10px"}} float="left" size="mini" name='title' value={title} onChange={this.handleChange} placeholder='Enter New Project Name' />
                
                 <Button style={{float:"left"}} size="mini" type='submit'><Icon name="plus square outline"/></Button>

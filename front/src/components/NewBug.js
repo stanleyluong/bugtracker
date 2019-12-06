@@ -17,7 +17,7 @@ class NewBug extends Component {
     }
 
     handleSubmit=(event)=>{
-        event.preventDefault()
+        // event.preventDefault()
         console.log(this.state)
         this.context.handleAddBug(this.state)
         // this.setState({

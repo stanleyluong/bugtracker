@@ -15,20 +15,15 @@ class ProjectBar extends Component{
 
     render(){
     const panes = []
-    this.context.projects.map((project, key)=>{
-        // console.log(typeof(project.title))
-        // if(typeof(project.title!=="Object")){
+    this.context.projects.map((project, index)=>{
             let bugs = this.context.bugs.filter(bug=>bug.project_id===project.id)
             return panes.push({menuItem: `${project.title}`, render: ()=> <Tab.Pane>
             <BugContainer
             project={project}
             bugs={bugs} 
+            key={index}
             />
-            
             </Tab.Pane>})
-        // } else {
-            // return
-        // }
     })
         return (            
             <div>
