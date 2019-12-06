@@ -30,7 +30,7 @@ end
 20.times do
     Bug.create(
         name:Faker::Games::LeagueOfLegends.rank,
-        priority:["Low","Medium","High","Critical"].sample,
+        priority:["Low","Normal","High","Critical"].sample,
         attachments:[],
         status:["Can't reproduce","In progress","Complete","Blocked","Won't fix","Duplicate"].sample,
         description:Faker::Games::LeagueOfLegends.quote + Faker::Games::LeagueOfLegends.quote + Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote+ Faker::Games::LeagueOfLegends.quote,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Bug from './Bug'
 import {Context} from './Provider'
-class BugList extends Component {
+class AssignedBugList extends Component {
   static contextType= Context
   constructor(props){
     super(props)
@@ -9,25 +9,27 @@ class BugList extends Component {
     this.onSort = this.onSort.bind(this)
   }
 
-  // componentDidMount(){
-  //   this.setState({
-  //     bugs: this.props.bugs
-  //   })
-  // }
+  componentDidMount(){
+      console.log(this.context.myBugs)
+    this.setState({
+      bugs: this.context.myBugs
+    })
+  }
 
-  onSort(event, sortKey){
-    console.log(this.state.bugs)
-   let bugs = this.state.bugs
+  onSort=(event, sortKey)=>{
+    // console.log(this.context.myBugs)
+   let bugs = this.context.myBugs
    bugs.sort((a,b)=> {
     // if(a[sortKey]===null){return a[sortKey]=-1}
     // if(b[sortKey]===null){return a[sortKey]=-1} 
-    return a[sortKey].localeCompare(b[sortKey])
+     return a[sortKey].localeCompare(b[sortKey])
     })
-   this.setState({bugs})
+//    this.setState({bugs})
+    this.context.handleSetMyBugs(bugs)
   }
   
   render(){
-    let newbugs = this.props.bugs
+    let newbugs = this.state.bugs
     return (
       <table className="ui celled striped padded table">
         <tbody>
@@ -105,4 +107,4 @@ class BugList extends Component {
   }
 }
   
-export default BugList
+export default AssignedBugList

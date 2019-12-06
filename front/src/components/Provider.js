@@ -9,7 +9,8 @@ class Provider extends Component {
         user_bugs: [],
         user_projects: [],
         userData:this.props.userData,
-        currentProject:""
+        currentProject:"",
+        myBugs: []
     }
 
     componentDidMount(){
@@ -66,7 +67,35 @@ class Provider extends Component {
                 user_bugs: res4,
                 user_projects: res5
             })
+            this.findMyBugs()
         })
+        
+    }
+
+    findMyBugs=()=>{
+     
+            // let yourBugs=[]
+        this.state.user_bugs.forEach(user_bug=>{
+            // console.log(this.state.userData.user.id)
+            if(user_bug.user_id === this.state.userData.user.id){
+                this.state.bugs.forEach(bug=>{
+                    if(user_bug.bug_id === bug.id){
+                        //  yourBugs.push(bug)
+                        if(!this.state.myBugs.includes(bug)){
+                            console.log(!this.state.myBugs.includes(bug))
+                            this.setState({myBugs: [bug, ...this.state.myBugs]})
+                        }
+                    }
+                })
+            }
+            console.log(this.state.myBugs)
+            // return yourBugs
+        }
+        )
+
+        
+        // ,()=>{  this.setState({myBugs:yourBugs}) }
+        
     }
 
     handleAddAttachment=(picture, id)=>{
@@ -112,9 +141,9 @@ class Provider extends Component {
              method:'POST',
              body: JSON.stringify({
                  bug:{
-                     name: bug.name,
-                     submitted_by: bug.submitted_by,
-                     description: bug.description,
+                    //  name: bug.name,
+                    //  submitted_by: bug.submitted_by,
+                    //  description: bug.description,
                      project_id: bug.project_id,
                      opened: bug.opened
                  }
@@ -129,6 +158,12 @@ class Provider extends Component {
              bugs: [response, ...this.state.bugs]
          }
         ))
+    }
+
+    handleSetMyBugs=(myBugs)=>{
+        this.setState({
+            myBugs: myBugs
+        })
     }
 
     handleDeleteBug=(bug)=>{
@@ -147,6 +182,20 @@ class Provider extends Component {
         .then(this.setState({
             bugs: this.state.bugs.filter(bog=>bog.id!==bug.id)
         }))
+        let deleteUserBugs = this.state.user_bugs.filter(user_bug=> user_bug.bug_id === bug.id)
+        deleteUserBugs.forEach(user_bug=> {
+            fetch(`http://localhost:3000/user_bugs/${user_bug.id}`,{
+                method:'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept':'application/json',
+                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
+                }
+            }).then(this.setState({
+                user_bugs: this.state.user_bugs.filter(user_bugg=> user_bugg.id!== user_bug.id)
+            }))
+            
+        })
     }
 
     handleChangeStatus=(e, data, id)=>{
@@ -282,6 +331,9 @@ class Provider extends Component {
         })
     }
     handleChangeAssignedTo=(val, bug, findAssignedUsers)=>{
+        if(!this.state.myBugs.includes(bug)){
+            this.setState({myBugs:[bug,...this.state.myBugs]})
+        }
         let userbugbugidsthatarethesameasbugbugid = []
         let usersthatareassociatedwithbug = []
         this.state.user_bugs.forEach(user_bug=>{
@@ -305,6 +357,9 @@ class Provider extends Component {
             }).then(response=>response.json()).then(response=>this.setState({user_bugs: [response, ...this.state.user_bugs]}))
         }
         if(val.length < usersthatareassociatedwithbug.length){ 
+            if(this.state.myBugs.includes(bug)){
+                this.setState({myBugs: this.state.myBugs.filter(bugg=>bugg!==bug)})
+            }
             this.state.user_bugs.forEach(user_bug=>{
                 if(user_bug.bug_id===bug.id && !val.includes(user_bug.user_id)){
                     let otherUserBugs = this.state.user_bugs.filter(userbug=> {return userbug !== user_bug})
@@ -320,7 +375,9 @@ class Provider extends Component {
                 }
             })
         }
+        this.findMyBugs()
         findAssignedUsers()
+        
     }
 
     handleLogin=(user)=>{
@@ -407,6 +464,7 @@ class Provider extends Component {
                 handleChangeAssignedTo: this.handleChangeAssignedTo,
                 handleLogin: this.handleLogin,
                 updateUserData: this.updateUserData,
+                handleSetMyBugs: this.handleSetMyBugs
                 }}>
                 {this.props.children}
             </Context.Provider>
